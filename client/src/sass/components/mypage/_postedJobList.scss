@@ -1,0 +1,67 @@
+.postedJobList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__item{
+        position: relative;
+        width: 45rem;
+        margin: 2rem;
+        h3 {
+            background-color: $primary-dark;
+            padding: 1rem;
+            color: $white;
+        }
+        margin-bottom: 5rem;
+
+        .buttons{
+            display: flex;
+            justify-content: center;
+            margin: 1rem auto;
+        }
+
+        .card {
+            background-color: $light;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        &.inactive>.card::before {
+            content: '募集停止中';
+            color: $white;
+            font-size: 3rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgba($dark, .7);
+        }
+    }
+    
+    dl {
+        // background-color: $light;
+        width: 100%;
+        text-align: left;
+        padding: 1rem;
+
+        dt {
+            font-weight: 700;
+        }
+
+        dd{
+            margin-left: 2rem;
+        }
+    }
+
+    @include respond(phone){
+        flex-direction: column;
+        align-items: center;
+        &__item{
+            max-width: 100%;
+            min-width: 30rem;
+            margin: 1rem 0;
+        }
+    }
+}

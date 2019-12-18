@@ -1,0 +1,150 @@
+.jobDetail{
+    h1{
+        font-size: 3.5rem;
+        color: $primary-dark;
+        margin-left: 5rem;
+        @include respond(phone){
+            margin-left: 2rem;
+        }
+    }
+
+    .container{
+        h2 {
+            padding: 1.5rem 2rem;
+            border-radius: 4px;
+            background-color: $primary;
+            border: 1px solid $primary-dark;
+        }
+    }
+
+    &__companyInfo {
+        h3{
+            border-bottom: 2px dotted $secondary;
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        padding: 1rem;
+        border: 1px solid $secondary-light;
+        background-color: $light;
+        // &__container{
+        //     display: flex;
+        //     @include respond(tab-port){
+        //         flex-direction: column;
+        //         align-items: center;
+        //     }
+        // }
+
+        // &__description {
+        //     width: 50rem;
+        //     margin: 2rem;
+        //     @include respond(tab-port){
+        //         margin: 1rem 0;
+        //         width: 100%;
+        //     }
+        // }
+
+        &__images {
+            max-width: 50rem;
+        }
+    }
+
+    &__info {
+        min-width: 38rem;
+        &__item{
+            h5 {
+                display: inline-block;
+                width: 10rem
+            }
+        }
+        dl {
+            width:100%;
+          }
+          dt {
+            float:left;
+            clear:left;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width:8rem;
+          }
+          dd {
+            float:left;
+          }
+        @include clearfix;
+    }
+
+    &__address{
+        background-color: $secondary-light;
+        border-radius: 5px;
+        padding: 1rem;
+    }
+
+    &__description{
+        h2{
+            background-color: $primary;
+        }
+    }
+
+    &__location{
+        display: flex;
+        &-map{
+            flex-grow: 1;
+            margin: 1rem;
+            max-width: 60rem;
+            min-width: 26rem;
+            height: 30rem;
+        }
+        .icon{
+            color: $danger;
+        }
+
+        @include respond(tab-port){
+            flex-direction: column;
+        }
+    }
+
+    // &__container{
+    //     display: flex;
+
+    //     @include respond(phone){
+    //         flex-direction: column;
+    //     }
+
+    //     &__infoMain {
+    //         width: 100%;
+    //         padding: 1rem;
+    //     }
+
+    //     &__infoSub {
+    //         width: 50rem;
+    //         padding: 1rem;
+    //         @include respond(tab-port){
+    //             width: 40rem;
+    //         }
+    //         @include respond(phone){
+    //             width: 100%;
+    //         }
+    //     }
+    // }
+
+    // &__mainImage{
+    //     display: block;
+    //     max-width:80%;
+    //     margin: auto;
+    //     height: 35rem;
+    //     object-fit: contain;
+    //     object-position: center; 
+    // }
+
+    // &__info{
+    //     display: flex;
+    //     @include respond(phone){
+    //         flex-direction: column;
+    //     }
+    // }
+
+    .tag {
+        margin: .5rem 1rem;
+        font-size: 2rem;
+    }
+}

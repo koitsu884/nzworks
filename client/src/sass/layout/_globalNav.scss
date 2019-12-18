@@ -1,0 +1,47 @@
+.globalNav{
+    display: flex;
+    align-items: center;
+    height: 5rem;
+    font-size: 1.8rem;
+    background-color: $primary;
+    box-shadow: 0 1px 2px rgba(0,0,0, .5);
+
+    list-style: none;
+    z-index: 50;
+
+    &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $white;
+        text-align: center;
+        flex: 1;
+        transition: all .3s;
+        height: 100%;
+
+        &:hover {
+            color: $primary-dark;
+            background-color: $warning;
+        }
+
+        &.active {
+            background-color: $primary-dark;
+            color: $white;
+        }
+    }
+
+    @include respond(phone){
+        position: fixed;
+        border-top: 1px solid $primary;
+        width: 100%;
+        background-color: $primary-light;
+        bottom: 0;
+        // padding: 1rem;
+        box-shadow: none;
+        justify-content: space-around;
+
+        &__item {
+            color: black;
+        }
+    }
+}

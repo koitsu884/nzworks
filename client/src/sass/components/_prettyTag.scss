@@ -1,0 +1,28 @@
+.prettyTag{
+    display: inline-block;
+    background-color: rgba(255, 255, 255, .9);
+    border: 2px solid rgba(139, 139, 139, .3);
+    color: #adadad;
+    border-radius: 25px;
+    white-space: nowrap;
+    padding: 1rem 2rem;
+    user-select: none;
+    transition: all .2s;
+    cursor: pointer;
+
+    .icon{
+        transition: transform .2s;
+        margin-right: .5rem;
+    }
+
+    &.active{
+      border: 2px solid #1bdbf8;
+      background-color: #12bbd4;
+      color: #fff;
+      transition: all .2s;
+
+      .icon{
+        transform: rotate(-360deg);
+      }
+    }
+}

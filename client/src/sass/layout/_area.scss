@@ -1,0 +1,46 @@
+.fixedArea {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-size: $default-font-size;
+    height: $fixed-area-height;
+    background-color: $white;
+    // color: $white;
+    z-index: 20;
+
+    @include respond(phone){
+        height: $fixed-area-height-phone;
+    }
+}
+
+.mainArea {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    // top: 0;
+    margin-top: $fixed-area-height;
+    min-height: 90vh;
+    font-size: $default-font-size;
+    // background-color: aquamarine;
+
+    @include respond(phone){
+        margin-top: $fixed-area-height-phone;
+        margin-bottom: $fixed-area-height-phone;
+    }
+}
+
+.mainSection{
+    margin-top: 5rem;
+}
+
+.container{
+    margin: 5rem;
+
+    @include respond(tab-port){
+        margin: 3rem 2.5rem;
+    }
+
+    @include respond(phone){
+        margin: 2rem 1rem;
+    }
+}

@@ -1,0 +1,25 @@
+.profile{
+
+    section > h2 {
+        text-align:center;
+        font-size: 2.4rem;
+        background-color: $primary;
+        color: $white;
+    }
+
+    &__basicInfo {
+        display: flex;
+        @include respond(phone){
+            flex-direction: column;
+        }
+    }
+
+    &__image{
+        display:block;
+        padding: 2px;
+        max-width: 80rem;
+        max-height: 48rem;
+        object-fit: contain;
+        background-color: black;
+    }
+}

@@ -1,0 +1,39 @@
+.userImageEditor {
+    &__selector{
+        margin: 2rem;
+        width: 40rem;
+        @include respond(tab-port){
+            width:100%;
+            margin: 2rem 0;
+        }
+    }
+
+    &__viewer {
+        margin: 2rem;
+        
+        &__container{
+            display: flex;
+            overflow-x: auto;
+        }
+
+        &__image {
+            width: 15rem;
+            height: 15rem;
+            margin: 1rem;
+
+            img{
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+            }
+        }
+    }
+
+    @include respond(tab-port){
+        flex-direction: column;    
+
+        // &__selecter {
+        //     width:100%;
+        // }
+    }
+}

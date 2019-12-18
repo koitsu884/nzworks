@@ -1,0 +1,96 @@
+
+.jobSearch{
+    --search-filter-height: calc(#{$search-filter-height});
+    --fixed-area-height: calc(#{$fixed-area-height});
+    @include respond(phone){
+        --search-filter-height: calc(#{$search-filter-height});
+        --fixed-area-height: calc(#{$fixed-area-height-phone});
+    }
+
+
+    position:relative;
+    width: 100%;
+    padding-top: var(--search-filter-height);
+
+
+    &__container{
+        width: 100%;
+        display: flex;
+    }
+
+    &__filter{
+        position: fixed;
+        width: 100%;
+        // width: var(--sidefilter-width);
+        // height: calc(100vh - #{--search-filter-height} - #{$fixed-area-height});
+        // min-height: 100%;
+        // top: calc(#{--search-filter-height} + #{$fixed-area-height});
+        top: calc(var(--search-filter-height) + var(--fixed-area-height));
+        overflow-y: auto;
+        transition: transform .2s;
+        padding: 2rem;
+        background-color: $primary-light;
+        border: 1px solid $primary-dark;
+        // transform: translateX(0);
+        transform: translateY(-100%);
+        z-index: 3;
+
+        &.active {
+            transform: translateY(0);
+        }
+
+        // @include respond(phone){
+        //     top: calc(var(--search-filter-height) + #{$fixed-area-height-phone});
+        // }
+
+
+        // @include respond(phone){
+        //     transform: translateX(-110%);
+        //     z-index: 5;
+        //     top: calc(#{--search-filter-height} + #{$fixed-area-height-phone});
+        //     // min-height: 0;
+        //     width: 100%;
+        //     &.active{
+        //         transform: translateX(0)
+        //     }
+        // }
+    }
+
+    &__fixedArea{
+        position: fixed;
+        background-color: $primary-light;
+        margin: 0;
+        top: var(--fixed-area-height);
+        left: 0;
+        padding: 2rem;
+        width: 100%;
+        height: var(--search-filter-height);
+        z-index: 10;
+        // @include respond(phone){
+        //     top: $fixed-area-height-phone;
+        // }
+    }
+
+    &__areaFilter{
+        display: flex;
+        align-items: center;
+        padding: 1rem 0;
+
+        .level-item{
+            margin: 0 1rem;
+            @include respond(phone){
+                flex-direction: column;
+            }
+        }
+    }
+    
+    .searchResult {
+        padding: 2rem;
+        // margin-left: var(--sidefilter-width);
+        width: 100%;
+
+        @include respond(phone){
+            margin: 0;
+        }
+    }
+}

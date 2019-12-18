@@ -1,0 +1,13 @@
+$default-font-size: 1.5rem;
+$secondary-dark: findDarkColor($secondary);
+$secondary-light: findLightColor($secondary);
+
+//Layout
+$global-nav-height: 5rem;
+$fixed-area-height: 13rem;
+$fixed-area-height-phone: $fixed-area-height - $global-nav-height;
+
+//Job Search
+$search-filter-height: 16rem;
+$search-filter-height-phone: 15rem;
+

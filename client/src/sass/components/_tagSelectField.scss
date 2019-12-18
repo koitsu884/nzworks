@@ -1,0 +1,10 @@
+.tagSelectField {
+    .tag {
+        color: $grey-lighter;
+        cursor: pointer;
+        &.active {
+            color: $white;
+            background-color: $success;
+        }
+    }
+}

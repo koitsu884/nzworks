@@ -1,0 +1,6 @@
+.footer {
+    height: 10rem;
+    @include respond(phone){
+        margin-bottom: 6rem;
+    }
+}

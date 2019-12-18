@@ -1,0 +1,28 @@
+.latestJobList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 1rem;
+
+    &__item{
+        width: 30rem;
+        flex-grow: 1;
+        margin: 2rem;
+        min-height: 50rem;
+        overflow: hidden;
+        .card{
+            height: 100%;
+        }
+    }
+
+    @include respond(phone){
+        flex-direction: column;
+        align-items: center;
+
+        &__item{
+            min-height: 0;
+            width: 90%;
+            margin: 2rem 0;
+        }
+    }
+}

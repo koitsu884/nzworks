@@ -1,0 +1,18 @@
+.jobList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .card{
+        margin: 1rem;
+        width: 50rem;
+    }
+
+    @include respond(phone){
+        display: block;
+        // flex-direction: column;
+        // jus
+        .card {
+            width: 100%;
+        }
+    }
+}

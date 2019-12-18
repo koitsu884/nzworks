@@ -1,0 +1,14 @@
+.jobCardLarge{
+    h3{
+        color: $primary-dark;
+    }
+    h5{
+        color: $secondary-dark;
+        font-size: 1.6rem;
+        font-family: 'Kosugi Maru';
+        margin-bottom: 1.4rem;
+    }
+    time{
+        font-weight: 700;
+    }
+}

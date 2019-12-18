@@ -1,0 +1,10 @@
+.jobFilter {
+    width: 100%;
+    &__jobTypes{
+        display: flex;
+    }
+    &__employType,
+    &__englishLevel {
+        margin: 1rem;
+    }
+}

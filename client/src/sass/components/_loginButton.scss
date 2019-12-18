@@ -1,0 +1,25 @@
+.button-google {
+    background-color: red;
+    height: 4.5rem;
+    border-radius: 5px;
+
+    a{
+        color: $white;
+        display: flex;
+        align-items: center;
+    }
+
+    &__logo{
+        height: 100%;
+        width: 4.5rem;
+        font-size: 2.5rem;
+        padding: 1rem;
+        margin-right: 2rem;
+        cursor: pointer;
+        border-right: 1px solid rgb(201, 2, 2)
+    }
+
+    &:hover{
+        background-color: rgb(250, 78, 78);
+    }
+}
