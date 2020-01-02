@@ -9,9 +9,6 @@ cloudinary.config({
 const cloudinaryRoot = config.get('cloudinaryRoot');
 
 module.exports.singleUpload = function (data, filetype, path, filename) {    
-    console.log(filetype);
-    console.log(path);
-    console.log(filename);
     return cloudinary.uploader.upload(data,
         {
             resource_type: filetype,
@@ -31,7 +28,7 @@ module.exports.deleteFile = function (public_id) {
 }
 
 module.exports.deleteFolder = function (path) {
-    return cloudinary.api.delete_resources_by_prefix(path);
+    return cloudinary.api.delete_resources_by_prefix(cloudinaryRoot + path);
 }
 
 

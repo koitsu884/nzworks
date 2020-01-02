@@ -4,20 +4,21 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const { PointSchema } = require('./commonSchema');
+const { SavedJob, JOBSTATUS_DEFAULT, JOBSTATUS_INACTIVE, JOBSTATUS_REMOVED } = require('./savedJob');
 const BaseDataModelSchema = require('./baseDataModelSchema');
 
 
 const JobSchema = new BaseDataModelSchema({
-    user: { 
-        type: Schema.Types.ObjectId, 
-        required: true, 
+    user: {
+        type: Schema.Types.ObjectId,
+        required: true,
         index: true,
         ref: 'users'
     },
     title: {
         type: String, required: true, maxlength: 100
     },
-    details: { 
+    details: {
         type: String,
         maxLength: 10000,
         required: true
@@ -37,10 +38,10 @@ const JobSchema = new BaseDataModelSchema({
         type: String,
         index: true,
     },
-    jobCategory: { 
+    jobCategory: {
         type: String,
         index: true,
-     },
+    },
     workType: {
         type: String,
         index: true,
@@ -48,15 +49,37 @@ const JobSchema = new BaseDataModelSchema({
     address: {
         type: String,
     },
+    phone: {
+        type: String,
+    },
+    email: {
+        type: String,
+    },
     location: PointSchema
 });
 
-JobSchema.pre('save', async function (next) {
-    this.updated_at = Date.now;
+JobSchema.post('findOneAndUpdate', async function (doc) {
+    const data = this.getUpdate();
+
+    if (data.$set.is_active !== undefined) {
+        let status = doc.is_active ? JOBSTATUS_DEFAULT : JOBSTATUS_INACTIVE;
+        await SavedJob.updateMany({ job: doc._id }, { $set: { jobStatus: status } })
+    }
+})
+
+JobSchema.pre('findOneAndUpdate', async function (next) {
+    this.set({ updated_at: new Date() });
     return next();
 })
 
-JobSchema.index({location : '2dsphere'});
+// Not working well.....
+// JobSchema.post('deleteOne', async function (doc) {
+//     console.log(doc);
+//     console.log(JOBSTATUS_REMOVED);
+//     await SavedJob.updateMany({ job: doc._id }, { $set: { jobStatus: JOBSTATUS_REMOVED }});
+// })
+
+JobSchema.index({ location: '2dsphere' });
 
 module.exports.Job = mongoose.model('jobs', JobSchema);
 
@@ -70,7 +93,9 @@ module.exports.validate = job => {
         englishLevel: Joi.string().optional(),
         jobCategory: Joi.string().optional(),
         workType: Joi.string().optional(),
-        address: Joi.string().optional(),
+        address: Joi.string().optional().allow(''),
+        phone: Joi.string().optional().allow(''),
+        email: Joi.string().required(),
         location: Joi.object().optional().allow(null),
     })
 
@@ -87,7 +112,9 @@ module.exports.validateUpdate = job => {
         englishLevel: Joi.string().optional(),
         jobCategory: Joi.string().optional(),
         workType: Joi.string().optional(),
-        address: Joi.string().optional(),
+        address: Joi.string().optional().allow(''),
+        phone: Joi.string().optional().allow(''),
+        email: Joi.string().optional().required(),
         is_active: Joi.boolean().optional(),
         location: Joi.object().optional().allow(null),
     })

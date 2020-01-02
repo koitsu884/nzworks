@@ -5,13 +5,16 @@ import {
     SET_IMAGES,
     ADD_SAVED_JOB,
     REMOVE_SAVED_JOB,
-    ADD_APPLIED_JOB,
-    REMOVE_APPLIED_JOB
+    SET_APPLY,
+    SIGN_OUT,
+    SET_SAVED_JOB_LIST,
+    SET_SAVED_JOB
 } from './types';
 import { setLoading } from './commonActions';
 import Alert from '../utils/alert';
 import client from '../utils/client';
 import errorToStr from '../utils/errorToStr';
+import history from '../history';
 
 const setAvatar = imageObj => {
     return {
@@ -34,17 +37,10 @@ const setImages = images => {
     }
 }
 
-export const setUploadingPhotoCount = count => {
-    return {
-        type: SET_UPLOADING_PHOTO_COUNT,
-        payload: count
-    }
-}
-
-export const addSavedJob = jobId => {
+export const addSavedJob = savedJob => {
     return {
         type: ADD_SAVED_JOB,
-        payload: jobId
+        payload: savedJob
     }
 }
 
@@ -55,24 +51,29 @@ const removeSavedJob = jobId => {
     }
 }
 
-const addAppliedJob = jobId => {
+const setApply = jobId => {
     return {
-        type: ADD_APPLIED_JOB,
+        type: SET_APPLY,
         payload: jobId
     }
 }
 
-const removeAppliedJob = jobId => {
+const setSavedJobList = jobList => {
     return {
-        type: REMOVE_APPLIED_JOB,
-        payload: jobId
+        type: SET_SAVED_JOB_LIST,
+        payload: jobList
     }
 }
 
+const setSavedJob = savedJob => {
+    return {
+        type: SET_SAVED_JOB,
+        payload: savedJob
+    }
+}
 /*-----------------------------------------------------------
  Export actions
 ------------------------------------------------------------*/
-
 export const getUserImages = () => dispatch => {
     client.get('user/images')
         .then(response => {
@@ -113,45 +114,63 @@ export const updateProfile = fd => dispatch => {
         })
 }
 
-export const saveJob = jobId => dispatch => {
-    client.patch('user/jobs/' + jobId, null, { params: { type: 'save' } })
+export const getSavedJobList = () => dispatch => {
+    client.get('savedjob/')
         .then(response => {
-            Alert.success('保存リストに追加しました');
-            dispatch(addSavedJob(jobId));
-
-        }).catch(error => {
+            dispatch(setSavedJobList(response.data));
+        })
+        .catch(error => {
             Alert.error(errorToStr(error));
         })
 }
 
-export const unsaveJob = jobId => dispatch => {
-    client.patch('user/jobs/' + jobId, null, { params: { type: 'save', remove: 'true' } })
+export const refleshSavedJob = jobId => dispatch => {
+    client.get(`savedjob/${jobId}`)
         .then(response => {
-            Alert.success('保存リストから削除しました');
-            dispatch(removeSavedJob(jobId));
+            dispatch(setSavedJob(response.data))
+        })
+}
 
-        }).catch(error => {
+export const saveJob = (userId, jobId, applied=false) => dispatch => {
+    client.post('savedjob/', {user: userId, job: jobId, applied:applied})
+    .then(response => {
+        dispatch(getSavedJobList());
+
+    }).catch(error => {
+        Alert.error(errorToStr(error));
+    })
+}
+
+export const unsaveJob = id => dispatch => {
+    client.delete('savedjob/' + id)
+    .then(response => {
+        dispatch(removeSavedJob(id));
+
+    }).catch(error => {
+        Alert.error(errorToStr(error));
+    })
+}
+
+export const applyJob = (userId, jobId) => dispatch => {
+    client.put('savedjob', {user: userId, job: jobId, applied:true})
+        .then(response => {
+            dispatch(setApply(jobId))
+        })
+        .catch(error => {
             Alert.error(errorToStr(error));
         })
 }
 
-export const saveAppliedJob = jobId => dispatch => {
-    client.patch('user/jobs/' + jobId, null, { params: { type: 'apply' } })
+export const deleteAccount = () => dispatch => {
+    history.push("/");
+    client.delete('user')
         .then(response => {
-            dispatch(addAppliedJob(jobId));
-
-        }).catch(error => {
+            Alert.success("アカウントを削除しました");
+            dispatch({
+                type: SIGN_OUT
+            })
+        })
+        .catch(error => {
             Alert.error(errorToStr(error));
         })
 }
-
-export const unsaveAppliedJob = jobId => dispatch => {
-    client.patch('user/jobs/' + jobId, null, { params: { type: 'apply', remove: 'true' } })
-        .then(response => {
-            dispatch(removeAppliedJob(jobId));
-
-        }).catch(error => {
-            Alert.error(errorToStr(error));
-        })
-}
-

@@ -16,10 +16,8 @@ function VerifyEmail(props) {
             history.push('/')
         }
         else{
-            console.log('sending token to server...');
             client.get('auth/verify', {params:{token: token}})
             .then(res => {
-                console.log('getting current user');
                 dispatch(getCurrentUser());
                 history.push('/');
             })

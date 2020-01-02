@@ -9,7 +9,7 @@ import GoogleLogin from '../auth/GoogleLogin';
 function Signup(props) {
     const dispatch = useDispatch();
     const methods = useForm(); // initialise the hook
-    const { register, setValue, errors, handleSubmit} = methods;
+    const { register, setValue, errors, handleSubmit } = methods;
     let userType = methods.watch('user_type');
 
     useEffect(() => {
@@ -21,7 +21,6 @@ function Signup(props) {
     }
 
     const onSubmit = data => {
-        console.log(data);
         let fd = Object.assign({}, data);
         fd.profile = { user_type: fd.user_type };
         fd.password2 = undefined;
@@ -36,17 +35,17 @@ function Signup(props) {
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="field">
-                        <label className="label">アカウントタイプ</label>
+                        <label className="label required">アカウントタイプ</label>
                         <div className="tabs is-toggle control">
                             <ul>
-                                <li className={userType === 'Business' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Business')}>
-                                    <a href="# ">
-                                        <span>雇用者側</span>
-                                    </a>
-                                </li>
                                 <li className={userType === 'Personal' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Personal')}>
                                     <a href="# ">
-                                        <span>求職者側</span>
+                                        <span>求職者</span>
+                                    </a>
+                                </li>
+                                <li className={userType === 'Business' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Business')}>
+                                    <a href="# ">
+                                        <span>企業・雇用主</span>
                                     </a>
                                 </li>
                             </ul>
@@ -87,8 +86,10 @@ function Signup(props) {
                             }
                         }}
                     />
-                    <div className="control">
-                        <button className="button is-link">登録</button>
+                    <div className="field u-margin-top-small">
+                        <div className="control">
+                            <button className="button is-link">登録</button>
+                        </div>
                     </div>
                 </form>
             </FormContext>

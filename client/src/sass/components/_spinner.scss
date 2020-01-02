@@ -14,14 +14,24 @@
         animation: spin 1s linear infinite;
     }
 
-    &.cover {
-        position: fixed;
+    &.cover,
+    &.coverFixed {
         z-index: 1000;
+        background-color: rgba(0,0,0, .6);
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0,0,0, .7);
+    }
+
+    &.cover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+
+    &.coverFixed {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
     }
 }
   

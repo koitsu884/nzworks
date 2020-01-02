@@ -1,65 +1,42 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
+import Alert from '../../utils/alert';
 import { getJobDetails } from '../../actions/jobActions';
-import { saveJob, saveAppliedJob } from '../../actions/userActions';
-import Modal from 'react-modal';
-import ContactForm from './ContactForm';
+import { saveJob, refleshSavedJob } from '../../actions/userActions';
 import TagCloud from '../common/TagCloud';
+import Spinner from '../common/Spinner';
 import JobDetailCompanyInfo from './JobDetail/JobDetailCompanyInfo';
 import JobDetailLocation from './JobDetail/JobDetailLocation';
-
-Modal.setAppElement('#root')
-
-const modalStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)'
-    },
-    overlay: {
-        zIndex: 100
-    }
-};
+import CoverMessage from '../common/CoverMessage';
+import Icon from '../common/Icon';
 
 function JobDetail(props) {
     const dispatch = useDispatch();
     const jobDetails = useSelector(state => state.job.jobDetails);
+    const loading = useSelector(state => state.common.loading);
     const user = useSelector(state => state.user.currentUser);
+    const savedJobList = useSelector(state => state.user.savedJobList);
     const jobId = props.match.params.id;
 
     useEffect(() => {
         dispatch(getJobDetails(jobId));
+        if(savedJobList && savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0){
+            dispatch(refleshSavedJob(jobId))
+        }
     }, [dispatch, jobId])
 
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-
-    const openModal = () => {
-        setModalIsOpen(true);
-    }
-
-    const closeModal = () => {
-        setModalIsOpen(false);
-    }
-
     const handleSaveJob = jobId => {
-        dispatch(saveJob(jobId));
-    }
-
-    //!!!!! For Test !!!!!!
-    const handleApplyJob = jobId => {
-        dispatch(saveAppliedJob(jobId));
+        dispatch(saveJob(user._id, jobId));
+        Alert.success('保存リストに追加しました');
     }
 
     const renderTools = (job) => {
         // const { user } = props;
 
         if (!user) {
-            return null;
+            return <div><strong>求人応募フォームを利用するにはログインが必要です</strong></div>
         }
 
         if (user.profile.user_type === 'Business') {
@@ -70,25 +47,24 @@ function JobDetail(props) {
             }
         }
         else {
+            let savedJob = savedJobList ? savedJobList.find(savedJob => savedJob.job === job._id) : [];
             return (
                 <Fragment>
                     {
-                        user.profile.savedJobs.length > 0 && user.profile.savedJobs.includes(job._id)
+                        savedJob
                         ? <button type="button" className="button is-warning is-large u-margin-small" disabled>保存済み</button> 
                         : <button type="button" className="button is-warning is-large u-margin-small" onClick={() => handleSaveJob(job._id)}>保存リストに追加</button>
                     }
                     {
-                        user.profile.appliedJobs.length > 0 && user.profile.appliedJobs.includes(job._id)
+                        savedJob && savedJob.applied
                         ? <button type="button" className="button is-success is-large u-margin-small" disabled>応募済み</button>
-                        : <button type="button" className="button is-success is-large u-margin-small" onClick={() => handleApplyJob(job._id)}>応募する</button>
+                        : <Link to={`/jobs/${job._id}/apply`} className="button is-success is-large u-margin-small">応募する</Link>
                     }
-                    <Modal
-                        isOpen={modalIsOpen}
-                        onRequestClose={closeModal}
-                        style={modalStyles}
-                    >
-                        <ContactForm job={job} onCancelClick={closeModal} />
-                    </Modal>
+                    {
+                        job.phone
+                        ? <a className="button is-info is-large u-margin-small" href={`tel:${job.phone}`} alt="phone">電話する</a>
+                        : null
+                    }
                 </Fragment>
             );
         }
@@ -100,6 +76,9 @@ function JobDetail(props) {
 
         return (
             <Fragment>
+                {
+                    loading ? <Spinner cover={true} /> : null
+                }
                 <h1>{job.title}</h1>
                 <div className="container jobDetail__description">
                     <h2>詳細</h2>
@@ -151,8 +130,9 @@ function JobDetail(props) {
     }
 
     return (
-        <section className="jobDetail mainSection">
+        <section className='jobDetail mainSection'>
             {renderJobDetail(jobDetails)}
+            {jobDetails && !jobDetails.is_active ? <CoverMessage message="この求人は現在募集していません" /> : null}
         </section>
     )
 }

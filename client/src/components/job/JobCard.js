@@ -3,7 +3,7 @@ import Image from '../common/Image';
 import formatDate from '../../utils/formatDate';
 import Icon from '../common/Icon';
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, saved, applied }) {
     let jobDescription = job.details.length > 200 ? job.details.substr(0, 200) + '...' : job.details;
 
     const renderJobImage = avatar => {
@@ -43,6 +43,20 @@ export default function JobCard({ job }) {
     return (
         <div className="card hover-basic">
             <div className="card-content">
+                {
+                    applied || saved
+                    ? (
+                        <div className="content tags are-medium">
+                            {
+                                saved ? <span className="tag is-warning is-light">保存済</span> : null
+                            }
+                            {
+                                applied ? <span className="tag is-warning is-danger">応募済</span> : null
+                            }
+                        </div>
+                    )
+                    : null
+                }
                 <div className="media">
                     {
                         renderJobImage(job.user.profile.avatar)

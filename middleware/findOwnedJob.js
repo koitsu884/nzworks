@@ -2,7 +2,6 @@ const { User } = require('../models/user');
 const { Job } = require('../models/job');
 
 module.exports = async function(req, res, next) {
-    console.log(req.body);
     let user = await User.findOne({_id:req.user._id, is_active:true, 'profile.user_type': 'Business' });
     if(user){
         req.user = user;

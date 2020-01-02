@@ -39,3 +39,24 @@ a {
 hr {
     margin: 2rem 0;
 }
+
+ol, ul {
+    padding-left:0;
+    list-style-position: inside;
+}
+
+ol li {
+    text-indent:-1em;
+    padding-left:1em;
+}
+
+dl{
+    font-size: inherit;
+    dt{
+        font-weight: 700;
+        font-size: 1.7rem;
+    }
+    dd{
+        margin-bottom: 1.5rem;
+    }
+}

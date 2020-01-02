@@ -1,0 +1,23 @@
+<html>
+<%- include('../partials/head.ejs') -%>
+
+<body>
+    <div class="wrapper">
+        <%- include('../partials/header.ejs') -%>
+        <div class="container">
+            <p><%=name %> 様,</p>
+            <br />
+            <p><%=fromName%> (<%=from%>)様から『<a href="<%=link%>" alt="link"><%=jobTitle%></a>』に応募がありました。</p>
+            <hr />
+            <div class="content">
+                <h5>メッセージ本文</h5>
+                <p class="message"><%=message%></p>
+            </div>
+            <hr />
+            <p class="info">※このメールに直接返信した場合、上記応募者のメールアドレスが自動的に送信先に設定されます。</p>
+        </div>
+        <%- include('../partials/footer.ejs') -%>
+    </div>
+</body>
+
+</html>

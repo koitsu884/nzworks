@@ -10,11 +10,14 @@ const { Job } = require('../models/job');
 const { validate: validateProfile } = require('../models/profile');
 const { memoryUploadSingle, bufferToDataUri } = require('../utils/formDataHandler');
 const { singleUpload, deleteFile, deleteFolder } = require('../utils/imageFileManager');
+const { setRefreshTokenToCookie } = require('../helper/cookieManager');
 
 const formDataHandler = memoryUploadSingle('photo');
 const router = express.Router();
 
 router.get('/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  let refreshToken = await req.user.generateRefreshToken();
+  setRefreshTokenToCookie(res, refreshToken);
   res.send(req.user);
 });
 
@@ -25,12 +28,12 @@ router.get('/images', passport.authenticate('jwt', { session: false }), async (r
 router.get('/jobs', passport.authenticate('jwt', { session: false }), findUser, async (req, res) => {
   let params = {};
 
-  switch(req.query.type){
+  switch (req.query.type) {
     case 'applied':
-      params._id = {$in: req.user.profile.appliedJobs};
+      params._id = { $in: req.user.profile.appliedJobs };
       break;
     case 'saved':
-      params._id = {$in: req.user.profile.savedJobs};
+      params._id = { $in: req.user.profile.savedJobs };
       break;
     default:
       params.user = req.user._id;
@@ -110,7 +113,7 @@ router.patch('/jobs/:id', passport.authenticate('jwt', { session: false }), find
         user.profile.savedJobs = user.profile.savedJobs.filter(savedJobId => savedJobId.toString() !== jobId);
       }
       else {
-        if (!user.profile.savedJobs.includes(job._id)){
+        if (!user.profile.savedJobs.includes(job._id)) {
           user.profile.savedJobs.push(jobId)
         }
         else {
@@ -161,6 +164,24 @@ router.post('/images', passport.authenticate('jwt', { session: false }), findUse
       console.log(error);
     })
 })
+
+router.delete('/', passport.authenticate('jwt', { session: false }), findUser, async (req, res) => {
+  let user = req.user;
+  //Delete images from cloudinary
+  deleteFolder(`/user/${user._id}`)
+    .then(console.log("Deleted user's images"))
+    .catch(errors => console.log(errors));
+
+  user.remove()
+    .then(result => {
+      res.status(200).send('OK');
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send("Something went wrong");
+    });
+})
+
 
 router.delete('/images/:id', passport.authenticate('jwt', { session: false }), findUser, async (req, res) => {
   let user = req.user;

@@ -1,28 +1,39 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
-import JobCardMini from '../../../job/JobCardMini';
+import SavedJobItem from './SavedJobItem';
 
 const SavedJobList = props => {
-    const { jobList } = props;
+    const { savedJobList } = props;
     const onClickDelete = id => {
         props.onClickDelete(id);
     }
 
-    if (!jobList || jobList.length === 0) {
+    if (!savedJobList || savedJobList.length === 0) {
         return <p>データがありません</p>
     }
 
     return (
-        <div className="jobList">
+        <div className="savedJobList">
             {
-                jobList.map(job => {
+                savedJobList.map(savedJob => {
                     return (
-                        <div className="u-flex" key={job._id}>
-                            <Link to={`/jobs/${job._id}`}>
-                                <JobCardMini job={job} />
-                            </Link>
-                            <button type="button" onClick={() => onClickDelete(job._id)} className="button is-danger is-small u-margin-auto">削除</button>
+                        <div className="u-flex" key={savedJob.job}>
+                            {
+                                savedJob.jobStatus === 'removed'
+                                ? (
+                                    <div className='u-flex-grow'>
+                                        <SavedJobItem savedJob={savedJob} />
+                                    </div>
+                                )
+                                : (
+                                    <Link to={`/jobs/${savedJob.job}`} className='u-flex-grow'>
+                                        <SavedJobItem savedJob={savedJob} />
+                                    </Link>
+                                )
+                            }
+   
+                            <button type="button" onClick={() => onClickDelete(savedJob._id)} className="button is-danger is-small u-margin-auto">削除</button>
                         </div>
                     )
                 })

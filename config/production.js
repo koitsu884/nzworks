@@ -1,0 +1,15 @@
+module.exports = {
+    "jwtPrivateKey": process.env.JWT_KEY,
+    "refreshTokenSecret" : process.env.REFRESH_SECRET,
+    "db": process.env.MONGODB_URI,
+    "googleClientID": process.env.GOOGLE_CLIENT_ID,
+    "googleClientSecret": process.env.GOOGLE_CLIENT_SECRET,
+    "googleCallbackURL": process.env.GOOGLE_CALLBACK_URL,
+    "cloudinaryName": process.env.CLOUDINARY_NAME,
+    "cloudinaryAPIKey": process.env.CLOUDINARY_KEY,
+    "cloudinarySecret": process.env.CLOUDINARY_SECRET,
+    "cloudinaryRoot":  process.env.CLOUDINARY_ROOT,
+    "sendgridUser": process.env.SENDGRID_USER,
+    "sendgridKey": process.env.SENDGRID_KEY,
+    "clientUrl": process.env.CLIENT_URL,
+}

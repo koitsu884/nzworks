@@ -31,6 +31,8 @@
 
 .u-flex { display:flex;}
 .u-flex-justify { justify-content:center;}
+.u-space-between { justify-content:space-between;}
+.u-space-around { justify-content:space-around;}
 .u-flex-align { align-items:center;}
 .u-flex-wrap { flex-wrap:wrap;}
 .u-flex-grow { flex-grow:1;}
@@ -43,8 +45,33 @@
 
 .u-text-wrap {white-space: pre-wrap}
 
+.link {
+    color: $link;
+    text-decoration: underline;
+}
+
 .hidden {
     display:none
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,.4);
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    z-index: 1000;
+
+    &__message {
+        background-color: $white;
+        font-size: 2.4rem;
+        padding: 3rem;
+        border: 2px solid $primary;
+    }
 }
 
 .label.required::after{

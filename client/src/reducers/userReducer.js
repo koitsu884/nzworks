@@ -4,20 +4,23 @@ import {
     SIGN_OUT,
     SET_PROFILE,
     SET_IMAGES,
-    SET_UPLOADING_PHOTO_COUNT,
-    ADD_APPLIED_JOB,
+    SET_APPLY,
     ADD_SAVED_JOB,
-    REMOVE_APPLIED_JOB,
     REMOVE_SAVED_JOB,
+    DELETE_USER,
+    SET_SAVED_JOB_LIST,
+    SET_SAVED_JOB
 } from '../actions/types';
 
 const INITIAL_STATE = {
     currentUser: null,
-    uploadingPhotoCount: 0
+    savedJobList: []
 }
 
 export default (state = INITIAL_STATE, action) => {
     let tempUser;
+    let index;
+    
     switch (action.type) {
         case SIGN_OUT:
             return { currentUser: null };
@@ -50,43 +53,43 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: tempUser
             }
-        case SET_UPLOADING_PHOTO_COUNT:
+        case SET_SAVED_JOB_LIST:
             return {
                 ...state,
-                uploadingPhotoCount: action.payload
+                savedJobList: action.payload
+            }
+        case SET_SAVED_JOB:
+            let tempSavedJobList = [...state.savedJobList];
+            index = state.savedJobList.findIndex(savedJob => savedJob._id === action.payload._id);
+            if(index >= 0){
+                tempSavedJobList[index] = action.payload
+            }
+
+            return {
+                ...state,
+                savedJobList: tempSavedJobList
             }
         case ADD_SAVED_JOB:
-            tempUser = { ...state.currentUser };
-            tempUser.profile.savedJobs.push(action.payload);
-
             return {
                 ...state,
-                currentUser: tempUser
+                savedJobList: [...state.savedJobList, action.payload]
             }
         case REMOVE_SAVED_JOB:
-            tempUser = { ...state.currentUser };
-            tempUser.profile.savedJobs = tempUser.profile.savedJobs.filter(jobs => jobs._id !== action.payload);
+            return {
+                ...state,
+                savedJobList: state.savedJobList.filter(jobs => jobs._id !== action.payload)
+            }
+        case SET_APPLY:
+            let tempJobList = [...state.savedJobList];
+            index = tempJobList.findIndex(savedJob => savedJob.job === action.payload);
+            tempJobList[index].applied = true;
 
             return {
                 ...state,
-                currentUser: tempUser
+                savedJobList: tempJobList
             }
-        case ADD_APPLIED_JOB:
-            tempUser = { ...state.currentUser };
-            tempUser.profile.appliedJobs.push(action.payload);
-
-            return {
-                ...state,
-                currentUser: tempUser
-            }
-        case REMOVE_APPLIED_JOB:
-            tempUser = { ...state.currentUser };
-            tempUser.profile.appliedJobs = tempUser.profile.appliedJobs.filter(jobs => jobs._id !== action.payload);
-
-            return {
-                ...state,
-                currentUser: tempUser
-            }
+        case DELETE_USER:
+            return INITIAL_STATE
         default:
             return state;
     }

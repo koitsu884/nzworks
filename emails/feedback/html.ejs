@@ -1,0 +1,18 @@
+<html>
+<%- include('../partials/head.ejs') -%>
+<body>
+    <div class="wrapper">
+        <%- include('../partials/header.ejs') -%>
+        <div class="container">
+            <p><%= name %>(<%= email %>)さんからフィードバックが届いたでよ</p>
+            <br />
+            <div class="content">
+                <h3><%=title%></h3>
+                <h5>メッセージ本文</h5>
+                <p class="message"><%=message%></p>
+            </div>
+        </div>
+        <%- include('../partials/footer.ejs') -%>
+    </div>
+</body>
+</html>

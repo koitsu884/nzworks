@@ -4,17 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 
 import Alert from '../../../utils/alert';
+import useModal from '../../hooks/useModal';
 import { getUserImages, deleteUserImage } from '../../../actions/userActions';
 import ImageSelector from '../../common/ImageSelector';
 import UserImageUploader from './UserImageUploader';
 
-Modal.setAppElement("#root")
-
 const UserImageEditor = (props) => {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
-    // const uploadingCount = useSelector(state =>  state.user.uploadingPhotoCount);
-    const [modalIsOpen, setModalOpen] = useState(false);
+    const [openModal, closeModal, modalIsOpen] = useModal();
     const { profile } = currentUser;
     let imageNum = profile.images ? profile.images.length : 0;
 
@@ -38,14 +36,6 @@ const UserImageEditor = (props) => {
         closeModal();
     }
 
-    const openModal = () => {
-        setModalOpen(true);
-    }
-
-    const closeModal = () => {
-        setModalOpen(false);
-    }
-
     return (
         <div className="userImageEditor">
             <button type="button" className="button is-primary" onClick={openModal} disabled={imageNum >= 4}>画像をアップロードする(４つまで)</button>
@@ -60,10 +50,9 @@ const UserImageEditor = (props) => {
                 isOpen={modalIsOpen}
                 onRequestClose={closeModal}
                 contentLabel="Test"
-                style={{ overlay: { zIndex: 1000 } }}
+                style={{ overlay: { zIndex: 1000}, content:{maxWidth: '65rem',  margin: 'auto'}}}
             >
-                <UserImageUploader onUploaded={handleImagesUploaded} maxNum={4 - imageNum} />
-                <button className="button is-danger is-small u-margin-auto" type="button" onClick={closeModal}>キャンセル</button>
+                <UserImageUploader onUploaded={handleImagesUploaded} onCancel={closeModal} maxNum={4 - imageNum} />
             </Modal>
         </div>
     )

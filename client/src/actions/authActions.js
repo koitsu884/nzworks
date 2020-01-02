@@ -4,6 +4,8 @@ import Alert from '../utils/alert';
 import client from '../utils/client';
 import errorToStr from '../utils/errorToStr';
 
+import {getSavedJobList} from './userActions';
+
 export const getCurrentUser = () => dispatch => {
     client.get('user/me/')
     .then(res => {
@@ -11,9 +13,11 @@ export const getCurrentUser = () => dispatch => {
             type: SET_CURRENT_USER,
             payload: res.data
         })
+        dispatch(getSavedJobList());
     })
     .catch(errors => {
         console.log('Failed to get current user');
+        dispatch(signOut());
     })
 }
 
@@ -25,6 +29,7 @@ export const signIn = (email, password) => dispatch => {
             type: SET_CURRENT_USER,
             payload: res.data
         })
+        dispatch(getSavedJobList());
     })
     .catch(errors => {
         Alert.error(errorToStr(errors));
@@ -42,6 +47,7 @@ export const signUp = (formData) => dispatch => {
 }
 
 export const signOut = () => dispatch => {
+    history.push("/");
     client.delete('auth/')
         .then(res => {
             dispatch({

@@ -1,17 +1,22 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import JobCardLarge from '../job/JobCardLarge';
 
 const LatestJobList = props => {
+    const {jobList} = props;
+    
     return (
         <div className="latestJobList">
             {
-                props.jobList.map(job => {
+                !jobList || jobList.length === 0
+                ? <p>データがありません</p>
+                : jobList.map(job => {
                     return (
-                        <div className="latestJobList__item hover-basic">
-                            <JobCardLarge key={job._id} job={job}/>
-                        </div>
+                        <Link key={job._id} to={`/jobs/${job._id}`} className="latestJobList__item hover-basic">
+                            <JobCardLarge job={job}/>
+                        </Link>
                     )
                 })
             }

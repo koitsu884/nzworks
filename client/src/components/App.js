@@ -16,12 +16,17 @@ import MyPage from './account/MyPage';
 import VerifyEmail from './auth/VerifyEmail';
 import ForgotPassword from './auth/ForgotPassword';
 import ResetPassword from './auth/ResetPassword';
-import EmailSent from './static/EmailSent';
-import NotFound from './static/NotFound';
 import Signin from './account/Signin';
 import PostedJob from './account/MyPage/PostedJob';
 import JobEdit from './job/JobEdit';
 import SavedJob from './account/MyPage/SavedJob';
+import ApplyJob from './job/ApplyJob';
+import EmailSent from './static/EmailSent';
+import NotFound from './static/NotFound';
+import Terms from './static/Terms';
+import Privacy from './static/Privacy';
+import ContactForm from './contact/ContactForm';
+import PrivateRoute from './PrivateRoute';
 
 
 function App(props) {
@@ -43,18 +48,24 @@ function App(props) {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/jobs" exact component={JobSearch} />
-            <Route path="/jobs/edit" exact component={JobEdit} />
-            <Route path="/jobs/edit/:id" exact component={JobEdit} />
+            <PrivateRoute path="/jobs/edit" userType="Business" exact component={JobEdit} />
+            <PrivateRoute path="/jobs/edit/:id" userType="Business" exact component={JobEdit} />
             <Route path="/jobs/:id" exact component={JobDetail} />
+            <PrivateRoute path="/jobs/:id/apply" userType="Personal" exact component={ApplyJob} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/signin" exact component={Signin} />
-            <Route path="/mypage" exact component={MyPage} />
-            <Route path="/mypage/postedjoblist" exact component={PostedJob} />
-            <Route path="/mypage/savedjoblist" exact component={SavedJob} />
+            <PrivateRoute path="/mypage" exact component={MyPage} />
+            <PrivateRoute path="/mypage/postedjoblist" userType="Business" exact component={PostedJob} />
+            {/* <Route path="/mypage/postedjoblist" exact component={PostedJob} /> */}
+            <PrivateRoute path="/mypage/savedjoblist" userType="Personal" exact component={SavedJob} />
+            {/* <Route path="/mypage/savedjoblist" exact component={SavedJob} /> */}
             <Route path="/auth/verifyemail/:token" exact component={VerifyEmail} />
             <Route path="/auth/forgotpassword" exact component={ForgotPassword} />
             <Route path="/auth/resetpassword/:token" exact component={ResetPassword} />
+            <Route path="/contact" exact component={ContactForm} />
             <Route path="/static/emailsent" exact component={EmailSent} />
+            <Route path="/static/privacy" exact component={Privacy} />
+            <Route path="/static/terms" exact component={Terms} />
             <Route exact path="*" component={NotFound} />
           </Switch>
         </div>

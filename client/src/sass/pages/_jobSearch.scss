@@ -16,6 +16,7 @@
     &__container{
         width: 100%;
         display: flex;
+        position: relative;
     }
 
     &__filter{
@@ -88,6 +89,7 @@
         padding: 2rem;
         // margin-left: var(--sidefilter-width);
         width: 100%;
+        min-height: 50vh;
 
         @include respond(phone){
             margin: 0;

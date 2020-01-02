@@ -5,6 +5,7 @@ import ImageGallery from 'react-image-gallery'
 import { getResizedImageUrl } from '../../../utils/imageManager';
 
 const JobDetailCompanyInfo = props => {
+    if(!props.user) return <p>No data</p>;
     let {name, profile} = props.user;
 
     const renderCompanyImages = images => {

@@ -42,6 +42,8 @@ function JobEdit(props) {
                     setValue("englishLevel", response.data.englishLevel);
                     setValue("tags", response.data.tags);
                     setValue("address", response.data.address);
+                    setValue("email", response.data.email);
+                    setValue("phone", response.data.phone);
                 })
                 .catch(error => {
                     Alert.error("詳細データの取得に失敗しました");
@@ -53,7 +55,7 @@ function JobEdit(props) {
     }, [jobId, setValue, dispatch])
 
     useEffect(() => {
-        if(!user) return;
+        if (!user) return;
 
         let { address, location } = user.profile;
         if (address) {
@@ -65,6 +67,10 @@ function JobEdit(props) {
                 lng: location.coordinates[0],
             });
         }
+        if (user.profile.phone) {
+            setValue('phone', user.profile.phone)
+        }
+        setValue('email', user.email);
     }, [user, setValue])
 
     useEffect(() => {
@@ -129,48 +135,75 @@ function JobEdit(props) {
                         registerOptions={{ required: true, maxLength: 10000 }}
                     />
                     <div className="u-flex-responsive">
-                        <div className="u-margin-small" style={{ minWidth: '30rem' }}>
-                            <AddressField
-                                label="住所"
-                                placeholder="勤務先の住所を入力してください"
-                            />
-                            <AreaField
-                                label="エリア"
-                                name="area"
-                                className="field u-margin-small"
-                            />
-                        </div>
                         <div className="u-margin-small u-flex-grow" style={{ maxWidth: '90rem' }}>
-                            <div className="u-flex u-flex-wrap">
-                                <SelectField
-                                    label="職種"
-                                    name="jobCategory"
-                                    className="field u-margin-small"
-                                    emptyString="-- 選択してください --"
-                                    dataList={jobCategories}
-                                    registerOptions={{ required: true }}
+                            <section className="section has-background-light u-margin-bottom-small">
+                                <h3>この求人の連絡手段</h3>
+                                <div className="u-flex u-flex-wrap">
+                                    <TextField
+                                        label="連絡先メールアドレス"
+                                        type="email"
+                                        className="field u-margin-small"
+                                        placeholder="メールアドレスを入力してください"
+                                        name="email"
+                                        registerOptions={{ maxLength: 100, required: true }}
+                                    />
+                                    <TextField
+                                        label="連絡先電話番号"
+                                        type="phone"
+                                        className="field u-margin-small"
+                                        placeholder="電話番号を入力してください"
+                                        name="phone"
+                                        registerOptions={{ maxLength: 100 }}
+                                    />
+                                </div>
+                            </section>
+                            <section className="section has-background-light">
+                                <h3>その他詳細</h3>
+                                <div className="u-flex u-flex-wrap">
+                                    <SelectField
+                                        label="職種"
+                                        name="jobCategory"
+                                        className="field u-margin-small"
+                                        emptyString="-- 選択してください --"
+                                        dataList={jobCategories}
+                                        registerOptions={{ required: true }}
+                                    />
+                                    <SelectField
+                                        label="雇用形態"
+                                        name="workType"
+                                        className="field u-margin-small"
+                                        emptyString="不問"
+                                        dataList={workTypes}
+                                    />
+                                    <SelectField
+                                        label="必要英語力"
+                                        name="englishLevel"
+                                        className="field u-margin-small"
+                                        emptyString="不問"
+                                        dataList={englishLevels}
+                                    />
+                                </div>
+                                <TagField
+                                    label="アピールポイント（複数選択可）"
+                                    name="tags"
+                                    className="field"
+                                    dataList={tagNames}
                                 />
-                                <SelectField
-                                    label="雇用形態"
-                                    name="workType"
-                                    className="field u-margin-small"
-                                    emptyString="不問"
-                                    dataList={workTypes}
+                            </section>
+                        </div>
+                        <div className="u-margin-small" style={{ minWidth: '30rem' }}>
+                            <section className="section has-background-light">
+                                <h3>勤務先</h3>
+                                <AddressField
+                                    label="住所"
+                                    placeholder="勤務先の住所を入力してください"
                                 />
-                                <SelectField
-                                    label="必要英語力"
-                                    name="englishLevel"
+                                <AreaField
+                                    label="エリア"
+                                    name="area"
                                     className="field u-margin-small"
-                                    emptyString="不問"
-                                    dataList={englishLevels}
                                 />
-                            </div>
-                            <TagField
-                                label="アピールポイント（複数選択可）"
-                                name="tags"
-                                className="field"
-                                dataList={tagNames}
-                            />
+                            </section>
                         </div>
                     </div>
                     <div className="field">

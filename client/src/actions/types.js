@@ -14,11 +14,12 @@ export const SIGN_OUT = 'SIGN_OUT';
 export const SET_AVATAR = 'SET_AVATAR';
 export const SET_PROFILE = 'SET_PROFILE';
 export const SET_IMAGES = 'SET_IMAGES';
-export const SET_UPLOADING_PHOTO_COUNT = 'SET_UPLOADING_PHOTO_COUNT';
+export const SET_SAVED_JOB_LIST = 'SET_SAVED_JOB_LIST';
+export const SET_SAVED_JOB = 'SET_SAVED_JOB';
 export const ADD_SAVED_JOB = 'ADD_SAVED_JOB';
 export const REMOVE_SAVED_JOB = 'REMOVE_SAVED_JOB';
-export const ADD_APPLIED_JOB = 'ADD_APPLIED_JOB';
-export const REMOVE_APPLIED_JOB = 'REMOVE_APPLIED_JOB';
+export const SET_APPLY = 'SET_APPLY';
+export const DELETE_USER = 'DELETE_USER';
 
 //Job
 export const SET_JOB_DETAILS = 'SET_JOB_DETAILS';

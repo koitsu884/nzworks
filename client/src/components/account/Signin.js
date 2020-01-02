@@ -1,4 +1,5 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signIn } from '../../actions/authActions';
 import useForm, { FormContext } from 'react-hook-form';
@@ -29,23 +30,23 @@ function Signin(props) {
         <div className="userForm">
             <h1 className="u-margin-bottom-medium">ログイン</h1>
             <div className="field">
-            <label className="label">アカウントタイプ</label>
-            <div className="tabs is-toggle control">
-                <ul>
-                    <li className={userType === 'Business' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Business')}>
-                        <a href="# ">
-                            <span>雇用者側</span>
-                        </a>
-                    </li>
-                    <li className={userType === 'Personal' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Personal')}>
-                        <a href="# ">
-                            <span>求職者側</span>
-                        </a>
-                    </li>
-                </ul>
+                <label className="label required">アカウントタイプ</label>
+                <div className="tabs is-toggle control">
+                    <ul>
+                        <li className={userType === 'Personal' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Personal')}>
+                            <a href="# ">
+                                <span>求職者</span>
+                            </a>
+                        </li>
+                        <li className={userType === 'Business' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Business')}>
+                            <a href="# ">
+                                <span>企業・雇用主</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {errors['user_type'] && <p className="help is-danger">アカウントタイプを選んでください</p>}
             </div>
-            {errors['user_type'] && <p className="help is-danger">アカウントタイプを選んでください</p>}
-        </div>
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <TextField
@@ -62,8 +63,11 @@ function Signin(props) {
                         name="password"
                         registerOptions={{ required: true, minLength: 6, maxLength: 50 }}
                     />
-                    <div className="control">
-                        <button className="button is-link">ログイン</button>
+                    <div className="field u-margin-top-small">
+                        <div className="u-flex u-space-between">
+                            <Link className="link" to="/auth/forgotpassword">パスワードを忘れた方</Link>
+                            <button className="button is-inline is-link">ログイン</button>
+                        </div>
                     </div>
                 </form>
             </FormContext>

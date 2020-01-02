@@ -10,7 +10,7 @@ import UserImageEditor from './UserImageEditor';
 const ProfileEdit = (props) => {
     const dispatch = useDispatch();
     const methods = useForm();
-    const { setValue, register} = methods;
+    const { setValue, register } = methods;
     const profile = useSelector(state => state.user.currentUser.profile);
 
     useEffect(() => {
@@ -37,26 +37,26 @@ const ProfileEdit = (props) => {
         <div className="container">
             <FormContext {...methods} >
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    <UserImageEditor onMainImageSelect={handleAvatarChange} />
+                    <div className="editSection">
+                        <UserImageEditor onMainImageSelect={handleAvatarChange} />
+                    </div>
                     <TextField
                         label="自己主紹介文(1000文字以内)"
                         type="textarea"
                         name="introduction"
+                        className="editSection"
+                        info="※紹介文は求人応募時に、メッセージに含む事ができます"
                         registerOptions={{ minLength: 6, maxLength: 1000 }}
                     />
-                    <p className="help is-info u-margin-bottom-medium">※紹介文は求人応募時に、メッセージに含む事ができます</p>
-                    <div className="u-flex-responsive">
-                        <div className="u-margin-small u-flex-grow">
-                            <TextField
-                                label="電話番号"
-                                type="tel"
-                                placeholder="電話番号を入力してください"
-                                name="phone"
-                                registerOptions={{ maxLength: 12 }}
-                            />
-                        </div>
-                    </div>
-                    <div className="control">
+                    <TextField
+                        label="電話番号"
+                        type="tel"
+                        placeholder="電話番号を入力してください"
+                        name="phone"
+                        className="editSection"
+                        registerOptions={{ maxLength: 12 }}
+                    />
+                    <div className="control editSection">
                         <button className="button is-link is-large">変更を保存</button>
                     </div>
                 </form>

@@ -1,15 +1,8 @@
 <html>
-
-<head>
-    <link href="/css/style.css" rel="stylesheet" data-inline> 
-</head>
-
+<%- include('../partials/head.ejs') -%>
 <body>
     <div class="wrapper">
-        <header class="header">
-            <h1>NZワークス</h1>
-            <h2>ニュージーランド在住者の為の求人サイト</h2>
-        </header>
+        <%- include('../partials/header.ejs') -%>
         <div class="container">
             <p><%=name %> 様,</p>
             <br />
@@ -29,9 +22,7 @@
                 ※当メールに心当たりの無い場合は、誠に恐れ入りますが　破棄して頂けますよう、よろしくお願い致します。
             </p>
         </div>
-        <footer class="footer">
-            <a href="#">NZワークスTOPへ</a>
-        </footer>
+        <%- include('../partials/footer.ejs') -%>
     </div>
 </body>
 </html>

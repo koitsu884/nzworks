@@ -56,13 +56,13 @@ module.exports = function () {
         useFindAndModify: false,
         useUnifiedTopology: true
     })
-        .then(() => {
-            // seed();
+    .then(() => {
+        // seed();
 
-            // const message = `Connected to ${dbConnection}...`;
-            // winston.info(message);
-            // console.log(message);
+        // const message = `Connected to ${dbConnection}...`;
+        // winston.info(message);
+        // console.log(message);
 
-            // createAdminUser();
-        })
+        // createAdminUser();
+    })
 }

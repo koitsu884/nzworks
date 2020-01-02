@@ -1,0 +1,9 @@
+.mypage{
+    .editSection{
+        margin: 4rem 2rem;
+
+        @include respond(phone){
+            margin: 2rem 1rem;
+        }
+    }
+}

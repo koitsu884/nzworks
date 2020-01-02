@@ -4,7 +4,7 @@ export default class Alert {
     static success = (message, onClose=null) => {
         Swal.fire({
             // title: 'Success!',
-            text: message,
+            html: message,
             onClose: onClose
         })
     }
@@ -13,14 +13,14 @@ export default class Alert {
         Swal.fire({
             title: 'エラー',
             icon: 'error',
-            text: message,
+            html: message,
         })
     }
 
     static confirm = (message) => {
         return Swal.fire({
             title: '確認',
-            text: message,
+            html: message,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'OK',

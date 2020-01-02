@@ -1,6 +1,7 @@
 .tagSelectField {
     .tag {
         color: $grey-lighter;
+        border: solid 1px $grey-light;
         cursor: pointer;
         &.active {
             color: $white;

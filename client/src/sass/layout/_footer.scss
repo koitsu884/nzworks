@@ -1,6 +1,22 @@
 .footer {
-    height: 10rem;
+    height: 12rem;
+    background-color: $primary;
+    color: $white;
+    text-align: center;
+
+    nav {
+        ul {
+            margin: auto;
+            display: inline-flex;
+            list-style: none;
+            li{
+                cursor: pointer;
+                margin: 1rem;
+            }
+        }
+    }
+
     @include respond(phone){
-        margin-bottom: 6rem;
+        margin-bottom: 5rem;
     }
 }

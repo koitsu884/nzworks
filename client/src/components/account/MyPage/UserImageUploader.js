@@ -6,22 +6,10 @@ import client from '../../../utils/client';
 import MultipleImageUploader from '../../common/MultipleImageUploader';
 import { resizeFile } from '../../../utils/imageManager';
 
-const modalStyle = {
-    position:'fixed',
-    top: 0,
-    left: 0,
-    width: '100vh',
-    height: '100vh',
-    backgroundColor: 'rgba(0,0,0,.5)',
-    display: 'flex',
-    justifyContents:'center',
-    alignItems: 'center',
-    zIndex: '1000'
-}
-
 const UserImageUploader = (props) => {
     const [selectedFiles, setFiles] = useState([]);
     const [uploading, setUploading] = useState(false);
+    const [count, setCount] = useState(null);
 
     const onImagesSelected = async (selectedFiles) => {
         let resizedFiles = [];
@@ -38,10 +26,12 @@ const UserImageUploader = (props) => {
         if(!files || files.length === 0) return;
     
         let failed = [];
+        let count = 1;
     
         for (var file of files) {
             let fd = new FormData();
             fd.append('photo', file, file.name);
+            setCount(count);
             try{
                 await client.post('user/images', fd, {
                     headers: {
@@ -51,6 +41,7 @@ const UserImageUploader = (props) => {
             } catch(error) {
                 failed.push(file.name);
             }
+            count++;
         }
     
         if (failed.length > 0) {
@@ -62,26 +53,31 @@ const UserImageUploader = (props) => {
     const onUpload = async () => {
         setUploading(true);
         await uploadImages(selectedFiles);
-        console.log('Upload complete!!');
         setUploading(false);
         props.onUploaded();
     }
 
     return (
-        <div className="userImageUploader">
+        <div className="userImageUploader has-text-centered">
             <h3>画像アップロードする（{props.maxNum}つまで）</h3>
             <MultipleImageUploader onImagesSelected={onImagesSelected} maxNum={props.maxNum} />
             {
                 uploading 
-                ? <div style={modalStyle}>画像をアップロード中です…</div>
-                : <button type="button" onClick={onUpload} className="button is-primary" disabled={selectedFiles.length === 0}>アップロード</button>
+                ? <div className='modal'><div className="modal__message">{count}枚目の画像をアップロード中です…</div></div>
+                : null
             }
+            <hr />
+            <div className="buttons u-margin-auto">
+                <button type="button" onClick={onUpload} className="button is-primary" disabled={selectedFiles.length === 0 || uploading}>アップロード</button>
+                <button className="button is-danger" type="button" onClick={props.onCancel}>キャンセル</button>
+            </div>
         </div>
     )
 }
 
 UserImageUploader.propTypes = {
     onUploaded: PropTypes.func,
+    onCancel: PropTypes.func,
     maxNum: PropTypes.number
 }
 

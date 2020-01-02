@@ -29,8 +29,6 @@ mongoose.connect(dbConnection, {
     await user.save();
 
     let areas = await Area.find({});
-    // console.log(areas);
-
 
     let jobs = [];
 

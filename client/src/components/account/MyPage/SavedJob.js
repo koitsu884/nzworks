@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import { updateProfile } from '../../../actions/userActions';
+import { saveJob, unsaveJob } from '../../../actions/userActions';
 import Alert from '../../../utils/alert';
 import errorToStr from '../../../utils/errorToStr';
 import client from '../../../utils/client';
@@ -12,51 +12,48 @@ import SavedJobList from './SavedJob/SavedJobList';
 const SavedJob = (props) => {
     const dispatch = useDispatch();
     const user = useSelector(state => state.user.currentUser);
+    const savedJobList = useSelector(state => state.user.savedJobList);
 
-    const [appliedJobList, setAppliedJobList] = useState([]);
-    const [savedJobList, setSavedJobList] = useState([]);
-    const [loading, setLoading] = useState(false);
+    // const [appliedJobList, setAppliedJobList] = useState([]);
+    // const [savedJobList, setSavedJobList] = useState([]);
+    // const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!user) return;
+        if (!savedJobList) return;
         window.scrollTo(0, 0);
-        setLoading(true);
+        // setLoading(true);
 
-        client.get('user/jobs', { params: {type: 'saved'} }).then(response => {
-            const appliedJobIdList = [...user.profile.appliedJobs];
-            const savedJobListFromResponse = response.data;
-            let savedJobArray = [];
-            let appliedJobArray = [];
-            savedJobListFromResponse.forEach(savedJob => {
-                appliedJobIdList.includes(savedJob._id) 
-                ? appliedJobArray.push(savedJob)
-                : savedJobArray.push(savedJob);
-            });
-            setAppliedJobList(appliedJobArray);
-            setSavedJobList(savedJobArray);
-        }).catch(error => {
-            Alert.error(errorToStr(error));
-        })
-        .finally(() => {
-            setLoading(false);
-        })
-    }, [user])
+        // client.get('savedJobList/jobs', { params: {type: 'saved'} }).then(response => {
+        //     const appliedJobIdList = [...user.profile.appliedJobs];
+        //     const savedJobListFromResponse = response.data;
+        //     let savedJobArray = [];
+        //     let appliedJobArray = [];
+        //     savedJobListFromResponse.forEach(savedJob => {
+        //         appliedJobIdList.includes(savedJob._id) 
+        //         ? appliedJobArray.push(savedJob)
+        //         : savedJobArray.push(savedJob);
+        //     });
+        //     setAppliedJobList(appliedJobArray);
+        //     setSavedJobList(savedJobArray);
+        // }).catch(error => {
+        //     Alert.error(errorToStr(error));
+        // })
+        // .finally(() => {
+        //     setLoading(false);
+        // })
+    }, [savedJobList])
 
     const handleRemoveItem = id => {
         Alert.confirm('この求人を保存リストから削除しますか？')
             .then((result) => {
                 if (result.value) {
-                    const { profile } = user;
-
-                    let fd = {
-                        user_type: 'Personal',
-                        savedJobs: profile.savedJobs.filter(savedJobId => savedJobId !== id),
-                        appliedJobs: profile.appliedJobs.filter(appliedJobId => appliedJobId !== id)
-                    };
-                    dispatch(updateProfile(fd));
+                    dispatch(unsaveJob(id));
                 }
             })
     }
+
+    let savedJobsNotApplied = savedJobList ? savedJobList.filter(savedJob => !savedJob.applied) : [];
+    let appliedJobs = savedJobList ? savedJobList.filter(savedJob => savedJob.applied) : [];
 
     return (
         <div className="container">
@@ -70,16 +67,16 @@ const SavedJob = (props) => {
                 </div>
                 <TabPanel>
                     {
-                        loading
+                        false
                             ? <Spinner />
-                            : <SavedJobList onClickDelete={(id) => handleRemoveItem(id)} jobList={savedJobList} />
+                            : <SavedJobList onClickDelete={(id) => handleRemoveItem(id)} savedJobList={savedJobsNotApplied} />
                     }
                 </TabPanel>
                 <TabPanel>
                     {
-                        loading
+                        false
                             ? <Spinner />
-                            : <SavedJobList onClickDelete={(id) => handleRemoveItem(id)} jobList={appliedJobList} applied={true} />
+                            : <SavedJobList onClickDelete={(id) => handleRemoveItem(id)} savedJobList={appliedJobs} applied={true} />
                     }
                 </TabPanel>
             </Tabs>
