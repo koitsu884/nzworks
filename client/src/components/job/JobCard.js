@@ -41,12 +41,12 @@ export default function JobCard({ job, saved, applied }) {
     }
 
     return (
-        <div className="card hover-basic">
+        <div className="card hover-basic jobCard">
             <div className="card-content">
                 {
                     applied || saved
                     ? (
-                        <div className="content tags are-medium">
+                        <div className="content jobCard__status tags">
                             {
                                 saved ? <span className="tag is-warning is-light">保存済</span> : null
                             }

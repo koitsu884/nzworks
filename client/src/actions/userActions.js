@@ -157,6 +157,7 @@ export const applyJob = (userId, jobId) => dispatch => {
             dispatch(setApply(jobId))
         })
         .catch(error => {
+            console.log(error);
             Alert.error(errorToStr(error));
         })
 }

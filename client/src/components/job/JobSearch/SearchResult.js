@@ -19,9 +19,9 @@ function SearchResult(props) {
         let appliedIdList = [];
         if(savedJobList){
             savedJobList.forEach(savedJob => {
-                idList.push(savedJob.job._id);
+                idList.push(savedJob.job);
                 if(savedJob.applied){
-                    appliedIdList.push(savedJob.job._id);
+                    appliedIdList.push(savedJob.job);
                 }
             })
         }

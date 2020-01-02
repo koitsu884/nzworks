@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
 
 import history from '../../history';
-import { applyJob } from '../../actions/userActions';
+import { applyJob, saveJob } from '../../actions/userActions';
 import client from '../../utils/client';
 import useModal from '../hooks/useModal';
 import ApplyForm from './ApplyForm';
 import ApplyPreview from './ApplyJob/ApplyPreview';
 import Alert from '../../utils/alert';
+import Spinner from '../common/Spinner';
 
 const modalStyles = {
     content: {
@@ -27,18 +28,20 @@ const modalStyles = {
 };
 
 const ApplyJob = props => {
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [])
-
     const dispatch = useDispatch();
     const [formData, setFormData] = useState(null);
+    const [sending, setSending] = useState(false);
 
     const [openModal, closeModal, modalIsOpen] = useModal();
 
     let jobId = props.match.params.id;
     const jobDetails = useSelector(state => state.job.jobDetails);
     const user = useSelector(state => state.user.currentUser);
+    const savedJobList = useSelector(state => state.user.savedJobList);
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
 
     const handleSubmit = fd => {
         setFormData(fd);
@@ -47,15 +50,17 @@ const ApplyJob = props => {
 
     const sendEmail = () => {
         let fd = new FormData();
-        for( var key in formData){
-            if(key === 'attachments'){
-                for( const file of formData[key]){
+        for (var key in formData) {
+            if (key === 'attachments') {
+                for (const file of formData[key]) {
                     fd.append('attachment', file, file.name);
                 }
             } else {
                 fd.append(key, formData[key])
             }
         }
+
+        setSending(true);
 
         client.post(
             `job/${jobDetails._id}/mail`,
@@ -66,14 +71,20 @@ const ApplyJob = props => {
                 },
             }
         )
-        .then(res => {
-            Alert.success("メールを送信しました");
-            dispatch(applyJob(user._id, jobId));
-            history.push('/jobs/' + jobId);
-        })
-        .catch(error => {
-            console.log(error);
-        })
+            .then(res => {
+                Alert.success("メールを送信しました");
+                if(savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0){
+                    dispatch(applyJob(user._id, jobId));
+                }
+                else {
+                    dispatch(saveJob(user._id, jobId, true));
+                }
+                history.push('/jobs/' + jobId);
+            })
+            .catch(error => {
+                console.log(error);
+                setSending(false);
+            })
     }
 
     if (!jobDetails || jobDetails._id !== jobId) {
@@ -103,14 +114,18 @@ const ApplyJob = props => {
                 <hr />
                 <ApplyPreview formData={formData} />
                 <hr />
-                <div className="field is-grouped">
-                    <div className="control">
-                        <button type="submit" onClick={sendEmail} className="button is-link">送信</button>
-                    </div>
-                    <div className="control">
-                        <button type="button" className="button is-link is-light" onClick={closeModal}>キャンセル</button>
-                    </div>
-                </div>
+                {
+                    sending ? <Spinner /> : (
+                        <div className="field is-grouped">
+                            <div className="control">
+                                <button type="submit" onClick={sendEmail} className="button is-link">送信</button>
+                            </div>
+                            <div className="control">
+                                <button type="button" className="button is-link is-light" onClick={closeModal}>キャンセル</button>
+                            </div>
+                        </div>
+                    )
+                }
             </Modal>
         </div>
     )

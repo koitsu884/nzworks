@@ -32,6 +32,15 @@ function JobDetail(props) {
         Alert.success('保存リストに追加しました');
     }
 
+    const renderApplyButton = (jobId, savedJob) => {
+        if( savedJob && savedJob.applied){
+            return <button type="button" className="button is-success is-large u-margin-small" disabled>応募済み</button>
+        }
+        else {
+            return <Link to={`/jobs/${jobId}/apply`} className="button is-success is-large u-margin-small">応募する</Link>
+        }
+    }
+
     const renderTools = (job) => {
         // const { user } = props;
 
@@ -56,9 +65,9 @@ function JobDetail(props) {
                         : <button type="button" className="button is-warning is-large u-margin-small" onClick={() => handleSaveJob(job._id)}>保存リストに追加</button>
                     }
                     {
-                        savedJob && savedJob.applied
-                        ? <button type="button" className="button is-success is-large u-margin-small" disabled>応募済み</button>
-                        : <Link to={`/jobs/${job._id}/apply`} className="button is-success is-large u-margin-small">応募する</Link>
+                        job.email 
+                        ? renderApplyButton(job._id, savedJob) 
+                        : null
                     }
                     {
                         job.phone

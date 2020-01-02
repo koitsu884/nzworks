@@ -95,7 +95,7 @@ module.exports.validate = job => {
         workType: Joi.string().optional(),
         address: Joi.string().optional().allow(''),
         phone: Joi.string().optional().allow(''),
-        email: Joi.string().required(),
+        email: Joi.string().optional().allow(''),
         location: Joi.object().optional().allow(null),
     })
 
@@ -114,7 +114,7 @@ module.exports.validateUpdate = job => {
         workType: Joi.string().optional(),
         address: Joi.string().optional().allow(''),
         phone: Joi.string().optional().allow(''),
-        email: Joi.string().optional().required(),
+        email: Joi.string().optional().allow(''),
         is_active: Joi.boolean().optional(),
         location: Joi.object().optional().allow(null),
     })
