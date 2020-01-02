@@ -155,9 +155,8 @@ router.post('/:id/mail', passport.authenticate('jwt', { session: false }), memor
         job.title,
         req.body.message,
         attachments.length > 0 ? attachments : null
-    ).then(res => {
-        console.log(res.originalMessage);
-        return res.send();
+    ).then(result => {
+        return res.status(200).send('OK');
     })
     .catch(error => {
         console.log(error);
