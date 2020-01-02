@@ -121,7 +121,6 @@ router.post('/search', async (req, res) => {
 });
 
 router.post('/:id/mail', passport.authenticate('jwt', { session: false }), memoryUploadMulti('attachment', 2), async (req, res) => {
-    console.log("Passed multar??");
     let job = await Job.findById(req.params.id).populate('user', ['name']);
     if (!job) {
         return res.status(404).send("その求人情報は既に削除されているか、存在しません。");
@@ -143,8 +142,6 @@ router.post('/:id/mail', passport.authenticate('jwt', { session: false }), memor
             })
         })
     }
-
-    console.log("Could be here...?");
 
     sendApplyEmail(
         job.email,
