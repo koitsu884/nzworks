@@ -70,8 +70,8 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), findOwnedJo
 
 router.delete('/:id', passport.authenticate('jwt', { session: false }), findOwnedJob, async (req, res) => {
     try {
-        await Job.deleteOne({_id: req.params.id});
-        await SavedJob.updateMany({ job: req.params.id }, { $set: { jobStatus: JOBSTATUS_REMOVED }});
+        await Job.deleteOne({ _id: req.params.id });
+        await SavedJob.updateMany({ job: req.params.id }, { $set: { jobStatus: JOBSTATUS_REMOVED } });
     }
     catch (error) {
         console.log(error);
@@ -123,19 +123,19 @@ router.post('/search', async (req, res) => {
 router.post('/:id/mail', passport.authenticate('jwt', { session: false }), memoryUploadMulti('attachment', 2), async (req, res) => {
     console.log("Passed multar??");
     let job = await Job.findById(req.params.id).populate('user', ['name']);
-    if(!job){
+    if (!job) {
         return res.status(404).send("その求人情報は既に削除されているか、存在しません。");
     }
-    if(!job.is_active){
+    if (!job.is_active) {
         return res.status(400).send("その求人情報は現在募集停止中です");
     }
-    if(!job.email){
+    if (!job.email) {
         return res.status(400).send("求人情報に連絡先メールアドレスが登録されていません");
     }
 
     var link = config.get('clientUrl') + "jobs/" + job._id;
     var attachments = [];
-    if(req.files){
+    if (req.files) {
         req.files.forEach(file => {
             attachments.push({
                 filename: file.originalname,
@@ -147,17 +147,23 @@ router.post('/:id/mail', passport.authenticate('jwt', { session: false }), memor
     console.log("Could be here...?");
 
     sendApplyEmail(
-        job.email, 
-        job.user.name, 
+        job.email,
+        job.user.name,
         link,
-        req.body.email, 
-        req.body.name, 
-        job.title, 
+        req.body.email,
+        req.body.name,
+        job.title,
         req.body.message,
         attachments.length > 0 ? attachments : null
-        );
+    ).then(res => {
+        console.log(res.originalMessage);
+        return res.send();
+    })
+    .catch(error => {
+        console.log(error);
+        return res.status(500).send("Something wrong");
+    });
 
-    res.send();
 })
 
 module.exports = router; 

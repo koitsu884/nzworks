@@ -8,7 +8,7 @@ const router = express.Router();
 
 function setHistoryInfo(savedJob, job){
     savedJob.jobTitle = job.title;
-    savedJob.areaName = job.area.name;
+    savedJob.areaName = job.area ? job.area.name : 'その他';
     savedJob.jobCategory = job.jobCategory;
     savedJob.employerName = job.user.name;
     savedJob.employerImage = job.user.avatar;
