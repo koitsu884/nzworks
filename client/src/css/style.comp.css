@@ -6616,6 +6616,13 @@ h5 {
   .userImageEditor {
     flex-direction: column; } }
 
+.jobCard {
+  position: relative; }
+  .jobCard__status {
+    position: absolute;
+    left: -1rem;
+    top: -1rem; }
+
 .jobCardLarge h3 {
   color: #066298; }
 
@@ -6633,7 +6640,7 @@ h5 {
   flex-wrap: wrap;
   justify-content: space-evenly; }
   .jobList .card {
-    margin: 1rem;
+    margin: 1.5rem;
     width: 50rem; }
   @media only screen and (max-width: 37.5em) {
     .jobList {
