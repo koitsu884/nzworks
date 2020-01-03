@@ -47,6 +47,7 @@
     "test": "jest --detectOpenHandles  --verbose",
     "start": "node server.js",
     "seed": "node seed/seed.js",
+    "randomJobs": "node seed/seedRandomJobs.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false cd client && npm install && npm run build"
   },
   "author": "",
