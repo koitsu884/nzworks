@@ -22,7 +22,10 @@ router.get('/me', passport.authenticate('jwt', { session: false }), async (req, 
 });
 
 router.get('/images', passport.authenticate('jwt', { session: false }), async (req, res) => {
-  res.send(req.user.profile.images);
+  res.send({
+    avatar: req.user.profile.avatar,
+    images: req.user.profile.images
+  });
 });
 
 router.get('/jobs', passport.authenticate('jwt', { session: false }), findUser, async (req, res) => {
@@ -148,14 +151,18 @@ router.post('/images', passport.authenticate('jwt', { session: false }), findUse
   console.log(req.file.originalname);
   singleUpload(file, "image", `/user/${user._id}`, req.file.originalname)
     .then(async result => {
-      user.profile.images.push({
+      let imageObj = {
         image_id: result.public_id,
         image_url: result.secure_url
-      })
+      };
+      user.profile.images.push(imageObj)
       // user.profile.avatar = {
       //   image_id: result.public_id,
       //   image_url: result.secure_url
       // }
+      if(!user.profile.avatar){
+        user.profile.avatar = imageObj;
+      }
       await user.save();
       res.send(user.profile.images);
     })

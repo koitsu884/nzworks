@@ -41,7 +41,7 @@ const PasswordEditor = () => {
                 style={{ overlay: { zIndex: 1000 }, content: { maxWidth: '65rem', margin: 'auto' } }}
             >
                 <div className="userForm">
-                    <h1 className="u-margin-bottom-medium">パスワード変更</h1>
+                    <h1 className="heading">パスワード変更</h1>
                     <FormContext {...methods} >
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <TextField

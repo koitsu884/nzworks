@@ -44,7 +44,7 @@ export default function ForgotPassword() {
 
     return (
         <div className="userForm">
-            <h1 className="u-margin-bottom-medium">パスワードリセット</h1>
+            <h1 className="heading">パスワードリセット</h1>
             {
                 sent ? (
                     <div>

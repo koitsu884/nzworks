@@ -31,7 +31,7 @@ function Signup(props) {
 
     return (
         <div className="userForm">
-            <h1 className="u-margin-bottom-medium">アカウント作成</h1>
+            <h1 className="heading">アカウント作成</h1>
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="field">

@@ -20,7 +20,7 @@ router.get('/', async (req, res) => {
     if (req.query.limit) {
         query = query.limit(+req.query.limit);
     }
-    let jobs = await query.sort({ _id: -1 });
+    let jobs = await query.sort({ updated_at: -1 });
 
     res.send(jobs);
 });
@@ -35,6 +35,12 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', passport.authenticate('jwt', { session: false }), findBusinessUser, async (req, res) => {
+    let jobCount = await Job.count({user: req.user._id});
+    const JOB_CREATION_LIMIT = 3;
+    if(jobCount >= JOB_CREATION_LIMIT){
+        return res.status(400).send(`1つのアカウントで作成できる広告は${JOB_CREATION_LIMIT}つまでです`);
+    }
+    
     const { error } = validate(req.body);
     if (error) return res.status(400).send(error.details[0].message);
 
@@ -109,7 +115,7 @@ router.post('/search', async (req, res) => {
     }
 
     const itemCount = await Job.countDocuments(filters);
-    let jobs = await query.sort({ _id: -1 });
+    let jobs = await query.sort({ updated_at: -1 });
 
     let returnData = {
         page: page,

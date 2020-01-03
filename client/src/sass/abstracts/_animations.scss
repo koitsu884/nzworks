@@ -7,3 +7,43 @@
         box-shadow: 1px 1px 2px rgba(0,0,0,.4);
     }
 }
+
+//------ React CSS transition ------
+.scale-enter {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+.scale-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity .3s, transform .3s;
+}
+
+.scale-exit {
+    opacity: 1;
+}
+
+.scale-exit-active {
+    opacity:0;
+    transform: scale(0.5);
+    transition: opacity .3s;
+}
+
+.fade-enter {
+    opacity: 0;
+}
+
+.fade-enter-active {
+    opacity: 1;
+    transition: opacity .3s;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit-active {
+    opacity:0;
+    transition: opacity .3s;
+}

@@ -79,20 +79,21 @@ JobSchema.pre('findOneAndUpdate', async function (next) {
 //     await SavedJob.updateMany({ job: doc._id }, { $set: { jobStatus: JOBSTATUS_REMOVED }});
 // })
 
-JobSchema.index({ location: '2dsphere' });
+JobSchema.index({ location: '2dsphere'});
+JobSchema.index({ updated_at: -1});
 
 module.exports.Job = mongoose.model('jobs', JobSchema);
 
 module.exports.validate = job => {
     const schema = Joi.object({
         user: Joi.objectId(),
-        area: Joi.objectId(),
+        area: Joi.objectId().optional().allow(null),
         title: Joi.string().max(100).required(),
         details: Joi.string().max(10000).required(),
         tags: Joi.array().items(Joi.string()),
-        englishLevel: Joi.string().optional(),
-        jobCategory: Joi.string().optional(),
-        workType: Joi.string().optional(),
+        englishLevel: Joi.string().optional().allow(''),
+        jobCategory: Joi.string().required(),
+        workType: Joi.string().optional().allow(''),
         address: Joi.string().optional().allow(''),
         phone: Joi.string().optional().allow(''),
         email: Joi.string().optional().allow(''),
@@ -105,13 +106,13 @@ module.exports.validate = job => {
 module.exports.validateUpdate = job => {
     const schema = Joi.object({
         user: Joi.objectId(),
-        area: Joi.objectId(),
+        area: Joi.objectId().optional().allow(null),
         title: Joi.string().min(1).max(100),
         details: Joi.string().min(1).max(10000),
         tags: Joi.array().items(Joi.string()),
-        englishLevel: Joi.string().optional(),
-        jobCategory: Joi.string().optional(),
-        workType: Joi.string().optional(),
+        englishLevel: Joi.string().optional().allow(''),
+        jobCategory: Joi.string().required(),
+        workType: Joi.string().optional().allow(''),
         address: Joi.string().optional().allow(''),
         phone: Joi.string().optional().allow(''),
         email: Joi.string().optional().allow(''),

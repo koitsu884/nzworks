@@ -28,7 +28,7 @@ function Signin(props) {
 
     return (
         <div className="userForm">
-            <h1 className="u-margin-bottom-medium">ログイン</h1>
+            <h1 className="heading">ログイン</h1>
             <div className="field">
                 <label className="label required">アカウントタイプ</label>
                 <div className="tabs is-toggle control">

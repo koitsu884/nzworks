@@ -77,7 +77,8 @@ const setSavedJob = savedJob => {
 export const getUserImages = () => dispatch => {
     client.get('user/images')
         .then(response => {
-            dispatch(setImages(response.data))
+            dispatch(setImages(response.data.images))
+            dispatch(setAvatar(response.data.avatar))
         }).catch(error => {
             console.log(error);
         })

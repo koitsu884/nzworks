@@ -28,7 +28,7 @@ export default function JobCardLarge({ job }) {
             </div>
             <div className="card-footer u-flex u-flex-align">
                 <Icon iconNameClass="fa-calendar-alt" />
-                <time className="u-margin-left-small" dateTime={job.created_at}>{formatDate(job.created_at)}</time>
+                <time className="u-margin-left-small" dateTime={job.updated_at}>{formatDate(job.updated_at)}</time>
             </div>
         </div>
     )

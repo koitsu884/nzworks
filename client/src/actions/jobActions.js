@@ -24,7 +24,7 @@ const setCurrentPage = page => {
     }
 }
 
-const setFilter = filter => {
+export const setFilter = filter => {
     return {
         type: SET_JOB_SEARCH_FILTER,
         payload: filter
@@ -83,7 +83,7 @@ export const changePage = page => dispatch => {
 
 export const startSearch = (filter, page, size) => dispatch => {
     dispatch(setLoading());
-    dispatch(setFilter(filter));
+    // dispatch(setFilter(filter));
 
     let params = {
         page:page,

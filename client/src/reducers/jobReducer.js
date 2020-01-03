@@ -28,7 +28,8 @@ export default (state = INITIAL_STATE, action) => {
         case SET_JOB_SEARCH_FILTER:
             return {
                 ...state,
-                searchFilter: action.payload
+                searchFilter: action.payload,
+                currentPage: 1
             }
         case SET_JOB_SEARCH_RESULT:
             return {

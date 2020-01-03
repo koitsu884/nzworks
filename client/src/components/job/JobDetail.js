@@ -11,6 +11,7 @@ import JobDetailCompanyInfo from './JobDetail/JobDetailCompanyInfo';
 import JobDetailLocation from './JobDetail/JobDetailLocation';
 import CoverMessage from '../common/CoverMessage';
 import Icon from '../common/Icon';
+import PageLoading from '../common/PageLoading';
 
 function JobDetail(props) {
     const dispatch = useDispatch();
@@ -21,8 +22,12 @@ function JobDetail(props) {
     const jobId = props.match.params.id;
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [])
+
+    useEffect(() => {
         dispatch(getJobDetails(jobId));
-        if(savedJobList && savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0){
+        if (savedJobList && savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0) {
             dispatch(refleshSavedJob(jobId))
         }
     }, [dispatch, jobId])
@@ -33,7 +38,7 @@ function JobDetail(props) {
     }
 
     const renderApplyButton = (jobId, savedJob) => {
-        if( savedJob && savedJob.applied){
+        if (savedJob && savedJob.applied) {
             return <button type="button" className="button is-success is-large u-margin-small" disabled>応募済み</button>
         }
         else {
@@ -61,18 +66,18 @@ function JobDetail(props) {
                 <Fragment>
                     {
                         savedJob
-                        ? <button type="button" className="button is-warning is-large u-margin-small" disabled>保存済み</button> 
-                        : <button type="button" className="button is-warning is-large u-margin-small" onClick={() => handleSaveJob(job._id)}>保存リストに追加</button>
+                            ? <button type="button" className="button is-warning is-large u-margin-small" disabled>保存済み</button>
+                            : <button type="button" className="button is-warning is-large u-margin-small" onClick={() => handleSaveJob(job._id)}>保存リストに追加</button>
                     }
                     {
-                        job.email 
-                        ? renderApplyButton(job._id, savedJob) 
-                        : null
+                        job.email
+                            ? renderApplyButton(job._id, savedJob)
+                            : null
                     }
                     {
                         job.phone
-                        ? <a className="button is-info is-large u-margin-small" href={`tel:${job.phone}`} alt="phone">電話する</a>
-                        : null
+                            ? <a className="button is-info is-large u-margin-small" href={`tel:${job.phone}`} alt="phone">電話する</a>
+                            : null
                     }
                 </Fragment>
             );
@@ -85,9 +90,6 @@ function JobDetail(props) {
 
         return (
             <Fragment>
-                {
-                    loading ? <Spinner cover={true} /> : null
-                }
                 <h1>{job.title}</h1>
                 <div className="container jobDetail__description">
                     <h2>詳細</h2>
@@ -117,9 +119,19 @@ function JobDetail(props) {
                                     <h5>職種:</h5>
                                     <span className="tag is-warning  is-medium">{job.jobCategory}</span>
                                 </div>
+                                {
+                                    job.workType
+                                        ? (
+                                            <div className="jobDetail__info__item">
+                                                <h5>雇用タイプ:</h5>
+                                                <span className="tag is-success is-light is-medium">{job.workType}</span>
+                                            </div>
+                                        )
+                                        : null
+                                }
                                 <div className="jobDetail__info__item">
-                                    <h5>雇用タイプ:</h5>
-                                    <span className="tag is-success  is-medium">{job.workType}</span>
+                                    <h5>必要英語力:</h5>
+                                    <span className="tag is-warning is-light is-medium">{job.englishLevel ? job.englishLevel : '不問'}</span>
                                 </div>
                             </div>
                             <h4>タグ</h4>
@@ -139,10 +151,15 @@ function JobDetail(props) {
     }
 
     return (
-        <section className='jobDetail mainSection'>
-            {renderJobDetail(jobDetails)}
-            {jobDetails && !jobDetails.is_active ? <CoverMessage message="この求人は現在募集していません" /> : null}
-        </section>
+        <Fragment>
+            <PageLoading animationClass="fade" />
+
+
+            <section className='jobDetail mainSection'>
+                {renderJobDetail(jobDetails)}
+                {jobDetails && !jobDetails.is_active ? <CoverMessage message="この求人は現在募集していません" /> : null}
+            </section>
+        </Fragment>
     )
 }
 

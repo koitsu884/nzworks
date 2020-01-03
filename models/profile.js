@@ -68,7 +68,7 @@ module.exports.validate = profile => {
         avatar: Joi.object().optional(),
         images: Joi.array().items(Joi.object()).optional(),
         phone: Joi.string().max(20).allow('').optional(),
-        introduction: Joi.string().max(1000),
+        introduction: Joi.string().allow('').max(1000),
         companyImages: Joi.object(),
         companyWebsite: Joi.string().max(200).allow('').optional(),
         address: Joi.string().max(200).allow('').optional(),

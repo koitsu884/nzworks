@@ -9,7 +9,7 @@ const { User } = require('../models/user');
 
 const {jobCategories, workTypes, englishLevels, tagNames} = require('./jobFilterValues');
 
-let recordNum = 20;
+let recordNum = 100;
 
 const dbConnection = config.get('db');
 console.log(dbConnection);
@@ -20,19 +20,30 @@ mongoose.connect(dbConnection, {
     useUnifiedTopology: true
 })
 .then(async (err, client) => {
-    let user = new User({
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        name: faker.internet.userName(),
-        profile: { user_type: 'Personal' }
-    });
-    await user.save();
+    // let user = new User({
+    //     email: faker.internet.email(),
+    //     password: 'Test@123!!',
+    //     name: faker.internet.userName(),
+    //     profile: { user_type: 'Business' }
+    // });
+    // await user.save();
+    let user;
 
     let areas = await Area.find({});
 
     let jobs = [];
 
     for( let i = 0 ; i < recordNum; i++){
+        if(i % 5 === 0){
+            user = new User({
+                email: faker.internet.email(),
+                password: 'Test@123!!',
+                name: faker.internet.userName(),
+                verified: true,
+                profile: { user_type: 'Business' }
+            });
+            await user.save();
+        }
         let area = faker.random.arrayElement(areas);
         let workType = faker.random.arrayElement(workTypes);
         let jobCategory = faker.random.arrayElement(jobCategories);
@@ -48,6 +59,7 @@ mongoose.connect(dbConnection, {
         let newJob = {
             user: user._id,
             area: area._id,
+            email: user.email,
             title: faker.lorem.words(3),
             details: faker.lorem.paragraphs(3),
             workType: workType,

@@ -59,7 +59,7 @@ const ContactForm = props => {
 
     return (
         <div className="userForm">
-            <h1 className="u-margin-bottom-medium">お問い合わせ</h1>
+            <h1 className="heading">お問い合わせ</h1>
             <div className="u-margin-bottom-small">
                 <p>ニュージーワークスにご関心をお持ちいただき誠にありがとうございます。<br />
                     以下のお問い合わせフォームより、ご意見やご相談などお問合わせください。<br />

@@ -24,9 +24,9 @@ const PostedJob = (props) => {
         }).catch(error => {
             Alert.error(errorToStr(error));
         })
-        .finally(() => {
-            setLoading(false);
-        })
+            .finally(() => {
+                setLoading(false);
+            })
     }, [user])
 
     const handleDeleteJob = id => {
@@ -41,9 +41,9 @@ const PostedJob = (props) => {
                     }).catch(error => {
                         Alert.error(errorToStr(error));
                     })
-                    .finally(() => {
-                        setLoading(false);
-                    })
+                        .finally(() => {
+                            setLoading(false);
+                        })
                 }
             })
     }
@@ -61,9 +61,9 @@ const PostedJob = (props) => {
                     }).catch(error => {
                         Alert.error(errorToStr(error));
                     })
-                    .finally(() => {
-                        setLoading(false);
-                    })
+                        .finally(() => {
+                            setLoading(false);
+                        })
                 }
             })
     }
@@ -81,9 +81,9 @@ const PostedJob = (props) => {
                     }).catch(error => {
                         Alert.error(errorToStr(error));
                     })
-                    .finally(() => {
-                        setLoading(false);
-                    })
+                        .finally(() => {
+                            setLoading(false);
+                        })
                 }
             })
     }
@@ -95,15 +95,31 @@ const PostedJob = (props) => {
         setPostedJobList(temp);
     }
 
+    const JOB_CREATION_LIMIT = 3;
+
     return (
         <div className="container">
-            <h1 className="u-margin-bottom-medium">求人広告リスト</h1>
-            <div className="control has-text-centered">
-                <Link to="/jobs/edit" className="button is-primary is-medium" >
-                    <span className="icon"><i className="fas fa-plus"></i></span>
-                    <span>求人広告を作成する</span>
-                </Link>
-            </div>
+            <h1 className="heading">求人広告リスト</h1>
+            {
+                postedJobList.length >= JOB_CREATION_LIMIT
+                    ? (
+                        <div className="control has-text-centered">
+                            <button to="/jobs/edit" className="button is-primary is-medium" disabled>
+                                <span className="icon"><i className="fas fa-plus"></i></span>
+                                <span>求人広告を作成する</span>
+                            </button>
+                            <p className="has-text-danger">※1つのアカウントで作成できる広告は{JOB_CREATION_LIMIT}つまでです</p>
+                        </div>
+                    )
+                    : (
+                        <div className="control has-text-centered">
+                            <Link to="/jobs/edit" className="button is-primary is-medium" >
+                                <span className="icon"><i className="fas fa-plus"></i></span>
+                                <span>求人広告を作成する</span>
+                            </Link>
+                        </div>
+                    )
+            }
             {
                 loading
                     ? <Spinner />

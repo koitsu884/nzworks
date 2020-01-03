@@ -85,13 +85,13 @@ function JobEdit(props) {
     const onSubmit = fd => {
         let data = { ...fd };
         if (!fd.area) {
-            data.area = undefined;
+            data.area = null;
         }
         if (!fd.englishLevel) {
-            data.englishLevel = undefined;
+            data.englishLevel = '';
         }
         if (!fd.workType) {
-            data.workType = undefined;
+            data.workType = '';
         }
 
         if (fd.location) {

@@ -45,6 +45,13 @@
 
 .u-text-wrap {white-space: pre-wrap}
 
+.heading {
+    font-size: 3rem;
+    margin: 0 3rem;
+    color: $primary-dark;
+    margin-bottom: 5rem;
+}
+
 .link {
     color: $link;
     text-decoration: underline;

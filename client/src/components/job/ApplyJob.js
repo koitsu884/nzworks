@@ -95,7 +95,7 @@ const ApplyJob = props => {
 
     return (
         <div className="container">
-            <h1 className="u-margin-bottom-medium">求人に応募する</h1>
+            <h1 className="heading">求人に応募する</h1>
             <h2>求人詳細</h2>
             <div className="has-background-light u-margin-bottom-medium">
                 <h3>{jobDetails.title}</h3>

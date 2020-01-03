@@ -37,7 +37,7 @@ export default function ResetPassword(props) {
 
     return (
         <div className="userForm">
-            <h1 className="u-margin-bottom-medium">パスワードリセット</h1>
+            <h1 className="heading">パスワードリセット</h1>
             <FormContext {...methods} >
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <TextField

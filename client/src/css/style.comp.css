@@ -1,4 +1,7 @@
 @charset "UTF-8";
+.image img {
+  object-fit: cover; }
+
 @keyframes spinAround {
   from {
     transform: rotate(0deg); }
@@ -5708,6 +5711,37 @@ label.panel-block {
     transform: translateY(-4px);
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4); }
 
+.scale-enter {
+  opacity: 0;
+  transform: scale(0.5); }
+
+.scale-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity .3s, transform .3s; }
+
+.scale-exit {
+  opacity: 1; }
+
+.scale-exit-active {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity .3s; }
+
+.fade-enter {
+  opacity: 0; }
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity .3s; }
+
+.fade-exit {
+  opacity: 1; }
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity .3s; }
+
 *,
 *:after,
 *:before {
@@ -5778,9 +5812,11 @@ h2 {
 h3 {
   font-size: 2rem; }
 
-h4,
-h5 {
+h4 {
   font-size: 1.8rem; }
+
+h5 {
+  font-size: 1.6rem; }
 
 .u-center-text {
   text-align: center !important; }
@@ -5863,6 +5899,12 @@ h5 {
 
 .u-text-wrap {
   white-space: pre-wrap; }
+
+.heading {
+  font-size: 3rem;
+  margin: 0 3rem;
+  color: #066298;
+  margin-bottom: 5rem; }
 
 .link {
   color: #3273dc;
@@ -6505,8 +6547,8 @@ h5 {
     height: 5rem;
     animation: spin 1s linear infinite; }
   .spinner.cover, .spinner.coverFixed {
-    z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.2);
     top: 0;
     left: 0; }
   .spinner.cover {
@@ -6642,7 +6684,7 @@ h5 {
   .jobList .card {
     margin: 1.5rem;
     width: 50rem; }
-  @media only screen and (max-width: 37.5em) {
+  @media only screen and (max-width: 56.25em) {
     .jobList {
       display: block; }
       .jobList .card {
@@ -6716,8 +6758,6 @@ h5 {
 .home section {
   margin: 5rem 0; }
   .home section .heading {
-    font-size: 3rem;
-    margin: 0 3rem;
     border-bottom: double 2px #52bbf8; }
 
 .home__header {
@@ -6803,7 +6843,8 @@ h5 {
         margin: 0; } }
 
 .jobDetail {
-  position: relative; }
+  position: relative;
+  min-height: 100vh; }
   .jobDetail h1 {
     font-size: 3.5rem;
     color: #066298;

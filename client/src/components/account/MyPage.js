@@ -21,7 +21,7 @@ function MyPage(props) {
 
     return (
         <div className="container mypage">
-            <h1 className="u-margin-bottom-medium">マイページ</h1>
+            <h1 className="heading">マイページ</h1>
             {
                 user.profile.user_type === "Business" ? <BusinessProfile user={user} /> : <Profile user={user} />
             }

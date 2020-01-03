@@ -58,7 +58,7 @@ router.post('', async (req, res) => {
   const validPassword = await user.verifyPassword(req.body.password);
   if (!validPassword) return res.status(400).send('メールアドレスかパスワードが間違っています');
 
-  if (!user.verified) return res.status(401).send('Ｅメールがまだ認証されていません');
+  if (!user.verified) return res.status(403).send('Ｅメールがまだ認証されていません');
 
   user.password = undefined;
 
