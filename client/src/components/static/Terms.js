@@ -97,7 +97,7 @@ const Terms = () => {
             <div className="container">
                 <p>以上</p>
                 <br />
-                <p>2019年 9月6日制定</p>
+                <p>2020年 1月5日制定</p>
             </div>
         </div >
     )

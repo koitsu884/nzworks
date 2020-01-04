@@ -208,7 +208,7 @@ function JobEdit(props) {
                     </div>
                     <div className="field">
                         <div className="control">
-                            <button type="submit" className="button is-primary">Submit</button>
+                            <button type="submit" className="button is-primary is-large u-margin-auto">{jobId ? '更新する' : '求人を追加する'}</button>
                         </div>
                     </div>
                 </form>

@@ -3,10 +3,16 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../../actions/authActions';
 import Image from '../common/Image';
+import history from '../../history';
 
 function AuthHeader(props) {
     const dispatch = useDispatch();
     const currentUser = useSelector(state => state.user.currentUser);
+
+    const handleLogout = () => {
+        dispatch(signOut());
+        history.push('/');
+    }
 
     const renderLinks = (user) => {
         if (user) {
@@ -22,7 +28,7 @@ function AuthHeader(props) {
                             : null
                     }
                     <span className="authHeader__name">{user.name}</span>
-                    <button type="button" className="button is-info is-small" onClick={() => {dispatch(signOut())}}>ログアウト</button>
+                    <button type="button" className="button is-info is-small" onClick={handleLogout}>ログアウト</button>
                 </Fragment>
             )
         }

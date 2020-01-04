@@ -6,6 +6,7 @@ import history from '../../history';
 import TextField from '../form/TextField';
 import client from '../../utils/client';
 import Alert from '../../utils/alert';
+import errorToStr from '../../utils/errorToStr';
 
 export default function ResetPassword(props) {
     const methods = useForm();
@@ -15,7 +16,7 @@ export default function ResetPassword(props) {
         let token = props.match.params.token;
         if (!token) {
             console.log('No token');
-            history.push('/')
+            // history.push('/')
         }
         else {
             setToken(token);
@@ -30,7 +31,7 @@ export default function ResetPassword(props) {
                 history.push('/signin');
             })
             .catch(error => {
-                Alert.error("パスワードリセットに失敗しました");
+                Alert.error(errorToStr(error));
             })
     }
 

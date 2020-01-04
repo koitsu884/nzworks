@@ -4,6 +4,7 @@ import { getCurrentUser } from '../../actions/authActions';
 import history from '../../history';
 import client from '../../utils/client';
 import Alert from '../../utils/alert';
+import errorToStr from '../../utils/errorToStr';
 
 function VerifyEmail(props) {
     const dispatch = useDispatch();
@@ -18,19 +19,20 @@ function VerifyEmail(props) {
         else{
             client.get('auth/verify', {params:{token: token}})
             .then(res => {
+                Alert.success("アカウントを認証しました")
                 dispatch(getCurrentUser());
                 history.push('/');
             })
             .catch(error => {
-                console.log(error);
-                Alert.error("アカウント認証に失敗しました");
+                Alert.error(errorToStr(error));
+                history.push('/');
             })
         }
     }, [props, dispatch])
 
 
     return (
-        <div>
+        <div className="container">
          <p>アカウントを認証しています</p>
         </div>
     )

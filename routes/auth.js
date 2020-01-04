@@ -72,13 +72,16 @@ router.get('/verify', async (req, res) => {
   if (!token) return res.status(400).send('No token provided');
 
   try {
+    
     let tokenObj = await Token.findOne({ token: token, type: TOKEN_TYPE_VERIFY });
     if (!tokenObj)
-      return res.status(404).send('Token object was not found');
+      return res.status(404).send('リンクが無効です');
 
     let user = await User.findById(tokenObj._userId);
     if (!user)
-      return res.status(404).send('User was not found');
+      return res.status(404).send('ユーザー情報が見つかりません');
+    if( user.verified)
+      return res.status(400).send('そのメールアドレスは既に認証済みです');
 
     user.verified = true;
     await user.save();
@@ -110,11 +113,11 @@ router.post('/resetpassword', async (req, res) => {
   try {
     let tokenObj = await Token.findOne({ token: token, type: TOKEN_TYPE_PASSWORD });
     if (!tokenObj)
-      return res.status(404).send('Token object was not found');
+      return res.status(404).send('リンクが無効です');
 
     let user = await User.findById(tokenObj._userId);
     if (!user)
-      return res.status(404).send('User was not found');
+      return res.status(404).send('ユーザーが見つかりません');
 
     user.password = req.body.password;
     await user.save();
@@ -122,6 +125,7 @@ router.post('/resetpassword', async (req, res) => {
     res.send('OK');
   }
   catch (error) {
+    console.log(error);
     res.status(500).send('Password reset failed');
   }
 })

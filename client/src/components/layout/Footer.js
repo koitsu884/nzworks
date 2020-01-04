@@ -11,7 +11,7 @@ export default function Footer() {
                     <li><Link to="/contact">お問い合わせ</Link></li>
                 </ul>
             </nav>
-            <p>Copyright &copy; NZWorks</p>
+            <p>Copyright &copy; {new Date().getFullYear()} NZWorks</p>
         </footer>
     )
 }

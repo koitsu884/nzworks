@@ -47,7 +47,7 @@ export const signUp = (formData) => dispatch => {
 }
 
 export const signOut = () => dispatch => {
-    history.push("/");
+    // history.push("/");
     client.delete('auth/')
         .then(res => {
             dispatch({

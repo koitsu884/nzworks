@@ -26,6 +26,7 @@ const PlaceSearchBox = props => {
         <Autocomplete
             onLoad={onLoad}
             onPlaceChanged={onPlaceChanged}
+            restrictions={{'country': ['nz', 'jp']}}
         >
             <input
                 type='text'
