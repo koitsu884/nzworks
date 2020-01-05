@@ -89,6 +89,18 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), findOwnedJo
     res.status(200).send(job);
 })
 
+router.patch('/:id', passport.authenticate('jwt', { session: false }), findOwnedJob, async (req, res) => {
+    try {
+        job = await Job.findOneAndUpdate({ _id: req.params.id }, { "$set": req.body }, { new: true });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(500).send('Something wrong');
+    }
+
+    res.status(200).send(job);
+})
+
 router.delete('/:id', passport.authenticate('jwt', { session: false }), findOwnedJob, async (req, res) => {
     try {
         await Job.deleteOne({ _id: req.params.id });

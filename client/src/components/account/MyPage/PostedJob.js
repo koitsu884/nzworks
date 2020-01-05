@@ -54,7 +54,7 @@ const PostedJob = (props) => {
                 if (result.value) {
                     // dispatch(activateJob(id));
                     setLoading(true);
-                    client.put('job/' + id, { is_active: true }).then(response => {
+                    client.patch('job/' + id, { is_active: true }).then(response => {
                         Alert.success("募集を再開しました");
                         _changeJobStatus(id, true);
                         // history.push('/mypage/postedjoblist');
@@ -74,7 +74,7 @@ const PostedJob = (props) => {
                 if (result.value) {
                     // dispatch(deactivateJob(id));
                     setLoading(true);
-                    client.put('job/' + id, { is_active: false }).then(response => {
+                    client.patch('job/' + id, { is_active: false }).then(response => {
                         Alert.success("募集を停止しました");
                         _changeJobStatus(id, false);
                         // history.push('/mypage/postedjoblist');
