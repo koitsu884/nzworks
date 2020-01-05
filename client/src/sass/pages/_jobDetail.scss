@@ -45,25 +45,14 @@
         padding: 1rem;
         border: 1px solid $secondary-light;
         background-color: $light;
-        // &__container{
-        //     display: flex;
-        //     @include respond(tab-port){
-        //         flex-direction: column;
-        //         align-items: center;
-        //     }
-        // }
-
-        // &__description {
-        //     width: 50rem;
-        //     margin: 2rem;
-        //     @include respond(tab-port){
-        //         margin: 1rem 0;
-        //         width: 100%;
-        //     }
-        // }
+        max-width: 40rem;
 
         &__images {
             max-width: 50rem;
+        }
+
+        @include respond(tab-port){
+            max-width: 100%;
         }
     }
 

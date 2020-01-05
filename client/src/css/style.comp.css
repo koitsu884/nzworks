@@ -6863,13 +6863,17 @@ h5 {
   .jobDetail__companyInfo {
     padding: 1rem;
     border: 1px solid #fffceb;
-    background-color: whitesmoke; }
+    background-color: whitesmoke;
+    max-width: 40rem; }
     .jobDetail__companyInfo h3 {
       border-bottom: 2px dotted #a78e03;
       padding-bottom: 1rem;
       margin-bottom: 1.5rem; }
     .jobDetail__companyInfo__images {
       max-width: 50rem; }
+    @media only screen and (max-width: 56.25em) {
+      .jobDetail__companyInfo {
+        max-width: 100%; } }
   .jobDetail__info {
     min-width: 38rem; }
     .jobDetail__info__item h5 {

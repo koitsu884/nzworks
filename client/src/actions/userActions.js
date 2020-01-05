@@ -102,6 +102,7 @@ export const deleteUserImage = (image, isMain = false) => dispatch => {
 }
 
 export const updateProfile = fd => dispatch => {
+    if(!fd.avatar) fd.avatar = undefined;
     dispatch(setLoading());
     client.patch('user/profile', fd)
         .then(response => {
