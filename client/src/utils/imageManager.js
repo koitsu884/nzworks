@@ -31,11 +31,19 @@ function resizeImage(src, maxSize, destFileName) {
                     resolve(resizedFile);
                 })
             } else if (ctx.canvas.msToBlob){
-                var uri = ctx.canvas.toDataURL('image/jpeg', 0.85);
-                let blob = toBlob(uri);
-                let resizedFile = new Blob([blob], destFileName, {type: 'image/jpeg'});
-                resizedFile['lastModified'] = Date.now();
+                let blob = ctx.canvas.msToBlob();
+
+                const resizedFile = new File([blob], destFileName, {
+                    type: 'image/jpeg',
+                    lastModified: Date.now()
+                });
                 resolve(resizedFile);
+                
+                // var uri = ctx.canvas.toDataURL('image/jpeg', 0.85);
+                // let blob = toBlob(uri);
+                // let resizedFile = new File([blob], destFileName, {type: 'image/jpeg'});
+                // resizedFile['lastModified'] = Date.now();
+                // resolve(resizedFile);
             }
         }
         image.src = src;
