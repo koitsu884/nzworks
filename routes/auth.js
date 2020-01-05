@@ -158,7 +158,7 @@ router.get('/token', async (req, res) => {
 
   let refreshTokenObj = await RefreshToken.findOne({ token: refreshToken });
   if (!refreshTokenObj)
-    return res.status(401).send();
+    return res.status(403).send();
 
   let decodedToken;
   try{

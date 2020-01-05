@@ -2,15 +2,22 @@ const express = require('express');
 const passport = require('passport');
 const config = require('config');
 
+
 const findBusinessUser = require('../middleware/findBusinessUser');
 const findOwnedJob = require('../middleware/findOwnedJob');
 
+const { postImageFromUrl, postTweet} = require('../utils/twitter');
 const { sendApplyEmail } = require('../utils/mailer');
 const { Job, validate, validateUpdate } = require('../models/job');
+const { Area } = require('../models/area');
 const { SavedJob, JOBSTATUS_REMOVED } = require('../models/savedJob');
 const { memoryUploadMulti } = require('../utils/formDataHandler');
 
 const router = express.Router();
+
+const getJobDetailURL = function (jobId) {
+    return config.get('clientUrl') + `jobs/${jobId}`;
+}
 
 router.get('/', async (req, res) => {
     let query = Job.find({ is_active: true })
@@ -35,7 +42,7 @@ router.get('/:id', async (req, res) => {
 })
 
 router.post('/', passport.authenticate('jwt', { session: false }), findBusinessUser, async (req, res) => {
-    let jobCount = await Job.count({user: req.user._id});
+    let jobCount = await Job.countDocuments({user: req.user._id});
     const JOB_CREATION_LIMIT = 3;
     if(jobCount >= JOB_CREATION_LIMIT){
         return res.status(400).send(`1つのアカウントで作成できる広告は${JOB_CREATION_LIMIT}つまでです`);
@@ -48,6 +55,14 @@ router.post('/', passport.authenticate('jwt', { session: false }), findBusinessU
     job.user = req.user;
     try {
         await job.save();
+        let mediaId = null;
+        if(req.user.profile.avatar){
+            mediaId = await postImageFromUrl(req.user.profile.avatar.image_url);
+        }
+        let area = await Area.findById(job.area);
+
+        let status = `【新規求人情報】\n投稿者 : ${req.user.name}\n\n『${job.title}』(${job.jobCategory})\n\n${getJobDetailURL(job._id)}\n\n#ニュージーランド\n#求人情報\n${area ? '#' + area.name + '\n' : ''}`
+        postTweet(status, mediaId);
     }
     catch (error) {
         console.log(error);

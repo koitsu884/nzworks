@@ -72,6 +72,7 @@ JobSchema.pre('findOneAndUpdate', async function (next) {
     return next();
 })
 
+
 // Not working well.....
 // JobSchema.post('deleteOne', async function (doc) {
 //     console.log(doc);

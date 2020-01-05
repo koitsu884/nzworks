@@ -45,7 +45,7 @@ const PasswordEditor = () => {
                     <FormContext {...methods} >
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <TextField
-                                label="パスワード"
+                                label="新しいパスワード"
                                 type="password"
                                 placeholder="パスワードを入力してください"
                                 name="password"
