@@ -148,6 +148,7 @@ router.post('/images', passport.authenticate('jwt', { session: false }), findUse
 
   console.log(`Uploading user photo for user ${user._id} (${req.file.size} byte)`)
 
+  console.log(req.file);
   console.log(req.file.originalname);
   singleUpload(file, "image", `/user/${user._id}`, req.file.originalname)
     .then(async result => {
