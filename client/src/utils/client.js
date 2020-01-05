@@ -9,7 +9,7 @@ var axiosInstance = axios.create({
 axiosInstance.interceptors.response.use(
   response => response,
   error => {
-    const originalRequest = error.config;
+    let originalRequest = error.config;
     if(error.response.status === 401 && !originalRequest._retry){
       originalRequest._retry = true;
       return axiosInstance.get('/auth/token')
