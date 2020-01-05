@@ -31,17 +31,21 @@
     }
 
     @include respond(phone){
-        position: fixed;
-        border-top: 1px solid $primary;
-        width: 100%;
-        background-color: $primary-light;
-        bottom: 0;
-        // padding: 1rem;
-        box-shadow: none;
-        justify-content: space-around;
-
-        &__item {
-            color: black;
-        }
+        font-size: 1.5rem;
     }
+
+    // @include respond(phone){
+    //     position: fixed;
+    //     border-top: 1px solid $primary;
+    //     width: 100%;
+    //     background-color: $primary-light;
+    //     bottom: 0;
+    //     // padding: 1rem;
+    //     box-shadow: none;
+    //     justify-content: space-around;
+
+    //     &__item {
+    //         color: black;
+    //     }
+    // }
 }

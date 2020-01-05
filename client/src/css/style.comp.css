@@ -5946,7 +5946,7 @@ h5 {
   z-index: 20; }
   @media only screen and (max-width: 37.5em) {
     .fixedArea {
-      height: 8rem; } }
+      height: 13rem; } }
 
 .mainArea {
   width: 100%;
@@ -5957,8 +5957,8 @@ h5 {
   font-size: 1.5rem; }
   @media only screen and (max-width: 37.5em) {
     .mainArea {
-      margin-top: 8rem;
-      margin-bottom: 8rem; } }
+      margin-top: 13rem;
+      margin-bottom: 13rem; } }
 
 .mainSection {
   margin-top: 5rem; }
@@ -5998,15 +5998,7 @@ h5 {
       color: white; }
   @media only screen and (max-width: 37.5em) {
     .globalNav {
-      position: fixed;
-      border-top: 1px solid #52bbf8;
-      width: 100%;
-      background-color: #ebf7fe;
-      bottom: 0;
-      box-shadow: none;
-      justify-content: space-around; }
-      .globalNav__item {
-        color: black; } }
+      font-size: 1.5rem; } }
 
 .header {
   padding: 1rem 5rem;
@@ -6060,9 +6052,6 @@ h5 {
     .footer nav ul li {
       cursor: pointer;
       margin: 1rem; }
-  @media only screen and (max-width: 37.5em) {
-    .footer {
-      margin-bottom: 5rem; } }
 
 .imageFileClipper {
   width: 100%; }
@@ -6746,7 +6735,7 @@ h5 {
   @media only screen and (max-width: 37.5em) {
     .mapSearch {
       flex-direction: column;
-      height: calc(100vh - 15rem - 8rem); }
+      height: calc(100vh - 15rem - 13rem); }
       .mapSearch__result {
         width: 100%;
         height: 26rem;
@@ -6797,7 +6786,7 @@ h5 {
   @media only screen and (max-width: 37.5em) {
     .jobSearch {
       --search-filter-height: calc(16rem);
-      --fixed-area-height: calc(8rem); } }
+      --fixed-area-height: calc(13rem); } }
   .jobSearch__container {
     width: 100%;
     display: flex;

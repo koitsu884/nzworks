@@ -5,7 +5,8 @@ $secondary-light: findLightColor($secondary);
 //Layout
 $global-nav-height: 5rem;
 $fixed-area-height: 13rem;
-$fixed-area-height-phone: $fixed-area-height - $global-nav-height;
+// $fixed-area-height-phone: $fixed-area-height - $global-nav-height;
+$fixed-area-height-phone: $fixed-area-height;
 
 //Job Search
 $search-filter-height: 16rem;
