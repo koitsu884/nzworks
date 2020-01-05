@@ -8,7 +8,12 @@ cloudinary.config({
 
 const cloudinaryRoot = config.get('cloudinaryRoot');
 
-module.exports.singleUpload = function (data, filetype, path, filename) {    
+module.exports.singleUpload = function (data, filetype, path, filename) {  
+    console.log(filetype);  
+    console.log(path);  
+    console.log(filename);  
+    console.log(cloudinaryRoot);  
+    
     return cloudinary.uploader.upload(data,
         {
             resource_type: filetype,
