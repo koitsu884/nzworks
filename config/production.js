@@ -11,5 +11,9 @@ module.exports = {
     "cloudinaryRoot":  process.env.CLOUDINARY_ROOT,
     "sendgridUser": process.env.SENDGRID_USER,
     "sendgridKey": process.env.SENDGRID_KEY,
+    "twitterConsumerKey": process.env.TWITTER_CONSUMER_KEY,
+    "twitterConsumerSecret": process.env.TWITTER_CONSUMER_SECRET,
+    "twitterAccessTokenKey": process.env.TWITTER_TOKEN_KEY,
+    "twitterAccessTokenSecret": process.env.TWITTER_TOKEN_SECRET,
     "clientUrl": process.env.CLIENT_URL,
 }
