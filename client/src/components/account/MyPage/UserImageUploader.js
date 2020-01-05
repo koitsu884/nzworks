@@ -30,6 +30,7 @@ const UserImageUploader = (props) => {
     
         for (var file of files) {
             let fd = new FormData();
+            console.log(file);
             fd.append('photo', file, file.name);
             setCount(count);
             try{

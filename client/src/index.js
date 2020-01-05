@@ -13,11 +13,11 @@ const googleMapsLibraries = ['drawing', 'visualization', 'places'];
 
 function noop() {}
 
-if (process.env.NODE_ENV !== 'development') {
-  console.log = noop;
-  console.warn = noop;
-  console.error = noop;
-}
+// if (process.env.NODE_ENV !== 'development') {
+//   console.log = noop;
+//   console.warn = noop;
+//   console.error = noop;
+// }
 
 
 ReactDOM.render(
