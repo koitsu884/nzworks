@@ -33,7 +33,7 @@ function resizeImage(src, maxSize, destFileName) {
             } else if (ctx.canvas.msToBlob){
                 var uri = ctx.canvas.toDataURL('image/jpeg', 0.85);
                 let resizedFile = toBlob(uri);
-                resizedFile['fileName'] = destFileName
+                resizedFile.name = destFileName
                 resolve(resizedFile);
             }
         }
