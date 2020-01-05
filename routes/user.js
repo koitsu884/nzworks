@@ -168,7 +168,7 @@ router.post('/images', passport.authenticate('jwt', { session: false }), findUse
     })
     .catch(error => {
       res.status(400).send("アップロードに失敗しました");
-      console.log(error.getMessage());
+      console.log(error);
     })
 })
 
