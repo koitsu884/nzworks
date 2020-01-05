@@ -32,11 +32,6 @@ export default function ApplyForm({ onSubmit, email, title }) {
         }
     }
 
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    //     console.log(selectedCV);
-    //     console.log(selectedCL);
-    // }
     const submitFormData = data => {
         let fd = {...data};
         let attachments = [];
