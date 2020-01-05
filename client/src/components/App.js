@@ -63,9 +63,9 @@ function App(props) {
             <Route path="/auth/forgotpassword" exact component={ForgotPassword} />
             <Route path="/auth/resetpassword/:token" exact component={ResetPassword} />
             <Route path="/contact" exact component={ContactForm} />
-            <Route path="/static/emailsent" exact component={EmailSent} />
-            <Route path="/static/privacy" exact component={Privacy} />
-            <Route path="/static/terms" exact component={Terms} />
+            <Route path="/emailsent" exact component={EmailSent} />
+            <Route path="/privacy" exact component={Privacy} />
+            <Route path="/terms" exact component={Terms} />
             <Route exact path="*" component={NotFound} />
           </Switch>
         </div>

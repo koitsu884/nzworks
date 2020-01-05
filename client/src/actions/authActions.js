@@ -39,7 +39,7 @@ export const signIn = (email, password) => dispatch => {
 export const signUp = (formData) => dispatch => {
     client.post('user/', formData)
     .then(response => {
-        history.push('static/emailsent');
+        history.push('/emailsent');
     })
     .catch(errors => {
         Alert.error(errorToStr(errors));
