@@ -11,8 +11,10 @@ import AddressField from '../../form/AddressField';
 const BusinessProfileEdit = (props) => {
     const methods = useForm();
     const dispatch = useDispatch();
-    const { setValue, register } = methods;
+    const { setValue, register, watch } = methods;
     const profile = useSelector(state => state.user.currentUser.profile);
+
+    let selectedImage = watch('avatar');
 
     useEffect(() => {
         register({ name: 'avatar' });
@@ -22,11 +24,10 @@ const BusinessProfileEdit = (props) => {
             setValue('phone', profile.phone);
             setValue('avatar', profile.avatar);
             setValue('address', profile.address);
-            if(profile.location)
-            {
+            if (profile.location) {
                 setValue('location', {
                     lat: profile.location.coordinates[1],
-                    lng: profile.location.coordinates[0],     
+                    lng: profile.location.coordinates[0],
                 });
             }
             setValue('companyWebsite', profile.companyWebsite);
@@ -53,21 +54,25 @@ const BusinessProfileEdit = (props) => {
         <div className="container">
             <FormContext {...methods} >
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
-                    <UserImageEditor onMainImageSelect={handleAvatarChange} />
+                    <div className="editSection">
+                        <UserImageEditor onMainImageSelect={handleAvatarChange} selectedImageId={selectedImage ? selectedImage.image_id : null} />
+                    </div>
                     <TextField
                         label="企業・雇用主紹介文(1000文字以内)"
                         type="textarea"
+                        className="editSection"
                         name="introduction"
+                        info="※紹介文は求人広告に表示されます"
                         registerOptions={{ minLength: 6, maxLength: 1000 }}
                     />
-                    <p className="help is-info u-margin-bottom-medium">※紹介文は求人広告に表示されます</p>
                     <div className="u-flex-responsive">
-                        <div className="u-margin-small u-flex-grow">
+                        <div className="u-flex-grow">
                             <TextField
                                 label="電話番号"
                                 type="tel"
                                 placeholder="電話番号を入力してください"
                                 name="phone"
+                                className="editSection"
                                 registerOptions={{ maxLength: 12 }}
                             />
                             <TextField
@@ -75,10 +80,11 @@ const BusinessProfileEdit = (props) => {
                                 type="url"
                                 placeholder="URLを入力してください"
                                 name="companyWebsite"
+                                className="editSection"
                                 registerOptions={{ maxLength: 200 }}
                             />
                         </div>
-                        <div className="u-margin-small u-flex-grow">
+                        <div className="u-margin-small u-flex-grow editSection">
                             <AddressField
                                 label="所在地"
                                 placeholder="会社の住所を入力してください"

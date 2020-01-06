@@ -145,9 +145,7 @@ router.post('/images', passport.authenticate('jwt', { session: false }), findUse
 
   // console.log(file);
 
-  console.log(`Uploading user photo for user ${user._id} (${req.file.size} byte)`)
-
-  console.log(req.file);
+  console.log(`Uploading user photo for user ${user._id} (${req.file.size} byte)`);
   console.log(req.file.originalname);
   singleUpload(file, "image", `/user/${user._id}`, req.file.originalname)
     .then(async result => {
@@ -196,6 +194,11 @@ router.delete('/images/:id', passport.authenticate('jwt', { session: false }), f
 
   deleteFile(imageId)
     .then(async result => {
+      let jobs = await Job.find({user: user._id, "mainImage.image_id": imageId });
+      for( let job of jobs){
+        job.mainImage = null;
+        await job.save();
+      }
       // user.profile.avatar = null;
       if (user.profile.avatar && user.profile.avatar.image_id === imageId) {
         user.profile.avatar = null;

@@ -4,10 +4,7 @@ import PropTypes from 'prop-types';
 import Image from './Image';
 
 const ImageSelector = (props) => {
-    const [selectedImageId, setImageId] = useState(props.initialSelection ? props.initialSelection.image_id : null);
-
     const handleImageSelect = (image) => {
-        setImageId(image.image_id);
         props.onSelect(image);
     }
 
@@ -21,12 +18,18 @@ const ImageSelector = (props) => {
         return images.map((image, index) => {
             return (
                 <div key={index} className="imageSelector__item">
-                    <div key={index} className={`imageSelector__item__image ${image.image_id === selectedImageId ? 'selected' : ''}`} onClick={() => handleImageSelect(image)}>
+                    <div key={index} className={`imageSelector__item__image ${image.image_id === props.selectedImageId ? 'selected' : ''}`} onClick={() => handleImageSelect(image)}>
                         <Image src={image.image_url} thumb={true} alt={`Image ${index + 1}`} />
                     </div>
-                    <span className="icon is-medium" onClick={() => handleDeleteImage(image)}>
-                        <i className="fas fa-2x fa-trash-alt"></i>
-                    </span>
+                    {
+                        props.onDelete
+                        ? (
+                            <span className="icon is-medium" onClick={() => handleDeleteImage(image)}>
+                                <i className="fas fa-2x fa-trash-alt"></i>
+                            </span>
+                        )
+                        : null
+                    }
                 </div>
             )
         })
@@ -42,10 +45,10 @@ const ImageSelector = (props) => {
 }
 
 ImageSelector.propTypes = {
-    initialSelection: PropTypes.object,
     onSelect: PropTypes.func,
     onDelete: PropTypes.func,
-    images: PropTypes.array
+    images: PropTypes.array,
+    selectedImageId: PropTypes.string
 }
 
 export default ImageSelector

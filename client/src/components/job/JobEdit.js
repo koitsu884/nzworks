@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import useForm, { FormContext } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { addNewJob, updateJob } from '../../actions/jobActions';
@@ -16,6 +17,7 @@ import TextField from '../form/TextField';
 import TagField from '../form/TagField';
 import AreaField from '../form/AreaField';
 import AddressField from '../form/AddressField';
+import ImageSelectField from '../form/ImageSelectField';
 
 
 function JobEdit(props) {
@@ -30,11 +32,15 @@ function JobEdit(props) {
     const jobId = props.match.params.id;
 
     useEffect(() => {
+        window.scrollTo(0, 0);
+
         if (jobId) {
             dispatch(setLoading(true));
             client.get('job/' + jobId)
-                .then(response => {
+            .then(response => {
+                console.log(response.data);
                     setValue("title", response.data.title);
+                    setValue("mainImage", response.data.mainImage);
                     setValue("details", response.data.details);
                     setValue("area", response.data.area ? response.data.area._id : '');
                     setValue("jobCategory", response.data.jobCategory);
@@ -109,6 +115,26 @@ function JobEdit(props) {
         }
     };
 
+    const renderImageEditor = () => {
+        if (!user) return null;
+
+        if (user.profile.images.length > 0) {
+            return (
+                <ImageSelectField
+                    name="mainImage"
+                    label="メイン画像選択"
+                    images={user.profile.images}
+                />
+            )
+        }
+
+        return (
+            <div>
+                <p className="has-text-danger u-margin-small">※広告に設定できる画像がありません</p>
+                <Link to="/mypage" className="button is-success u-margin-small">画像をアップロードする（プロフィールページへ移動）</Link>
+            </div>
+        )
+    }
 
     return (
         <div className="container">
@@ -117,10 +143,13 @@ function JobEdit(props) {
             }
             <FormContext {...methods} >
                 <form className="form" onSubmit={methods.handleSubmit(onSubmit)}>
+                    {
+                        renderImageEditor()
+                    }
                     <TextField
                         label="タイトル"
                         type="text"
-                        className="field"
+                        className="field u-margin-small"
                         placeholder="求人広告のタイトルを入力してください"
                         name="title"
                         registerOptions={{ required: true, maxLength: 100 }}
@@ -130,7 +159,7 @@ function JobEdit(props) {
                         type="textarea"
                         placeholder="求人の詳細を入力してください"
                         name="details"
-                        className="field"
+                        className="field u-margin-small"
                         rows={20}
                         registerOptions={{ required: true, maxLength: 10000 }}
                     />

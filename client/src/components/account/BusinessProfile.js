@@ -11,17 +11,17 @@ export default function BusinessProfile({ user }) {
             <Tabs>
                 <div className="tabs is-boxed control">
                     <TabList >
-                        <Tab selectedClassName="is-active"><a href="# ">アカウント</a></Tab>
                         <Tab selectedClassName="is-active"><a href="# ">プロフィール</a></Tab>
+                        <Tab selectedClassName="is-active"><a href="# ">アカウント</a></Tab>
                     </TabList>
                 </div>
                 <TabPanel>
-                    <h2>アカウント設定</h2>
-                    <AccountEdit />
-                </TabPanel>
-                <TabPanel>
                     <h2>プロフィール</h2>
                     <BusinessProfileEdit />
+                </TabPanel>
+                <TabPanel>
+                    <h2>アカウント設定</h2>
+                    <AccountEdit />
                 </TabPanel>
             </Tabs>
         </div>

@@ -5,13 +5,20 @@ import Icon from '../common/Icon';
 
 export default function JobCard({ job, saved, applied }) {
     let jobDescription = job.details.length > 200 ? job.details.substr(0, 200) + '...' : job.details;
+    let imageUrl = job.mainImage 
+                ? job.mainImage.image_url 
+                : (
+                    job.user.profile.avatar 
+                    ? job.user.profile.avatar.image_url
+                    : null 
+                );
 
-    const renderJobImage = avatar => {
-        if (!avatar) return null;
+    const renderJobImage = () => {
+        if (!imageUrl) return null;
         return (
             <div className="media-left">
                 <figure className="image is-96x96">
-                    <Image src={avatar.image_url} thumb={true} alt='Job image' />
+                    <Image src={imageUrl} thumb={true} alt='Job image' />
                 </figure>
             </div>
         )
@@ -68,7 +75,7 @@ export default function JobCard({ job, saved, applied }) {
                 }
                 <div className="u-flex u-margin-bottom-small">
                     {
-                        renderJobImage(job.user.profile.avatar)
+                        renderJobImage()
                     }
                     <div>
                         <h3 className="is-primary">{job.title}</h3>

@@ -10,8 +10,10 @@ import UserImageEditor from './UserImageEditor';
 const ProfileEdit = (props) => {
     const dispatch = useDispatch();
     const methods = useForm();
-    const { setValue, register } = methods;
+    const { setValue, register, watch } = methods;
     const profile = useSelector(state => state.user.currentUser.profile);
+
+    let selectedImage = watch('avatar');
 
     useEffect(() => {
         register({ name: 'avatar' });
@@ -38,7 +40,7 @@ const ProfileEdit = (props) => {
             <FormContext {...methods} >
                 <form onSubmit={methods.handleSubmit(onSubmit)}>
                     <div className="editSection">
-                        <UserImageEditor onMainImageSelect={handleAvatarChange} />
+                        <UserImageEditor onMainImageSelect={handleAvatarChange} selectedImageId={selectedImage ? selectedImage.image_id : null} />
                     </div>
                     <TextField
                         label="自己主紹介文(1000文字以内)"

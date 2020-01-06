@@ -10,6 +10,8 @@ var client = new Twitter({
 })
 
 module.exports.postTweet = async function(status, mediaIds=null){
+    if (process.env.NODE_ENV !== 'production') return null;
+
     try{
         const res = await client.post('statuses/update', {status: status, media_ids: mediaIds});
         return res.text;
@@ -20,6 +22,8 @@ module.exports.postTweet = async function(status, mediaIds=null){
 }
 
 module.exports.postImage = async function(imageString) {
+    if (process.env.NODE_ENV !== 'production') return null;
+
     try {
         const res = await client.post('media/upload', {
             media_data: imageString

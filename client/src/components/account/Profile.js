@@ -9,18 +9,17 @@ export default function Profile({ user }) {
             <Tabs>
                 <div className="tabs is-boxed control">
                     <TabList >
-                        <Tab selectedClassName="is-active"><a href="# ">アカウント</a></Tab>
                         <Tab selectedClassName="is-active"><a href="# ">プロフィール</a></Tab>
+                        <Tab selectedClassName="is-active"><a href="# ">アカウント</a></Tab>
                     </TabList>
                 </div>
-
-                <TabPanel>
-                    <h2>アカウント情報</h2>
-                    <AccountEdit />
-                </TabPanel>
                 <TabPanel>
                     <h2>プロフィール</h2>
                     <ProfileEdit />
+                </TabPanel>
+                <TabPanel>
+                    <h2>アカウント情報</h2>
+                    <AccountEdit />
                 </TabPanel>
             </Tabs>
         </div>

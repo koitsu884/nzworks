@@ -44,7 +44,8 @@ const UserImageEditor = (props) => {
                 images={profile.images}
                 onSelect={handleMainImageSelect}
                 onDelete={handleDeleteImage}
-                initialSelection={profile.avatar}
+                // initialSelection={profile.avatar}
+                selectedImageId={props.selectedImageId}
             />
             <Modal
                 isOpen={modalIsOpen}
@@ -59,7 +60,8 @@ const UserImageEditor = (props) => {
 }
 
 UserImageEditor.propTypes = {
-    onMainImageSelect: PropTypes.func
+    onMainImageSelect: PropTypes.func,
+    selectedImageId: PropTypes.string
 }
 
 export default UserImageEditor;

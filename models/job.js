@@ -4,9 +4,9 @@ const Joi = require('@hapi/joi');
 Joi.objectId = require('joi-objectid')(Joi);
 
 const { PointSchema } = require('./commonSchema');
-const { SavedJob, JOBSTATUS_DEFAULT, JOBSTATUS_INACTIVE, JOBSTATUS_REMOVED } = require('./savedJob');
+const { SavedJob, JOBSTATUS_DEFAULT, JOBSTATUS_INACTIVE } = require('./savedJob');
 const BaseDataModelSchema = require('./baseDataModelSchema');
-
+const { ImageSchema } = require('./commonSchema');
 
 const JobSchema = new BaseDataModelSchema({
     user: {
@@ -14,6 +14,9 @@ const JobSchema = new BaseDataModelSchema({
         required: true,
         index: true,
         ref: 'users'
+    },
+    mainImage: {
+        type: ImageSchema
     },
     title: {
         type: String, required: true, maxlength: 100
@@ -89,6 +92,7 @@ module.exports.validate = job => {
     const schema = Joi.object({
         user: Joi.objectId(),
         area: Joi.objectId().optional().allow(null),
+        mainImage: Joi.object().optional(),
         title: Joi.string().max(100).required(),
         details: Joi.string().max(10000).required(),
         tags: Joi.array().items(Joi.string()),
@@ -108,6 +112,7 @@ module.exports.validateUpdate = job => {
     const schema = Joi.object({
         user: Joi.objectId(),
         area: Joi.objectId().optional().allow(null),
+        mainImage: Joi.object().optional(),
         title: Joi.string().min(1).max(100),
         details: Joi.string().min(1).max(10000),
         tags: Joi.array().items(Joi.string()),

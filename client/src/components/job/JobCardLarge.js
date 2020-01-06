@@ -7,13 +7,19 @@ import noImageUrl from '../../img/no_image.png';
 import Icon from '../common/Icon';
 
 export default function JobCardLarge({ job }) {
-    const { avatar } = job.user.profile;
+    let imageUrl = job.mainImage 
+                ? job.mainImage.image_url 
+                : (
+                    job.user.profile.avatar 
+                    ? job.user.profile.avatar.image_url
+                    : null 
+                );
 
     return (
         <div className="jobCardLarge card">
             <div className="card-image">
                 <figure className="image is-4by3">
-                    <Image src={avatar ? avatar.image_url : noImageUrl} alt='Company image'/>
+                    <Image src={imageUrl ? imageUrl : noImageUrl} alt='Company image'/>
                 </figure>
             </div>
             <div className="card-content">
