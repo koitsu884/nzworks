@@ -69,7 +69,7 @@ module.exports.validateApplyEmail = (to, name, link, from, fromName, jobTitle, m
 
 module.exports.sendApplyEmail = (to, name, link, from, fromName, jobTitle, message, attachments = null) => {
   return sendMail(to,
-    'noreply@nzworks.com',
+    'noreply@nzworks-jp.com',
     '【ニュージーワークス】求人応募',
     'apply',
     {
@@ -89,7 +89,7 @@ module.exports.sendApplyEmail = (to, name, link, from, fromName, jobTitle, messa
 
 module.exports.sendEmailVerification = (to, name, link) => {
   return sendMail(to,
-    'noreply@nzworks.com',
+    'noreply@nzworks-jp.com',
     '【ニュージーワークス】アカウント登録確認',
     'verify',
     {
@@ -101,7 +101,7 @@ module.exports.sendEmailVerification = (to, name, link) => {
 
 module.exports.sendPasswordResetLink = (to, name, link) => {
   return sendMail(to,
-    'noreply@nzworks.com',
+    'noreply@nzworks-jp.com',
     '【ニュージーワークス】パスワードリセット',
     'password',
     {
@@ -113,7 +113,7 @@ module.exports.sendPasswordResetLink = (to, name, link) => {
 
 module.exports.sendFeedback = (name, email, title, message) => {
   return sendMail('nzoshigoto@gmail.com',
-    'noreply@nzworks.com',
+    'noreply@nzworks-jp.com',
     '【ニュージーワークス】フィードバック',
     'feedback',
     {
