@@ -1,16 +1,17 @@
 
 .jobSearch{
-    --search-filter-height: calc(#{$search-filter-height});
-    --fixed-area-height: calc(#{$fixed-area-height});
-    @include respond(phone){
-        --search-filter-height: calc(#{$search-filter-height});
-        --fixed-area-height: calc(#{$fixed-area-height-phone});
-    }
+    // --search-filter-height: calc(#{$search-filter-height});
+    // --fixed-area-height: calc(#{$fixed-area-height});
+    // @include respond(phone){
+    //     --search-filter-height: calc(#{$search-filter-height});
+    //     --fixed-area-height: calc(#{$fixed-area-height-phone});
+    // }
 
 
     position:relative;
     width: 100%;
-    padding-top: var(--search-filter-height);
+    // padding-top: var(--search-filter-height);
+    padding-top: $search-filter-height;
 
 
     &__container{
@@ -26,7 +27,8 @@
         // height: calc(100vh - #{--search-filter-height} - #{$fixed-area-height});
         // min-height: 100%;
         // top: calc(#{--search-filter-height} + #{$fixed-area-height});
-        top: calc(var(--search-filter-height) + var(--fixed-area-height));
+        // top: calc(var(--search-filter-height) + var(--fixed-area-height));
+        top: calc(#{$search-filter-height} + #{$fixed-area-height});
         overflow-y: auto;
         transition: transform .2s;
         padding: 2rem;
@@ -61,11 +63,13 @@
         position: fixed;
         background-color: $primary-light;
         margin: 0;
-        top: var(--fixed-area-height);
+        // top: var(--fixed-area-height);
+        top: $fixed-area-height;
         left: 0;
         padding: 2rem;
         width: 100%;
-        height: var(--search-filter-height);
+        // height: var(--search-filter-height);
+        height: $search-filter-height;
         z-index: 10;
         // @include respond(phone){
         //     top: $fixed-area-height-phone;

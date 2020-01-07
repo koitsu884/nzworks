@@ -6805,15 +6805,9 @@ h5 {
         font-size: 2.4rem; } }
 
 .jobSearch {
-  --search-filter-height: calc(16rem);
-  --fixed-area-height: calc(13rem);
   position: relative;
   width: 100%;
-  padding-top: var(--search-filter-height); }
-  @media only screen and (max-width: 37.5em) {
-    .jobSearch {
-      --search-filter-height: calc(16rem);
-      --fixed-area-height: calc(13rem); } }
+  padding-top: 16rem; }
   .jobSearch__container {
     width: 100%;
     display: flex;
@@ -6821,7 +6815,7 @@ h5 {
   .jobSearch__filter {
     position: fixed;
     width: 100%;
-    top: calc(var(--search-filter-height) + var(--fixed-area-height));
+    top: calc(16rem + 13rem);
     overflow-y: auto;
     transition: transform .2s;
     padding: 2rem;
@@ -6835,11 +6829,11 @@ h5 {
     position: fixed;
     background-color: #ebf7fe;
     margin: 0;
-    top: var(--fixed-area-height);
+    top: 13rem;
     left: 0;
     padding: 2rem;
     width: 100%;
-    height: var(--search-filter-height);
+    height: 16rem;
     z-index: 10; }
   .jobSearch__areaFilter {
     display: flex;
