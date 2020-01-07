@@ -45,10 +45,14 @@
         padding: 1rem;
         border: 1px solid $secondary-light;
         background-color: $light;
-        max-width: 40rem;
+        max-width: 42rem;
 
         &__images {
             max-width: 50rem;
+        }
+
+        &__description {
+            white-space: pre-wrap;
         }
 
         @include respond(tab-port){

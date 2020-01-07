@@ -42,14 +42,14 @@ const ProfileEdit = (props) => {
                     <div className="editSection">
                         <UserImageEditor onMainImageSelect={handleAvatarChange} selectedImageId={selectedImage ? selectedImage.image_id : null} />
                     </div>
-                    <TextField
+                    {/* <TextField
                         label="自己主紹介文(1000文字以内)"
                         type="textarea"
                         name="introduction"
                         className="editSection"
                         info="※紹介文は求人応募時に、メッセージに含む事ができます"
                         registerOptions={{ minLength: 6, maxLength: 1000 }}
-                    />
+                    /> */}
                     <TextField
                         label="電話番号"
                         type="tel"

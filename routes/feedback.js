@@ -15,9 +15,14 @@ router.post('/', async (req, res) => {
     let feedback = new Feedback(req.body);
     let jwtToken = getJwtFromRequest(req);
     if(jwtToken){
-        let decodedToken = jwt.verify(jwtToken, config.get('jwtPrivateKey'));
-        if(decodedToken){
-            feedback._userId = decodedToken._id;
+        try{
+            let decodedToken = jwt.verify(jwtToken, config.get('jwtPrivateKey'));
+            if(decodedToken){
+                feedback._userId = decodedToken._id;
+            }
+        }
+        catch(error){
+            //Do nothing
         }
     }
 

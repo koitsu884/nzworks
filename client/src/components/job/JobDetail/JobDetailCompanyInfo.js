@@ -5,8 +5,8 @@ import ImageGallery from 'react-image-gallery'
 import { getResizedImageUrl } from '../../../utils/imageManager';
 
 const JobDetailCompanyInfo = props => {
-    if(!props.user) return <p>No data</p>;
-    let {name, profile} = props.user;
+    if (!props.user) return <p>No data</p>;
+    let { name, profile } = props.user;
 
     const renderCompanyImages = images => {
         if (!images || images.length === 0) return null;
@@ -21,10 +21,10 @@ const JobDetailCompanyInfo = props => {
         })
 
         return (
-            <ImageGallery 
-                items={items} 
+            <ImageGallery
+                items={items}
                 autoPlay={true}
-                slideInterval={6000}    
+                slideInterval={6000}
             />
         )
     }
@@ -34,11 +34,11 @@ const JobDetailCompanyInfo = props => {
             <h3>投稿者情報</h3>
             <h4>{name}</h4>
             <div className="jobDetail__companyInfo__container">
-                <div className="jobDetail__companyInfo__description">
-                    {profile.introduction}
-                </div>
                 <div className="jobDetail__companyInfo__images">
                     {renderCompanyImages(profile.images)}
+                </div>
+                <div className="jobDetail__companyInfo__description">
+                    {profile.introduction}
                 </div>
             </div>
         </div>

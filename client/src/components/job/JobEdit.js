@@ -99,6 +99,9 @@ function JobEdit(props) {
         if (!fd.workType) {
             data.workType = '';
         }
+        if(!fd.mainImage) {
+            data.mainImage = undefined;
+        }
 
         if (fd.location) {
             data.location = {
