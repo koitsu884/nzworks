@@ -5930,7 +5930,7 @@ h5 {
     padding: 3rem;
     border: 2px solid #52bbf8; }
 
-.label.required::after {
+.required::after {
   content: '*';
   font-size: 1.2rem;
   margin-left: .5rem;
@@ -6562,6 +6562,33 @@ h5 {
   .tagSelectField .tag.active {
     color: white;
     background-color: #48c774; }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  font-weight: 300; }
+  .tooltip .icon {
+    cursor: pointer; }
+    .tooltip .icon:hover + .tooltip__content {
+      visibility: visible;
+      opacity: 1; }
+  .tooltip__content {
+    position: absolute;
+    min-width: 30rem;
+    max-width: 100%;
+    padding: 1rem;
+    background-color: white;
+    visibility: hidden;
+    opacity: 0;
+    border: solid 1px #52bbf8;
+    border-radius: 5px;
+    box-shadow: 2px 2px 2px rgba(10, 10, 10, 0.5);
+    display: inline-block;
+    z-index: 5;
+    transition: visibility .3s, opacity .3s linear; }
+  .tooltip__content.active {
+    visibility: visible;
+    opacity: 1; }
 
 .userForm {
   position: relative;

@@ -5,6 +5,7 @@ import useForm, { FormContext } from 'react-hook-form';
 
 import TextField from '../form/TextField';
 import GoogleLogin from '../auth/GoogleLogin';
+import Tooltip from '../common/Tooltip';
 
 function Signup(props) {
     const dispatch = useDispatch();
@@ -35,7 +36,11 @@ function Signup(props) {
             <FormContext {...methods} >
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="field">
-                        <label className="label required">アカウントタイプ</label>
+                        <label className="label">
+                            <span className="required">アカウントタイプを選んでください</span>
+                            <Tooltip className={'u-margin-left-small'} iconClass={'fa-question-circle has-text-warning'}>
+                                <p>仕事を探している方は『求職者』,<br/>求人広告を投稿したい方は『企業・雇用主』を選んでください</p>
+                            </Tooltip></label>
                         <div className="tabs is-toggle control">
                             <ul>
                                 <li className={userType === 'Personal' ? 'is-active' : ''} onClick={() => handleUserTypeChange('Personal')}>

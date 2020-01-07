@@ -39,7 +39,7 @@ const ContactForm = props => {
             setValue('email', user.email);
             setValue('name', user.name);
         }
-    }, [user])
+    }, [user, setValue])
 
     const onSubmit = data => {
         setFormData(data);

@@ -81,7 +81,7 @@
     }
 }
 
-.label.required::after{
+.required::after{
     content:'*';
     font-size: 1.2rem;
     margin-left: .5rem;

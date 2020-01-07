@@ -2,25 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 const Icon = ({
-    iconNameClass, 
-    iconSizeClass = '', 
-    modifierClasses = '',
+    className,
+    iconClassName,
     onClick
 }) => {
-    let className = 'fas '
-                  + iconNameClass
-                  + (modifierClasses ? ' ' + modifierClasses : '');
     return (
-        <span className={`icon ${iconSizeClass}`} onClick={onClick}>
-            <i className={`${className}`}></i>
+        <span className={`icon ${className}`} onClick={onClick}>
+            <i className={`fas ${iconClassName}`}></i>
         </span>
     )
 }
 
 Icon.propTypes = {
-    iconSizeClass: PropTypes.string,
-    iconNameClass: PropTypes.string.isRequired,
-    modifierClasses: PropTypes.string,
+    className: PropTypes.string,
+    iconClassName: PropTypes.string,
     onClick: PropTypes.func
 }
 

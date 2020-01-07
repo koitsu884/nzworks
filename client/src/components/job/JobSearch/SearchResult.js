@@ -33,14 +33,6 @@ function SearchResult(props) {
         dispatch(changePage(selectedPage));
     }
 
-    const getSavedJobIds = () => {
-        let idList = []
-        if(savedJobList){
-            savedJobList.forEach(savedJob => idList.push(savedJob.job._id));
-        }
-        return idList;
-    }
-
     return (
         <div className="searchResult">
             <h3>検索結果</h3>

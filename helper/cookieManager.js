@@ -1,5 +1,7 @@
 const cookieAge = 60 * 60 * 24 * 1000; //1 Day
-const cookieOptions = { maxAge: cookieAge, httpOnly: true, sameSite: false };
+const cookieOptions = process.env.NODE_ENV !== 'development'
+                    ? { maxAge: cookieAge, httpOnly: true, sameSite: false }
+                    : { maxAge: cookieAge, httpOnly: true, secure: true, sameSite: true };
 
 module.exports.setAuthTokenToCookie = (res, token) => {
     res.cookie('jwt', token, cookieOptions);

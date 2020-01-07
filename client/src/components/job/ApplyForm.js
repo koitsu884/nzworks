@@ -16,7 +16,7 @@ export default function ApplyForm({ onSubmit, email, title }) {
     useEffect(() => {
         setValue('email', email);
         setValue('title', title);
-    }, [email, title])
+    }, [email, title, setValue])
 
     const handleFileChange = event => {
         let file = event.target.files[0];
@@ -107,7 +107,7 @@ export default function ApplyForm({ onSubmit, email, title }) {
                                 {selectedCV ? (
                                     <Fragment >
                                         <span>{selectedCV.name}</span>
-                                        <Icon onClick={() => setCV(null)} iconNameClass='fa-times-circle' iconSizeClass='is-medium' modifierClasses='fa-lg' />
+                                        <Icon onClick={() => setCV(null)} iconClassName='fa-times-circle' className='is-medium fa-lg' />
                                     </Fragment>
                                 ) : 'No file'}
                             </div>
@@ -135,7 +135,7 @@ export default function ApplyForm({ onSubmit, email, title }) {
                                 {selectedCL ? (
                                     <Fragment >
                                         <span>{selectedCL.name}</span>
-                                        <Icon onClick={() => setCL(null)} iconNameClass='fa-times-circle' iconSizeClass='is-medium' modifierClasses='fa-lg' />
+                                        <Icon onClick={() => setCL(null)} iconClassName='fa-times-circle' className='is-medium fa-lg' />
                                     </Fragment>
                                 ) : 'No file'}
                             </div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import Modal from 'react-modal';
@@ -44,7 +44,6 @@ const UserImageEditor = (props) => {
                 images={profile.images}
                 onSelect={handleMainImageSelect}
                 onDelete={handleDeleteImage}
-                // initialSelection={profile.avatar}
                 selectedImageId={props.selectedImageId}
             />
             <Modal

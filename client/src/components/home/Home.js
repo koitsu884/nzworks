@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getLatestJobList } from '../../actions/homeActions';
 
-import JobList from '../job/JobList';
-import Spinner from '../common/Spinner';
 import LatestJobList from './LatestJobList';
 
 function Home(props) {

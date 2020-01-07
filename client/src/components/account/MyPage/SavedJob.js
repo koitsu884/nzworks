@@ -9,7 +9,6 @@ import SavedJobList from './SavedJob/SavedJobList';
 
 const SavedJob = (props) => {
     const dispatch = useDispatch();
-    const user = useSelector(state => state.user.currentUser);
     const savedJobList = useSelector(state => state.user.savedJobList);
 
     useEffect(() => {

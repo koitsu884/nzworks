@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { startSearch, setFilter } from '../../actions/jobActions';
 import MapSearch from './JobSearch/MapSearch';
@@ -8,21 +7,17 @@ import SearchResult from './JobSearch/SearchResult';
 import JobFilter from './JobFilter';
 import AreaSelect from '../common/AreaSelect';
 import FilterSummary from './JobSearch/FilterSummary';
-import Spinner from '../common/Spinner';
 import PageLoading from '../common/PageLoading';
 
 const DEFAULT_PAGE_SIZE = 12;
 
 function JobSearch(props) {
-    // const initialFilter = useSelector(state => state.job.filter);
     const filter = useSelector(state => state.job.searchFilter);
-    const loading = useSelector(state => state.common.loading);
     const currentPage = useSelector(state => state.job.currentPage);
     const dispatch = useDispatch();
 
     const [useMap, setUseMap] = useState(false);
     const [filterOpened, setFilterOpen] = useState(false);
-    // const [filter, setFilter] = useState({...initialFilter});
 
     useEffect(() => {
         window.scrollTo(0, 0);

@@ -6,17 +6,14 @@ import Alert from '../../utils/alert';
 import { getJobDetails } from '../../actions/jobActions';
 import { saveJob, refleshSavedJob } from '../../actions/userActions';
 import TagCloud from '../common/TagCloud';
-import Spinner from '../common/Spinner';
 import JobDetailCompanyInfo from './JobDetail/JobDetailCompanyInfo';
 import JobDetailLocation from './JobDetail/JobDetailLocation';
 import CoverMessage from '../common/CoverMessage';
-import Icon from '../common/Icon';
 import PageLoading from '../common/PageLoading';
 
 function JobDetail(props) {
     const dispatch = useDispatch();
     const jobDetails = useSelector(state => state.job.jobDetails);
-    const loading = useSelector(state => state.common.loading);
     const user = useSelector(state => state.user.currentUser);
     const savedJobList = useSelector(state => state.user.savedJobList);
     const jobId = props.match.params.id;
@@ -30,7 +27,7 @@ function JobDetail(props) {
         if (savedJobList && savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0) {
             dispatch(refleshSavedJob(jobId))
         }
-    }, [dispatch, jobId])
+    }, [savedJobList, dispatch, jobId])
 
     const handleSaveJob = jobId => {
         dispatch(saveJob(user._id, jobId));

@@ -50,7 +50,7 @@ export default function JobCard({ job, saved, applied }) {
 
         return (
             <div className="content u-margin-bottom-small">
-                <Icon iconNameClass='fa-map-marker-alt' modifierClasses='has-text-danger' />
+                <Icon iconClassName='fa-map-marker-alt' className='has-text-danger' />
                 <span>{address}</span>
             </div>
         )
