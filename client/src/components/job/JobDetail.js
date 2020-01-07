@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Alert from '../../utils/alert';
 import { getJobDetails } from '../../actions/jobActions';
-import { saveJob, refleshSavedJob } from '../../actions/userActions';
+import { saveJob } from '../../actions/userActions';
 import TagCloud from '../common/TagCloud';
 import JobDetailCompanyInfo from './JobDetail/JobDetailCompanyInfo';
 import JobDetailLocation from './JobDetail/JobDetailLocation';
@@ -25,12 +25,6 @@ function JobDetail(props) {
     useEffect(() => {
         dispatch(getJobDetails(jobId));
     }, [dispatch, jobId])
-
-    useEffect(() => {
-        if (savedJobList && savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0) {
-            dispatch(refleshSavedJob(jobId))
-        }
-    }, [dispatch, savedJobList, jobId])
 
     const handleSaveJob = jobId => {
         dispatch(saveJob(user._id, jobId));
