@@ -24,10 +24,13 @@ function JobDetail(props) {
 
     useEffect(() => {
         dispatch(getJobDetails(jobId));
+    }, [dispatch, jobId])
+
+    useEffect(() => {
         if (savedJobList && savedJobList.findIndex(savedJob => savedJob.job === jobId) >= 0) {
             dispatch(refleshSavedJob(jobId))
         }
-    }, [savedJobList, dispatch, jobId])
+    }, [dispatch, savedJobList, jobId])
 
     const handleSaveJob = jobId => {
         dispatch(saveJob(user._id, jobId));
