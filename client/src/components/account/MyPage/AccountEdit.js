@@ -4,6 +4,7 @@ import { deleteAccount } from '../../../actions/userActions';
 import EmailEditor from './AccountEdit/EmailEditor';
 import PasswordEditor from './AccountEdit/PasswordEditor';
 import Alert from '../../../utils/alert';
+import UserNameEditor from './AccountEdit/UserNameEditor';
 
 function AccountEdit() {
     const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function AccountEdit() {
         <div className="container">
             <div className="u-margin-small">
                 <EmailEditor />
+                <UserNameEditor />
                 <PasswordEditor />
                 <div className="u-margin-top-big">
                     <hr />

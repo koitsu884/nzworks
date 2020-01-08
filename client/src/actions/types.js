@@ -12,6 +12,7 @@ export const SIGN_OUT = 'SIGN_OUT';
 
 //User
 export const SET_AVATAR = 'SET_AVATAR';
+export const SET_USERNAME = 'SET_USERNAME';
 export const SET_PROFILE = 'SET_PROFILE';
 export const SET_IMAGES = 'SET_IMAGES';
 export const SET_SAVED_JOB_LIST = 'SET_SAVED_JOB_LIST';

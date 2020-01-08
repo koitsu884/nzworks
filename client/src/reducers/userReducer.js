@@ -2,6 +2,7 @@ import {
     SET_CURRENT_USER,
     SET_AVATAR,
     SIGN_OUT,
+    SET_USERNAME,
     SET_PROFILE,
     SET_IMAGES,
     SET_APPLY,
@@ -29,6 +30,14 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 currentUser: action.payload
             };
+        case SET_USERNAME:
+            tempUser = { ...state.currentUser };
+            tempUser.name = action.payload;
+
+            return {
+                ...state,
+                currentUser: tempUser
+            }
         case SET_AVATAR:
             tempUser = { ...state.currentUser };
             tempUser.profile.avatar = action.payload;

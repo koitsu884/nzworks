@@ -5,7 +5,7 @@ const _ = require('lodash');
 const findUser = require('../middleware/findUser');
 const findBusinessUser = require('../middleware/findBusinessUser');
 
-const { User, validate } = require('../models/user');
+const { User, validate, validateUpdate } = require('../models/user');
 const { Job } = require('../models/job');
 const { validate: validateProfile } = require('../models/profile');
 const { memoryUploadSingle, bufferToDataUri } = require('../utils/formDataHandler');
@@ -74,6 +74,20 @@ router.post('/', async (req, res) => {
   res.status(201).send(user);
 })
 
+router.patch('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
+  const { error } = validateUpdate(req.body);
+  if (error) return res.status(400).send(error.details[0].message);
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(req.user._id, { "$set": req.body }, { new: true });
+    res.send(updatedUser);
+  }
+  catch (error) {
+    res.status(400).send("更新できませんでした");
+    console.log(error);
+  }
+})
+
 router.patch('/profile', passport.authenticate('jwt', { session: false }), findUser, async (req, res) => {
   const { error } = validateProfile(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -88,6 +102,7 @@ router.patch('/profile', passport.authenticate('jwt', { session: false }), findU
     console.log(error);
   }
 })
+
 
 router.patch('/jobs/:id', passport.authenticate('jwt', { session: false }), findUser, async (req, res) => {
   let type = req.query.type;
@@ -136,7 +151,6 @@ router.patch('/jobs/:id', passport.authenticate('jwt', { session: false }), find
     console.log(error);
   }
 })
-
 
 
 router.post('/images', passport.authenticate('jwt', { session: false }), findUser, formDataHandler, async (req, res) => {

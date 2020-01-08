@@ -7,7 +7,8 @@ import {
     SET_APPLY,
     SIGN_OUT,
     SET_SAVED_JOB_LIST,
-    SET_SAVED_JOB
+    SET_SAVED_JOB,
+    SET_USERNAME
 } from './types';
 import { setLoading } from './commonActions';
 import Alert from '../utils/alert';
@@ -19,6 +20,13 @@ const setAvatar = imageObj => {
     return {
         type: SET_AVATAR,
         payload: imageObj
+    }
+}
+
+export const setUserName = name => {
+    return {
+        type: SET_USERNAME,
+        payload: name
     }
 }
 

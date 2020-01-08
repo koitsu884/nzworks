@@ -148,3 +148,13 @@ module.exports.validate = user => {
 
     return schema.validate(user);
 }
+
+module.exports.validateUpdate = user => {
+    const schema = Joi.object({
+        email: Joi.string().min(5).max(255).email().optional(),
+        password: Joi.string().min(6).max(255).optional(),
+        name: Joi.string().min(2).max(50).optional(),
+    })
+
+    return schema.validate(user);
+}
