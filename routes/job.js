@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     let job = await Job.findById(req.params.id)
         .populate('area')
-        .populate('user', ['_id', 'name', 'profile.introduction', 'profile.avatar', 'profile.images']);
+        .populate('user', ['_id', 'name', 'profile.introduction', 'profile.avatar', 'profile.images', 'profile.companyWebsite']);
 
     if (!job) return res.status(404).send('この求人は存在しないか、既に削除されています');
     res.send(job);

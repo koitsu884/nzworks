@@ -40,6 +40,16 @@ const JobDetailCompanyInfo = props => {
                 <div className="jobDetail__companyInfo__description">
                     {profile.introduction}
                 </div>
+                {
+                    profile.companyWebsite
+                    ? (
+                        <div className="jobDetail__companyInfo__description u-margin-top-small">
+                            <h5>ウェブサイト</h5>
+                            <a href={profile.companyWebsite} className="has-text-link"><u>{profile.companyWebsite}</u></a>
+                        </div>
+                    )
+                    : null
+                }
             </div>
         </div>
     )
