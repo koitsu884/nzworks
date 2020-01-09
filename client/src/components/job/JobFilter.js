@@ -37,7 +37,7 @@ function JobFilter(props) {
             <div className="jobFilter__">
                 <PrettyTagSelector dataList={jobCategories} onChange={(data)=>handleFilterChange('jobCategory', data)} values={selectedCategories} />
             </div>
-            <div className="u-flex">
+            <div className="u-flex-responsive">
                 <div className="jobFilter__employType">
                     <h4 className="u-margin-top-small is-size-3">雇用形態</h4>
                     <Selector 
@@ -63,8 +63,8 @@ function JobFilter(props) {
             <div >
             <PrettyTagSelector dataList={tagNames} onChange={(data) => handleFilterChange('tags', data)} values={selectedTags} />
             </div>
-            <div className="field u-margin-top-medium">
-                <button type="button" onClick={onSaveFilter} className="button is-success is-large u-margin-auto">フィルターを適用する</button>
+            <div className="field u-margin-medium">
+                <button type="button" onClick={onSaveFilter} className="button is-success is-medium u-margin-auto">フィルターを適用する</button>
             </div>
         </div>
     )

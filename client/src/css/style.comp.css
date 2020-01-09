@@ -6487,6 +6487,7 @@ h5 {
   border-radius: 25px;
   white-space: nowrap;
   padding: 1rem 2rem;
+  margin: .2rem;
   user-select: none;
   transition: all .2s;
   cursor: pointer; }
@@ -6500,6 +6501,9 @@ h5 {
     transition: all .2s; }
     .prettyTag.active .icon {
       transform: rotate(-360deg); }
+  @media only screen and (max-width: 37.5em) {
+    .prettyTag {
+      padding: .3rem 1rem; } }
 
 .profile section > h2 {
   text-align: center;
@@ -6712,7 +6716,8 @@ h5 {
   overflow-x: auto; }
 
 .jobFilter {
-  width: 100%; }
+  width: 100%;
+  max-height: calc(95vh - (16rem + 13rem)); }
   .jobFilter__jobTypes {
     display: flex; }
   .jobFilter__employType, .jobFilter__englishLevel {
@@ -6885,13 +6890,15 @@ h5 {
     padding: 1rem;
     border: 1px solid #fffceb;
     background-color: whitesmoke;
-    max-width: 40rem; }
+    max-width: 42rem; }
     .jobDetail__companyInfo h3 {
       border-bottom: 2px dotted #a78e03;
       padding-bottom: 1rem;
       margin-bottom: 1.5rem; }
     .jobDetail__companyInfo__images {
       max-width: 50rem; }
+    .jobDetail__companyInfo__description {
+      white-space: pre-wrap; }
     @media only screen and (max-width: 56.25em) {
       .jobDetail__companyInfo {
         max-width: 100%; } }

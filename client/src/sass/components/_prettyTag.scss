@@ -6,6 +6,7 @@
     border-radius: 25px;
     white-space: nowrap;
     padding: 1rem 2rem;
+    margin: .2rem;
     user-select: none;
     transition: all .2s;
     cursor: pointer;
@@ -24,5 +25,9 @@
       .icon{
         transform: rotate(-360deg);
       }
+    }
+
+    @include respond(phone){
+      padding: .3rem 1rem;
     }
 }
