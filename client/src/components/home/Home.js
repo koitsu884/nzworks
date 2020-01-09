@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getLatestJobList } from '../../actions/homeActions';
@@ -15,6 +16,10 @@ function Home(props) {
 
     return (
         <div className="home">
+            <Helmet>
+                <title>ニュージーワークス</title>
+                <meta name="description" content="ニュージーランドの日本人向け求人情報を投稿・検索できます。経営者の方、永住者、ワーキングホリデーメーカーいずれの方も是非ご利用ください！" />
+            </Helmet>
             <header className="home__header">
                 <div className="home__header__container">
                     <h1><span>ニュージーランドの</span><span>求人情報ウェブサイト</span></h1>

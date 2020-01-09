@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { Helmet } from "react-helmet";
 
 import Alert from '../../utils/alert';
 import { getJobDetails } from '../../actions/jobActions';
@@ -84,6 +85,10 @@ function JobDetail(props) {
 
         return (
             <Fragment>
+                <Helmet>
+                    <title>求人詳細</title>
+                    <meta name="description" content="求人情報の詳細です。仕事内容、雇用者情報、雇用形態・特典等をチェックできます。" />
+                </Helmet>
                 <h1>{job.title}</h1>
                 <div className="container jobDetail__description">
                     <h2>詳細</h2>
