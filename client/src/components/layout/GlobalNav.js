@@ -11,7 +11,7 @@ function GlobalNav(props) {
         if (userType === 'Business') {
             linkContents = (
                 <Fragment>
-                    <Link to="/mypage/postedjoblist" className="globalNav__item">投稿リスト</Link>
+                    <Link to="/mypage/postedjoblist" className="globalNav__item">求人投稿・編集</Link>
                     <Link to="/mypage" className="globalNav__item">マイページ</Link>
                 </Fragment>
             )
