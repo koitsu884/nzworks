@@ -1,0 +1,11 @@
+
+
+.latestFeedList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    &__item{
+        margin: .4rem;
+    }
+}

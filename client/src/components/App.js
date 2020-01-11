@@ -4,6 +4,7 @@ import history from '../history';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from '../actions/authActions';
 import { getAreaList } from '../actions/commonActions';
+import { getLatestFeedList } from '../actions/homeActions';
 import '../css/style.css';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
@@ -35,6 +36,7 @@ function App(props) {
   useEffect(() => {
     dispatch(getAreaList());
     dispatch(getCurrentUser());
+    dispatch(getLatestFeedList());
   }, [dispatch])
 
   return (

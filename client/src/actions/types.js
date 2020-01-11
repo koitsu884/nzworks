@@ -5,6 +5,7 @@ export const SET_AREA_LIST = 'SET_AREA_LIST';
 
 //Home
 export const SET_LATEST_JOBLIST = 'SET_LATEST_JOBLIST';
+export const SET_LATEST_FEEDLIST = 'SET_LATEST_FEEDLIST';
 
 //Auth
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

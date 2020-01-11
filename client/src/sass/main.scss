@@ -40,12 +40,16 @@
 @import "components/pagination";
 @import "components/prettyTag";
 @import "components/profile";
+@import "components/seasonalWorkInfo";
 @import "components/spinner";
 @import "components/tagSelectField";
 @import "components/tooltip";
 @import "components/userForm";
 @import "components/mypage/postedJobList";
 @import "components/mypage/userImageEditor";
+
+@import "components/feed/feedCard";
+@import "components/feed/latestFeedList";
 
 @import "components/job/jobCard";
 @import "components/job/jobCardLarge";

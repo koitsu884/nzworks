@@ -45,4 +45,21 @@
             }
         }
     }
+
+    &__content {
+        display: flex;
+        
+        &__side {
+            max-width: 35rem;
+            padding: 1.3rem;
+        }
+
+        @include respond(tab-port){
+            flex-direction: column;
+
+            &__side {
+                max-width: 100%;
+            }
+        }
+    }
 }

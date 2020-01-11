@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getLatestJobList } from '../../actions/homeActions';
 
 import LatestJobList from './LatestJobList';
+import SeasonalWorkInfo from './SeasonalWorkInfo';
 
 function Home(props) {
     const dispatch = useDispatch();
@@ -29,13 +30,15 @@ function Home(props) {
                     <div><Link to="/signup" className="button is-primary is-large">アカウント登録（無料）</Link></div>
                 </div>
             </header>
-            <section>
-                <h2 className="heading">最近の投稿</h2>
-                <div className="container">
-                    <LatestJobList jobList={latestJobList} />
-                </div>
-            </section>
-            {/* <section>
+            <div className="home__content">
+                <div className="home__content__main">
+                    <section>
+                        <h2 className="heading">最近の投稿</h2>
+                        <div className="container">
+                            <LatestJobList jobList={latestJobList} />
+                        </div>
+                    </section>
+                    {/* <section>
                 <h2 className="heading">エリアから探す</h2>
             </section>
             <section>
@@ -45,6 +48,11 @@ function Home(props) {
                 <h2 className="heading">様々な条件から探す</h2>
                 <button type="button is-large is-primary">検索ページへ</button>
             </section> */}
+                </div>
+                <div className="home__content__side">
+                    <SeasonalWorkInfo />
+                </div>
+            </div>
         </div>
     )
 }

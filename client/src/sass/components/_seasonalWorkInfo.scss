@@ -1,0 +1,14 @@
+.seasonalWorkInfo {
+    &__link {
+        background-color: $black;
+        color: $white;
+        cursor: pointer;
+        padding: .2rem .5rem;
+        margin: .5rem;
+        border-radius: 4px;
+
+        &:hover {
+            color: $yellow;
+        }
+    }
+}

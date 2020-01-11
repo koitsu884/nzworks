@@ -6525,6 +6525,16 @@ h5 {
   object-fit: contain;
   background-color: black; }
 
+.seasonalWorkInfo__link {
+  background-color: #0a0a0a;
+  color: white;
+  cursor: pointer;
+  padding: .2rem .5rem;
+  margin: .5rem;
+  border-radius: 4px; }
+  .seasonalWorkInfo__link:hover {
+    color: #ffdd57; }
+
 .spinner {
   width: 100%;
   height: 100%;
@@ -6678,6 +6688,26 @@ h5 {
   .userImageEditor {
     flex-direction: column; } }
 
+.feedCard {
+  background-color: #fffbeb;
+  display: flex;
+  align-items: center;
+  width: 30rem;
+  height: 13rem;
+  font-size: 1.3rem;
+  margin: auto;
+  padding: .3rem;
+  border: 1px solid #ebf7fe; }
+  .feedCard h5 {
+    font-size: 1.4rem; }
+
+.latestFeedList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
+  .latestFeedList__item {
+    margin: .4rem; }
+
 .jobCard {
   position: relative; }
   .jobCard__status {
@@ -6809,6 +6839,17 @@ h5 {
         height: 100%; }
       .home__header h1 {
         font-size: 2.4rem; } }
+
+.home__content {
+  display: flex; }
+  .home__content__side {
+    max-width: 35rem;
+    padding: 1.3rem; }
+  @media only screen and (max-width: 56.25em) {
+    .home__content {
+      flex-direction: column; }
+      .home__content__side {
+        max-width: 100%; } }
 
 .jobSearch {
   position: relative;

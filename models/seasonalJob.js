@@ -22,15 +22,14 @@ SeasonalJobSchema = new Schema({
     },
     category: {
         type: String
-    },
-    createdAt: { type: Date, required: true, default: Date.now, expires: 3600 }
+    }
 }, {_id: false});
 
 LatestFeedSchema  = new Schema({
     jobList: [{
         type: SeasonalJobSchema
     }],
-    createdAt: { type: Date, required: true, default: Date.now, expires: 3600 }
+    createdAt: { type: Date, required: true, default: Date.now}
 })
 
 module.exports.LatestFeed = mongoose.model('latestfeed', LatestFeedSchema);

@@ -30,7 +30,7 @@ function requestJobFeed() {
                 parseStringPromise(body)
                     .then(async result => {
                         let latestJobs = [];
-                        for (let i = 0; i < 10; i++) {
+                        for (let i = 0; i < 6; i++) {
                             let jobDetail = result.source.job[i];
                             latestJobs.push({
                                 title: jobDetail.title[0],

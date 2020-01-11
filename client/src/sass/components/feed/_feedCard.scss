@@ -1,0 +1,15 @@
+.feedCard {
+    background-color: $warning-light;
+    display: flex;
+    align-items: center;
+    width: 30rem;
+    height: 13rem;
+    font-size: 1.3rem;
+    margin: auto;
+    padding: .3rem;
+    border: 1px solid $primary-light;
+
+    h5 {
+        font-size: 1.4rem;
+    }
+}
