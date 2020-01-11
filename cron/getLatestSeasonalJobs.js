@@ -49,6 +49,7 @@ function requestJobFeed() {
                         latestFeed = new LatestFeed({ jobList: latestJobs });
                         await latestFeed.save();
                         // console.log(status);
+                        status += '\n\nhttps://www.nzworks-jp.com/';
                         postTweet(status);
                         resolve();
                     })
