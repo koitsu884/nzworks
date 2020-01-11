@@ -44,7 +44,10 @@ function requestJobFeed() {
                                 salary: jobDetail.salary[0],
                                 category: jobDetail.category[0],
                             });
-                            status += `\n・${jobDetail.title[0]} (${jobDetail.city[0]})`;
+                            if(status.length < 200)
+                            {
+                                status += `\n・${jobDetail.title[0]} (${jobDetail.city[0]})`;
+                            }
                         }
                         latestFeed = new LatestFeed({ jobList: latestJobs });
                         await latestFeed.save();
