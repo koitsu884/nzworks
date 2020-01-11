@@ -3,6 +3,7 @@ const config = require('config');
 const request = require('request');
 const parseStringPromise = require('xml2js').parseStringPromise;
 
+const { postTweet} = require('../utils/twitter');
 const { LatestFeed } = require('../models/seasonalJob');
 
 
@@ -30,6 +31,8 @@ function requestJobFeed() {
                 parseStringPromise(body)
                     .then(async result => {
                         let latestJobs = [];
+                        let status = '【最新シーズナルワーク情報】\n';
+
                         for (let i = 0; i < 6; i++) {
                             let jobDetail = result.source.job[i];
                             latestJobs.push({
@@ -41,9 +44,12 @@ function requestJobFeed() {
                                 salary: jobDetail.salary[0],
                                 category: jobDetail.category[0],
                             });
+                            status += `\n・${jobDetail.title[0]} (${jobDetail.city[0]})`;
                         }
                         latestFeed = new LatestFeed({ jobList: latestJobs });
                         await latestFeed.save();
+                        // console.log(status);
+                        postTweet(status);
                         resolve();
                     })
                     .catch(error => {
