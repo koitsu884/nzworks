@@ -25,7 +25,6 @@ export const getLatestFeedList = () => dispatch => {
     };
     
     client.get('feed', {params:params}).then(response => {
-        console.log(response.data);
         dispatch(setLatestFeedList(response.data[0].jobList));
     }).catch(error => {
         console.log(error);
