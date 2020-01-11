@@ -1,8 +1,9 @@
 const express = require('express');
-var https = require('https');
 var request = require('request');
 const fs = require('fs');
 const router = express.Router();
+
+const { LatestFeed } = require('../models/seasonalJob');
 
 const parseStringPromise = require('xml2js').parseStringPromise;
 
@@ -14,8 +15,7 @@ router.get('/readrss', async (req, res) => {
             console.log(error);
             return res.status(500).send("Something went wrong")
         }
-        // console.log(body);
-        // console.log(response);
+
         parseStringPromise(body)
             .then(result => {
                 // console.log(result);
@@ -23,11 +23,27 @@ router.get('/readrss', async (req, res) => {
                 for( let i=0; i<10; i++){
                     let jobDetail = result.source.job[i];
                     console.log(jobDetail);
-                    // latestJobs.push({
-                    //     title: 
-                    // })
+                    latestJobs.push({
+                        title: jobDetail.title[0],
+                        date: jobDetail.date[0],
+                        url: jobDetail.url[0],
+                        city: jobDetail.city[0],
+                        description: jobDetail.description[0],
+                        salary: jobDetail.salary[0],
+                        category: jobDetail.category[0],
+                    });
                 }
-                res.send('OK');
+                console.log(latestJobs);
+                latestFeed = new LatestFeed({jobList: latestJobs});
+                latestFeed.save()
+                    .then(result => {
+                        res.send(result);
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        res.status(500).send("Something went wrong");
+                    })
+
             })
             .catch(error => {
                 console.log(error);
