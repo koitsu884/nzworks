@@ -39,6 +39,7 @@ export const signIn = (email, password) => dispatch => {
 export const signUp = (formData) => dispatch => {
     client.post('user/', formData)
     .then(response => {
+        sessionStorage.setItem('email', formData.email);
         history.push('/emailsent');
     })
     .catch(errors => {
