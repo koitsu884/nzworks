@@ -19,9 +19,9 @@ function connectDB() {
     })
 }
 
-function saveLatestDataToDB(data) {
+async function saveLatestDataToDB(data) {
     parseStringPromise(data)
-        .then(result => {
+        .then(async result => {
             let latestJobs = [];
             for (let i = 0; i < 10; i++) {
                 let jobDetail = result.source.job[i];
@@ -37,14 +37,7 @@ function saveLatestDataToDB(data) {
             }
             console.log(latestJobs);
             latestFeed = new LatestFeed({ jobList: latestJobs });
-            latestFeed.save()
-                .then(result => {
-                    console.log("Complete");
-                })
-                .catch(error => {
-                    throw error;
-                })
-
+            await latestFeed.save();
         })
         .catch(error => {
             throw error;
@@ -60,19 +53,22 @@ function execute() {
                 console.log(error);
             }
             else {
-                saveLatestDataToDB(body);
+                try{
+                    await saveLatestDataToDB(body);
+                    mongoose.connection.close();
+                }
+                catch(error){
+                    console.log(error);
+                    mongoose.connection.close();
+                }
+                console.log('Cron job finished');
             }
         });
-
-        console.log('Cron job finished');
     })
     .catch(error => {
+        console.log('connection failed');
         console.log(error);
-        console.log('Cron job finished with error');
     })
-    .finally(() => {
-        mongoose.connection.close();
-    });
 }
 
 execute();
