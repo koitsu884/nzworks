@@ -5,8 +5,12 @@ import { useDispatch } from 'react-redux';
 import { getCurrentUser } from '../actions/authActions';
 import { getAreaList } from '../actions/commonActions';
 import '../css/style.css';
+import PrivateRoute from './PrivateRoute';
+import AdminRoute from './AdminRoute';
+
 import Header from './layout/Header';
 import Footer from './layout/Footer';
+
 import Home from './home/Home';
 import JobSearch from './job/JobSearch';
 import JobDetail from './job/JobDetail';
@@ -26,8 +30,8 @@ import NotFound from './static/NotFound';
 import Terms from './static/Terms';
 import Privacy from './static/Privacy';
 import ContactForm from './contact/ContactForm';
-import PrivateRoute from './PrivateRoute';
 import BusinessProfileList from './profile/BusinessProfileList';
+import Dashboard from './admin/Dashboard';
 
 
 function App(props) {
@@ -68,6 +72,7 @@ function App(props) {
             <Route path="/emailsent" exact component={EmailSent} />
             <Route path="/privacy" exact component={Privacy} />
             <Route path="/terms" exact component={Terms} />
+            <AdminRoute path='/admin' exact component={Dashboard} />
             <Route exact path="*" component={NotFound} />
           </Switch>
         </div>

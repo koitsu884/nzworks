@@ -1,3 +1,4 @@
+const admin = require('../routes/admin');
 const auth = require('../routes/auth');
 const user = require('../routes/user');
 const job = require('../routes/job');
@@ -9,6 +10,7 @@ const feed = require('../routes/feed');
 const test = require('../routes/test');
 
 module.exports = function(app) {
+    app.use('/api/admin', admin);
     app.use('/api/area', area);
     app.use('/api/auth', auth);
     app.use('/api/job', job);

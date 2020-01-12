@@ -21,7 +21,7 @@ const client = nodemailer.createTransport({
 });
 
 const email = new Email({
-  send: true,
+  // send: true,
   juice: true,
   juiceResources: {
     webResources: {

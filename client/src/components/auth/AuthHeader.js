@@ -28,6 +28,11 @@ function AuthHeader(props) {
                             : null
                     }
                     <span className="authHeader__name">{user.name}</span>
+                    {
+                        user.is_admin
+                        ? <Link to='/admin' className="button is-warning is-small" >Admin</Link>
+                        : null
+                    }
                     <button type="button" className="button is-info is-small" onClick={handleLogout}>ログアウト</button>
                 </Fragment>
             )
