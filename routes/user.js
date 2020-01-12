@@ -31,7 +31,8 @@ router.get('/', withPagination, async (req, res) => {
   }
 
   let filters = {
-      'profile.user_type':userType
+      'profile.user_type':userType,
+      verified: true
   }
 
   let options = {};
