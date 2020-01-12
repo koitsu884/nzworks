@@ -11,9 +11,48 @@ const { validate: validateProfile } = require('../models/profile');
 const { memoryUploadSingle, bufferToDataUri } = require('../utils/formDataHandler');
 const { singleUpload, deleteFile, deleteFolder } = require('../utils/imageFileManager');
 const { setRefreshTokenToCookie } = require('../helper/cookieManager');
+const withPagination = require('../middleware/withPagination');
 
 const formDataHandler = memoryUploadSingle('photo');
 const router = express.Router();
+
+router.get('/', withPagination, async (req, res) => {
+  const userType = req.query.type ? req.query.type : 'Business';
+  const sort = req.query.sort ? req.query.sort : 'updated_at';
+  
+  let desc = false;
+  switch(sort){
+    case 'updated_at':
+    case 'created_at':
+      desc = true;
+      break;
+    default:
+      break;
+  }
+
+  let filters = {
+      'profile.user_type':userType
+  }
+
+  let options = {};
+  if (req.page && req.size) {
+    options.skip = req.size * (req.page - 1);
+    options.limit = req.size;
+  }
+
+  let query = User.find(filters, 'name profile', options);
+
+  let itemCount = await User.countDocuments(filters);
+  let users = await query.sort({ sort: desc ? -1 : 1 });
+
+  let returnData = {
+      page: req.page,
+      count: itemCount,
+      users: users
+  }
+
+  res.send(returnData);
+});
 
 router.get('/me', passport.authenticate('jwt', { session: false }), async (req, res) => {
   let refreshToken = await req.user.generateRefreshToken();

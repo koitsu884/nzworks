@@ -29,7 +29,7 @@ LatestFeedSchema  = new Schema({
     jobList: [{
         type: SeasonalJobSchema
     }],
-    createdAt: { type: Date, required: true, default: Date.now}
+    createdAt: { type: Date, required: true, default: Date.now, expires: 60 * 60 * 48}
 })
 
 module.exports.LatestFeed = mongoose.model('latestfeed', LatestFeedSchema);

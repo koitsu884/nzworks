@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { getLatestJobList } from '../../actions/homeActions';
+import { getLatestJobList, getLatestFeedList } from '../../actions/homeActions';
 
 import LatestJobList from './LatestJobList';
 import SeasonalWorkInfo from './SeasonalWorkInfo';
@@ -13,6 +13,7 @@ function Home(props) {
 
     useEffect(() => {
         dispatch(getLatestJobList());
+        dispatch(getLatestFeedList());
     }, [dispatch]);
 
     return (

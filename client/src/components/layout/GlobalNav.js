@@ -28,6 +28,7 @@ function GlobalNav(props) {
         return (
             <Fragment>
                 <Link to="/jobs" className="globalNav__item">仕事検索</Link>
+                <Link to="/profiles" className="globalNav__item">企業一覧</Link>
                 {linkContents}
             </Fragment>
         )

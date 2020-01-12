@@ -26,8 +26,7 @@ ReactDOM.render(
             <LoadScript
                 id='script_loader'
                 googleMapsApiKey={apiKey}
-                language='ja'
-                region='JA'
+                language='en'
                 // version='weekly'
                 // onLoad={onLoad}
                 // onError={onError}

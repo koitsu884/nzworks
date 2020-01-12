@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ImageGallery from 'react-image-gallery'
 
 import { getResizedImageUrl } from '../../../utils/imageManager';
+import JobDetailLocation from './JobDetailLocation';
 
 const JobDetailCompanyInfo = props => {
     if (!props.user) return <p>No data</p>;
@@ -50,6 +51,7 @@ const JobDetailCompanyInfo = props => {
                     )
                     : null
                 }
+                <JobDetailLocation address={profile.address} />
             </div>
         </div>
     )

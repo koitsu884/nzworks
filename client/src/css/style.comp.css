@@ -6807,6 +6807,65 @@ h5 {
           min-width: 25rem;
           max-width: 25rem; } }
 
+.businessProfileCard {
+  background-color: #effaf3;
+  height: 35rem;
+  max-width: 30rem;
+  min-width: 28rem; }
+  .businessProfileCard__image {
+    display: block;
+    height: 20rem;
+    margin: auto; }
+    .businessProfileCard__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+  .businessProfileCard__content {
+    margin: 1.4rem; }
+
+.businessProfileCardMin {
+  display: flex;
+  align-items: center; }
+  .businessProfileCardMin__image {
+    width: 5rem;
+    height: 4rem;
+    margin-right: 1rem; }
+    .businessProfileCardMin__image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+
+.businessProfileDetail__avatar {
+  width: 100%;
+  height: 60rem;
+  background-color: #0a0a0a; }
+  .businessProfileDetail__avatar img {
+    height: 60rem;
+    object-fit: contain; }
+
+.businessProfileDetail__garelly {
+  width: 100%;
+  height: 60rem; }
+
+.businessProfileDetail .image-gallery-slide img {
+  height: 60rem;
+  object-fit: contain; }
+
+.businessProfileList__side {
+  min-width: 30rem;
+  margin: 1rem; }
+  .businessProfileList__side h3 {
+    padding: .5rem;
+    border: solid 1px #3298dc;
+    border-radius: 5px;
+    color: #066298;
+    background-color: #eef6fc; }
+
+@media only screen and (max-width: 37.5em) {
+  .businessProfileList__side {
+    width: 100%; } }
+
 .home section {
   margin: 5rem 0; }
   .home section .heading {

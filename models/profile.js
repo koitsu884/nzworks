@@ -26,7 +26,8 @@ module.exports.ProfileSchema = new Schema({
     },
     user_type: {
         type: String,
-        required: true
+        required: true,
+        index: true,
     }
 }, {
     discriminatorKey: 'user_type',

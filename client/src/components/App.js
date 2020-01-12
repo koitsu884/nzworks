@@ -4,7 +4,6 @@ import history from '../history';
 import { useDispatch } from 'react-redux';
 import { getCurrentUser } from '../actions/authActions';
 import { getAreaList } from '../actions/commonActions';
-import { getLatestFeedList } from '../actions/homeActions';
 import '../css/style.css';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
@@ -28,6 +27,7 @@ import Terms from './static/Terms';
 import Privacy from './static/Privacy';
 import ContactForm from './contact/ContactForm';
 import PrivateRoute from './PrivateRoute';
+import BusinessProfileList from './profile/BusinessProfileList';
 
 
 function App(props) {
@@ -36,7 +36,6 @@ function App(props) {
   useEffect(() => {
     dispatch(getAreaList());
     dispatch(getCurrentUser());
-    dispatch(getLatestFeedList());
   }, [dispatch])
 
   return (
@@ -50,6 +49,7 @@ function App(props) {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/jobs" exact component={JobSearch} />
+            <Route path="/profiles" exact component={BusinessProfileList} />
             <PrivateRoute path="/jobs/edit" userType="Business" exact component={JobEdit} />
             <PrivateRoute path="/jobs/edit/:id" userType="Business" exact component={JobEdit} />
             <Route path="/jobs/:id" exact component={JobDetail} />
