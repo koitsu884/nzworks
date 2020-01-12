@@ -1,0 +1,21 @@
+.businessProfileDetail {
+    &__avatar {
+        width: 100%;
+        height: 60rem;
+        background-color: $black;
+        img{
+            height: 60rem;
+            object-fit: contain;
+        }
+    }
+
+    &__garelly {
+        width: 100%;
+        height: 60rem;
+    }
+
+    .image-gallery-slide img {
+        height: 60rem;
+        object-fit: contain;
+    }
+}
