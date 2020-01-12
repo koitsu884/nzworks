@@ -10,15 +10,15 @@ const options = {
   apiKey: config.get("sendgridKey")
 }
 
-const client = nodemailer.createTransport(sgTransport(options));
-// const client = nodemailer.createTransport({
-//   host: 'mail.privateemail.com',
-//   port: 465,
-//   auth: {
-//     user: config.get('mailUser'),
-//     pass: config.get('mailPass'),
-//   }
-// });
+// const client = nodemailer.createTransport(sgTransport(options));
+const client = nodemailer.createTransport({
+  host: 'mail.privateemail.com',
+  port: 465,
+  auth: {
+    user: config.get('mailUser'),
+    pass: config.get('mailPass'),
+  }
+});
 
 const email = new Email({
   send: true,
@@ -77,7 +77,7 @@ module.exports.validateApplyEmail = (to, name, link, from, fromName, jobTitle, m
 
 module.exports.sendApplyEmail = (to, name, link, from, fromName, jobTitle, message, attachments = null) => {
   return sendMail(to,
-    'ニュージーワークス <noreply@nzworks-jp.com>',
+    'ニュージーワークス <contact@nzworks-jp.com>',
     '【ニュージーワークス】求人応募',
     'apply',
     {
@@ -97,7 +97,7 @@ module.exports.sendApplyEmail = (to, name, link, from, fromName, jobTitle, messa
 
 module.exports.sendEmailVerification = (to, name, link) => {
   return sendMail(to,
-    'ニュージーワークス <noreply@nzworks-jp.com>',
+    'ニュージーワークス <contact@nzworks-jp.com>',
     '【ニュージーワークス】アカウント登録確認',
     'verify',
     {
@@ -109,7 +109,7 @@ module.exports.sendEmailVerification = (to, name, link) => {
 
 module.exports.sendPasswordResetLink = (to, name, link) => {
   return sendMail(to,
-    'ニュージーワークス <noreply@nzworks-jp.com>',
+    'ニュージーワークス <contact@nzworks-jp.com>',
     '【ニュージーワークス】パスワードリセット',
     'password',
     {
@@ -121,7 +121,7 @@ module.exports.sendPasswordResetLink = (to, name, link) => {
 
 module.exports.sendFeedback = (name, email, title, message) => {
   return sendMail('nzoshigoto@gmail.com',
-    'ニュージーワークス <noreply@nzworks-jp.com>',
+    'ニュージーワークス <contact@nzworks-jp.com>',
     '【ニュージーワークス】フィードバック',
     'feedback',
     {
