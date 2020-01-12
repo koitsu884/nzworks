@@ -16,23 +16,25 @@ const withPagination = require('../middleware/withPagination');
 const formDataHandler = memoryUploadSingle('photo');
 const router = express.Router();
 
+const getOrderConfig = sortBy => {
+  switch (sortBy) {
+    case 'updated_at':
+      return { updated_at: -1 }
+    case 'created_at':
+      return { created_at: -1 }
+    default:
+      return {}
+  }
+}
+
 router.get('/', withPagination, async (req, res) => {
   const userType = req.query.type ? req.query.type : 'Business';
-  const sort = req.query.sort ? req.query.sort : 'updated_at';
-  
-  let desc = false;
-  switch(sort){
-    case 'updated_at':
-    case 'created_at':
-      desc = true;
-      break;
-    default:
-      break;
-  }
+  const sortBy = req.query.sort ? req.query.sort : 'updated_at';
 
+  let orderConfig = getOrderConfig(sortBy);
   let filters = {
-      'profile.user_type':userType,
-      verified: true
+    'profile.user_type': userType,
+    verified: true
   }
 
   let options = {};
@@ -44,12 +46,12 @@ router.get('/', withPagination, async (req, res) => {
   let query = User.find(filters, 'name profile', options);
 
   let itemCount = await User.countDocuments(filters);
-  let users = await query.sort({ sort: desc ? -1 : 1 });
+  let users = await query.sort(orderConfig);
 
   let returnData = {
-      page: req.page,
-      count: itemCount,
-      users: users
+    page: req.page,
+    count: itemCount,
+    users: users
   }
 
   res.send(returnData);
@@ -212,7 +214,7 @@ router.post('/images', passport.authenticate('jwt', { session: false }), findUse
       //   image_id: result.public_id,
       //   image_url: result.secure_url
       // }
-      if(!user.profile.avatar){
+      if (!user.profile.avatar) {
         user.profile.avatar = imageObj;
       }
       await user.save();
@@ -248,8 +250,8 @@ router.delete('/images/:id', passport.authenticate('jwt', { session: false }), f
 
   deleteFile(imageId)
     .then(async result => {
-      let jobs = await Job.find({user: user._id, "mainImage.image_id": imageId });
-      for( let job of jobs){
+      let jobs = await Job.find({ user: user._id, "mainImage.image_id": imageId });
+      for (let job of jobs) {
         job.mainImage = null;
         await job.save();
       }
