@@ -1,0 +1,35 @@
+.modalContent{
+    position: absolute;
+    top: 3rem;
+    left: 3rem;
+    right: 3rem;
+    bottom: 3rem;
+    border: 1px solid rgb(204, 204, 204);
+    background: rgb(255, 255, 255);
+    overflow: auto;
+    border-radius: 3px;
+    outline: none;
+    padding: 0px;
+
+    @include respond(phone){
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+    }
+}
+
+.modalCloseButton {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem;
+    height: 5rem;
+    right: 3rem;
+    top: 3rem;
+    // fill: rgba($color-primary-dark, .7);
+    background-color: rgba($white, .7);
+    border-radius: 50%;
+    box-shadow: 5px 5px 5px rgba( 0,0,0,.5);
+}

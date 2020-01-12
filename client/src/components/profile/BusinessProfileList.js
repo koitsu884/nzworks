@@ -110,13 +110,14 @@ const BusinessProfileList = () => {
             <Modal
                 isOpen={modalIsOpen}
                 onRequestClose={() => setUser(null)}
-                style={{ overlay: { zIndex: 1000}, content: { padding: 0 } }}
+                className='modalContent'
+                style={{ overlay: { zIndex: 1000} }}
             >
                 {
                     selectedUser ? (
                         <div>
                             <BusinessProfileDetail user={selectedUser} />
-                            <div style={{ position: 'fixed', top: '3rem', right: '3rem', zIndex: '2000' }}>
+                            <div className="modalCloseButton">
                                 <Icon className="fas fa-3x" iconClassName="fa-times-circle"  onClick={()=>setUser(null)}  />
                             </div>
                          </div>

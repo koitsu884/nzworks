@@ -6345,6 +6345,12 @@ h5 {
     padding: 1.4rem;
     background-color: white; }
 
+.fixedButton-topRight {
+  position: fixed;
+  top: 3rem;
+  right: 3rem;
+  z-index: 2000; }
+
 .imageSelector {
   display: flex;
   overflow-x: auto; }
@@ -6444,6 +6450,38 @@ h5 {
     border-right: 1px solid #c90202; }
   .button-google:hover {
     background-color: #fa4e4e; }
+
+.modalContent {
+  position: absolute;
+  top: 3rem;
+  left: 3rem;
+  right: 3rem;
+  bottom: 3rem;
+  border: 1px solid #cccccc;
+  background: white;
+  overflow: auto;
+  border-radius: 3px;
+  outline: none;
+  padding: 0px; }
+  @media only screen and (max-width: 37.5em) {
+    .modalContent {
+      top: 1rem;
+      left: 1rem;
+      right: 1rem;
+      bottom: 1rem; } }
+
+.modalCloseButton {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  right: 3rem;
+  top: 3rem;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5); }
 
 .pagination {
   display: flex;

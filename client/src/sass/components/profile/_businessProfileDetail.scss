@@ -20,6 +20,14 @@
         object-fit: contain;
     }
 
+    // .modalCloseButton {
+    //     i
+    //     {
+    //         background-color: #aaa;
+    //         border-radius: 50%;
+    //     }
+    // }
+
     @include respond(phone){
         &__avatar {
             height: 35rem;

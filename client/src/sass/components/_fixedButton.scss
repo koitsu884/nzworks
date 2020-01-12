@@ -1,0 +1,8 @@
+.fixedButton{
+    &-topRight{
+        position: fixed;
+        top: 3rem;
+        right: 3rem;
+        z-index: 2000; 
+    }
+}

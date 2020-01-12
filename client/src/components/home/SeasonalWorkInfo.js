@@ -11,7 +11,7 @@ const SeasonalWorkInfo = () => {
         }
 
         return latestFeedList.map(feed => {
-            return <div className="latestFeedList__item hover-basic">
+            return <div key={feed._id} className="latestFeedList__item hover-basic">
                 <LatestFeedCard feed={feed} />
             </div>
         })
