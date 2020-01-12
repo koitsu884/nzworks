@@ -10,15 +10,15 @@ const options = {
   apiKey: config.get("sendgridKey")
 }
 
-// const client = nodemailer.createTransport(sgTransport(options));
-const client = nodemailer.createTransport({
-  host: 'mail.privateemail.com',
-  port: 465,
-  auth: {
-    user: config.get('mailUser'),
-    pass: config.get('mailPass'),
-  }
-});
+const client = nodemailer.createTransport(sgTransport(options));
+// const client = nodemailer.createTransport({
+//   host: 'mail.privateemail.com',
+//   port: 465,
+//   auth: {
+//     user: config.get('mailUser'),
+//     pass: config.get('mailPass'),
+//   }
+// });
 
 const email = new Email({
   send: true,
