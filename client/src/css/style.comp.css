@@ -6841,7 +6841,8 @@ h5 {
   height: 60rem;
   background-color: #0a0a0a; }
   .businessProfileDetail__avatar img {
-    height: 60rem;
+    height: 100%;
+    width: 100%;
     object-fit: contain; }
 
 .businessProfileDetail__garelly {
@@ -6851,6 +6852,10 @@ h5 {
 .businessProfileDetail .image-gallery-slide img {
   height: 60rem;
   object-fit: contain; }
+
+@media only screen and (max-width: 37.5em) {
+  .businessProfileDetail__avatar {
+    height: 35rem; } }
 
 .businessProfileList__side {
   min-width: 30rem;

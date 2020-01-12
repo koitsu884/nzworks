@@ -4,7 +4,8 @@
         height: 60rem;
         background-color: $black;
         img{
-            height: 60rem;
+            height: 100%;
+            width: 100%;
             object-fit: contain;
         }
     }
@@ -17,5 +18,11 @@
     .image-gallery-slide img {
         height: 60rem;
         object-fit: contain;
+    }
+
+    @include respond(phone){
+        &__avatar {
+            height: 35rem;
+        }
     }
 }
