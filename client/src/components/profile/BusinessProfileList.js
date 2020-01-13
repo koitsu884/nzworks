@@ -52,7 +52,10 @@ const BusinessProfileList = () => {
     }
 
     const handleCardClick = user => {
-        setUser(user);
+        if(user.profile.introduction)
+        {
+            setUser(user);
+        }
     }
 
     const renderProfileList = () => {
@@ -61,8 +64,10 @@ const BusinessProfileList = () => {
 
 
         return profileList.map(user => {
+            
+
             return (
-                <div key={user._id} className="u-margin-small" onClick={() => handleCardClick(user)}>
+                <div key={user._id} className={`u-margin-small ${user.profile.introduction ? 'hover-basic' : ''}`} onClick={() => handleCardClick(user)}>
                     <BusinessProfileCard user={user} />
                 </div>
             )

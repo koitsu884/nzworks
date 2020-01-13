@@ -26,7 +26,7 @@ const BusinessProfileCard = props => {
     }
 
     return (
-        <div className="businessProfileCard hover-basic">
+        <div className="businessProfileCard">
             {renderImage(user.profile.avatar)}
             <div className="businessProfileCard__content">
                 <h3 className="businessProfileCard__name has-text-info">{user.name}</h3>
