@@ -34,7 +34,7 @@ export const getLatestFeedList = () => dispatch => {
 export const getLatestJobList = () => dispatch => {
     dispatch(setLoading());
     const params = {
-        limit: 12,
+        limit: 10,
     };
     
     client.get('job', {params:params}).then(response => {
