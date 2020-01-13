@@ -25,7 +25,9 @@ const LatestJobList = props => {
                 )
             case 1:
                 return (
-                    <AdNZWorksLarge />
+                    <div className="latestJobList__item">
+                        <AdNZWorksLarge />
+                    </div>
                 )
             default:
                 return null;
