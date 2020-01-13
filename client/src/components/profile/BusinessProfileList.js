@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import Modal from 'react-modal';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,15 +11,44 @@ import BusinessProfileCard from './BusinessProfileCard';
 import BusinessProfileDetail from './BusinessProfileDetail';
 import BusinessProfileCardMin from './BusinessProfileCardMin';
 
+import AdNZWorksLarge from '../common/ads/AdNZWorksLarge';
+import AdNZCafemap from '../common/ads/AdNZCafemap';
+
 Modal.setAppElement("#root")
 
-const DEFAULT_PAGE_SIZE = 12;
+const DEFAULT_PAGE_SIZE = 4;
 
 const BusinessProfileList = () => {
     const profileList = useSelector(state => state.profile.profileList);
     const latestProfileList = useSelector(state => state.profile.latestProfileList);
     const itemCount = useSelector(state => state.profile.itemCount);
     const loading = useSelector(state => state.common.loading);
+
+    const adCount = 3 - (profileList.length % 3);
+
+    const renderAds = () => {
+        switch (adCount) {
+            case 2:
+                return (
+                    <Fragment>
+                        <div className="u-margin-small businessProfileCard">
+                            <AdNZWorksLarge />
+                        </div>
+                        <div className="u-margin-small businessProfileCard">
+                            <AdNZCafemap />
+                        </div>
+                    </Fragment>
+                )
+            case 1:
+                return (
+                    <div className="u-margin-small businessProfileCard">
+                        <AdNZWorksLarge />
+                    </div>
+                )
+            default:
+                return null;
+        }
+    }
 
     // const [result, setResult] = useState([]);
     // const [loading, setLoading] = useState(false);
@@ -41,7 +70,7 @@ const BusinessProfileList = () => {
         if (selectedUser) {
             setModalOpen(true);
         }
-        else{
+        else {
             setModalOpen(false);
         }
     }, [selectedUser, setModalOpen])
@@ -52,8 +81,7 @@ const BusinessProfileList = () => {
     }
 
     const handleCardClick = user => {
-        if(user.profile.introduction)
-        {
+        if (user.profile.introduction) {
             setUser(user);
         }
     }
@@ -64,8 +92,6 @@ const BusinessProfileList = () => {
 
 
         return profileList.map(user => {
-            
-
             return (
                 <div key={user._id} className={`u-margin-small ${user.profile.introduction ? 'hover-basic' : ''}`} onClick={() => handleCardClick(user)}>
                     <BusinessProfileCard user={user} />
@@ -97,6 +123,9 @@ const BusinessProfileList = () => {
                                 ? <Spinner cover={true} />
                                 : renderProfileList(profileList)
                         }
+                        {
+                            renderAds()
+                        }
                     </div>
                     <Pagination
                         itemCount={itemCount}
@@ -116,16 +145,16 @@ const BusinessProfileList = () => {
                 isOpen={modalIsOpen}
                 onRequestClose={() => setUser(null)}
                 className='modalContent'
-                style={{ overlay: { zIndex: 1000} }}
+                style={{ overlay: { zIndex: 1000 } }}
             >
                 {
                     selectedUser ? (
                         <div>
                             <BusinessProfileDetail user={selectedUser} />
                             <div className="modalCloseButton">
-                                <Icon className="fas fa-3x" iconClassName="fa-times-circle"  onClick={()=>setUser(null)}  />
+                                <Icon className="fas fa-3x" iconClassName="fa-times-circle" onClick={() => setUser(null)} />
                             </div>
-                         </div>
+                        </div>
                     )
                         : <p>Loading...</p>
                 }

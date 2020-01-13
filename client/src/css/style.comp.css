@@ -6857,6 +6857,7 @@ h5 {
           max-width: 25rem; } }
 
 .businessProfileCard {
+  overflow: hidden;
   background-color: #effaf3;
   height: 35rem;
   max-width: 30rem;
@@ -6871,6 +6872,14 @@ h5 {
       object-fit: cover; }
   .businessProfileCard__content {
     margin: 1.4rem; }
+  .businessProfileCard .adLarge {
+    min-height: 35rem;
+    height: 35rem;
+    max-width: 30rem;
+    min-width: 28rem; }
+    .businessProfileCard .adLarge img {
+      height: 100%;
+      object-fit: contain; }
 
 .businessProfileCardMin {
   display: flex;
