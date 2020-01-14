@@ -83,7 +83,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), findOwnedJo
     }
     catch (error) {
         console.log(error);
-        res.status(500).send('Something wrong');
+        return res.status(500).send('Something wrong');
     }
 
     res.status(200).send(job);
