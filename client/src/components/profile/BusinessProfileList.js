@@ -16,7 +16,7 @@ import AdNZCafemap from '../common/ads/AdNZCafemap';
 
 Modal.setAppElement("#root")
 
-const DEFAULT_PAGE_SIZE = 4;
+const DEFAULT_PAGE_SIZE = 12;
 
 const BusinessProfileList = () => {
     const profileList = useSelector(state => state.profile.profileList);
