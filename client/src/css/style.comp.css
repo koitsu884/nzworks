@@ -6915,6 +6915,13 @@ h5 {
   .businessProfileDetail__avatar {
     height: 35rem; } }
 
+.adminUserCard {
+  width: 80%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center; }
+
 .businessProfileList__side {
   min-width: 30rem;
   margin: 1rem; }

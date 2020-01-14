@@ -11,8 +11,8 @@ const BusinessProfileCardMin = props => {
             <div className="businessProfileCardMin__image">
                 {
                     user.profile.avatar
-                    ? <Image src={user.profile.avatar.image_url} thumb={true} />
-                    : <img src={noImageUrl} />
+                    ? <Image src={user.profile.avatar.image_url} thumb={true} alt="avatar" />
+                    : <img src={noImageUrl} alt="noImage" />
                 }
                
             </div>

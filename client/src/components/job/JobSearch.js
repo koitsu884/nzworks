@@ -67,7 +67,7 @@ function JobSearch(props) {
                             <button type="button" className="button" onClick={() => setUseMap(true)}>
                                 <span className="icon"><i className="fas fa-lg fa-map-marked-alt"></i></span>
                             </button>
-                        </div>
+                    </div>
                     </div> */}
                     <div className="level-item">
                         <h4 className="is-hidden-mobile">フィルタ</h4>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { CONTACT_EMAIL } from '../../constants/index';
 import { useSelector } from 'react-redux';
 import Modal from 'react-modal';
 import useForm, { FormContext } from 'react-hook-form';
@@ -63,6 +64,7 @@ const ContactForm = props => {
             <div className="u-margin-bottom-small">
                 <p>ニュージーワークスにご関心をお持ちいただき誠にありがとうございます。<br />
                     以下のお問い合わせフォームより、ご意見やご相談などお問合わせください。<br />
+                    また、メールでの問い合わせも受け付けております。(<a className="has-text-link" href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>)<br /><br />
                     お問合せ内容の確認後、担当者よりご連絡させていただきます。
                 </p>
             </div>
