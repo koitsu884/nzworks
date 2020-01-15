@@ -17,7 +17,12 @@ router.get('/', async (req, res) => {
  Google Oauth
 ========================================================*/
 router.get('/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] })
+  (req, res, next) => {
+    let userType = req.query.userType;
+    req.session.userType = userType;
+    next();
+  }
+,  passport.authenticate('google', { scope: ['profile', 'email'] })
 )
 
 router.get('/google/callback',
@@ -25,6 +30,7 @@ router.get('/google/callback',
   async (req, res) => {
     let email = req.user._json.email;
     let displayName = req.user.displayName;
+    let userType = req.session.userType;
 
     let user = await User.findOne({ email: email });
     if (!user) {
@@ -32,7 +38,7 @@ router.get('/google/callback',
         email: email,
         name: displayName,
         verified: true,
-        profile: { user_type: 'Personal' }
+        profile: { user_type: userType}
       });
       await user.save();
     }
@@ -42,6 +48,7 @@ router.get('/google/callback',
     }
 
     await setTokensToCookie(res, user);
+    delete req.session.userType;
     res.redirect(config.get('clientUrl'));
   }
 )
@@ -184,6 +191,11 @@ router.get('/token', async (req, res) => {
 router.delete('', (req, res) => {
   res.clearCookie('jwt');
   res.clearCookie('refresh');
+  req.session.destroy((error) => {
+    if(error){
+      console.log(error);
+    }
+  });
   res.send();
 })
 

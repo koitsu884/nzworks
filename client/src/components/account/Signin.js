@@ -71,15 +71,9 @@ function Signin(props) {
                     </div>
                 </form>
             </FormContext>
-            {
-                userType === 'Personal' ? (
-                    <Fragment>
-                        <hr />
-                        <h4>もしくは</h4>
-                        <GoogleLogin />
-                    </Fragment>
-                ) : null
-            }
+            <hr />
+            <h4>もしくは</h4>
+            <GoogleLogin userType={userType} signIn={true} />
         </div>
     )
 }

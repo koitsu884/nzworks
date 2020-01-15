@@ -9,6 +9,8 @@ module.exports = {
     "cloudinaryAPIKey": process.env.CLOUDINARY_KEY,
     "cloudinarySecret": process.env.CLOUDINARY_SECRET,
     "cloudinaryRoot":  process.env.CLOUDINARY_ROOT,
+    "redisURL": process.env.REDIS_URL,
+    "sessionSecret" : process.env.SESSION_SECRET,
     "sendgridUser": process.env.SENDGRID_USER,
     "sendgridKey": process.env.SENDGRID_KEY,
     "mailUser": process.env.MAIL_USER,

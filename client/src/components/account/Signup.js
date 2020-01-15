@@ -39,7 +39,7 @@ function Signup(props) {
                         <label className="label">
                             <span className="required">アカウントタイプを選んでください</span>
                             <Tooltip className={'u-margin-left-small'} iconClass={'fa-question-circle has-text-warning'}>
-                                <p>仕事を探している方は『求職者』,<br/>求人広告を投稿したい方は『企業・雇用主』を選んでください</p>
+                                <p>仕事を探している方は『求職者』,<br />求人広告を投稿したい方は『企業・雇用主』を選んでください</p>
                             </Tooltip></label>
                         <div className="tabs is-toggle control">
                             <ul>
@@ -98,16 +98,9 @@ function Signup(props) {
                     </div>
                 </form>
             </FormContext>
-            {
-                userType === 'Personal' ? (
-                    <Fragment>
-                        <hr />
-                        <h4>もしくは</h4>
-                        <GoogleLogin />
-                    </Fragment>
-                ) : null
-            }
-
+            <hr />
+            <h4>もしくは</h4>
+            <GoogleLogin userType={userType} />
         </div>
     )
 }

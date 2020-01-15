@@ -1,4 +1,5 @@
 const express = require('express');
+
 const helmet = require('helmet');
 const cors = require('cors');
 const path = require('path');
@@ -27,6 +28,7 @@ app.use(cookieParser());
 app.use(passport.initialize());
 //### Passport strategies ###
 require('./startup/passport')(passport);
+require('./startup/redis')(app);
 require('./startup/routes')(app);
 //Front end
 if(process.env.NODE_ENV === 'production') {

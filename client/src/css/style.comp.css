@@ -6441,11 +6441,10 @@ h5 {
 .button-google {
   background-color: red;
   height: 4.5rem;
-  border-radius: 5px; }
-  .button-google a {
-    color: white;
-    display: flex;
-    align-items: center; }
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center; }
   .button-google__logo {
     height: 100%;
     width: 4.5rem;
