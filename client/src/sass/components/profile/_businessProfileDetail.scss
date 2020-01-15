@@ -20,6 +20,17 @@
         object-fit: contain;
     }
 
+    &__jobList {
+        max-width: 50rem;
+        &__item {
+            margin: 1rem;
+        }
+    }
+
+    &__jobCard {
+        
+    }
+
     // .modalCloseButton {
     //     i
     //     {

@@ -32,6 +32,13 @@ router.get('/', async (req, res) => {
     res.send(jobs);
 });
 
+router.get('/user/:id', async (req, res) => {
+    let jobs = await Job.find({ is_active: true, user:req.params.id })
+        .populate('area');
+
+    res.send(jobs);
+});
+
 router.get('/:id', async (req, res) => {
     let job = await Job.findById(req.params.id)
         .populate('area')

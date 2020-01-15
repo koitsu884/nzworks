@@ -50,6 +50,14 @@
     margin: 0 3rem;
     color: $primary-dark;
     margin-bottom: 5rem;
+
+    &--label-primary{
+        padding: .5rem;
+        border: solid 1px $info;
+        border-radius: 5px;
+        color: $primary-dark;
+        background-color: $info-light;  
+    }
 }
 
 .link {

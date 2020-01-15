@@ -1,8 +1,8 @@
 .businessProfileCard {
     // display: flex;
-    
+    border-radius: 10px;
     overflow: hidden;
-    background-color: $success-light;
+    // background-color: $success-light;
     height: 35rem;
     max-width: 30rem;
     min-width: 28rem;
@@ -11,6 +11,8 @@
         display: block;
         height: 20rem;
         margin: auto;
+        border-radius: 10px;
+        overflow: hidden;
 
         img{
             width: 100%;
@@ -34,6 +36,9 @@
         height: 35rem;
         max-width: 30rem;
         min-width: 28rem;
+        border-radius: 10px;
+        overflow: hidden
+        ;
         img {
             height: 100%;
             object-fit: contain;
