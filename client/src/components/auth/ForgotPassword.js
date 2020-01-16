@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import client from '../../utils/client';
 import Alert from '../../utils/alert';
+import errorToStr from '../../utils/errorToStr';
 
 export default function ForgotPassword() {
     const [email, setEmail] = useState('');
@@ -18,7 +19,7 @@ export default function ForgotPassword() {
                 setFlag(true);
             })
             .catch(error => {
-                Alert.error(error);
+                Alert.error(errorToStr(error));
             })
     }
 
