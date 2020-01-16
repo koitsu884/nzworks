@@ -16,20 +16,20 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-// const client = nodemailer.createTransport(sgTransport(options));
-// const client = nodemailer.createTransport({
-//   host: 'mail.privateemail.com',
-//   port: 465,
-//   auth: {
-//     user: config.get('mailUser'),
-//     pass: config.get('mailPass'),
-//   }
-// });
+const client = nodemailer.createTransport(sgTransport(options));
 const client = nodemailer.createTransport({
-  SES: new AWS.SES({
-    apiVersion: '2010-12-01'
-  })
-})
+  host: 'mail.privateemail.com',
+  port: 465,
+  auth: {
+    user: config.get('mailUser'),
+    pass: config.get('mailPass'),
+  }
+});
+// const client = nodemailer.createTransport({
+//   SES: new AWS.SES({
+//     apiVersion: '2010-12-01'
+//   })
+// })
 
 const email = new Email({
   // send: true,
