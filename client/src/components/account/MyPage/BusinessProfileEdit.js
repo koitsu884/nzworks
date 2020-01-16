@@ -62,6 +62,7 @@ const BusinessProfileEdit = (props) => {
                         type="textarea"
                         className="editSection"
                         name="introduction"
+                        rows={15}
                         info="※紹介文は求人広告に表示されます"
                         registerOptions={{ minLength: 6, maxLength: 1000 }}
                     />
