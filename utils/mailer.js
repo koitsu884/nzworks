@@ -16,7 +16,7 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-const client = nodemailer.createTransport(sgTransport(options));
+// const client = nodemailer.createTransport(sgTransport(options));
 const client = nodemailer.createTransport({
   host: 'mail.privateemail.com',
   port: 465,
