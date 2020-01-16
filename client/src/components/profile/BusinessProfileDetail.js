@@ -25,6 +25,10 @@ const BusinessProfileDetail = (props) => {
     }, [props.user])
 
     const renderJobList = () => {
+        if(jobList.length === 0){
+            return <div className="u-margin-medium">現在募集中の求人はありません</div>
+        }
+
         return jobList.map(job => {
             return (
                 <Link to={`/jobs/${job._id}`} className="businessProfileDetail__jobList__item" key={job._id}>

@@ -35,7 +35,6 @@ function SearchResult(props) {
 
     return (
         <div className="searchResult">
-            <h3>検索結果</h3>
             <JobList jobList={searchResult} savedJobIds={savedJobIds} appliedJobIds={appliedJobIds} />
             <Pagination
                 itemCount={itemCount}

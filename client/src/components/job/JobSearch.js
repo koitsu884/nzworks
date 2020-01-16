@@ -52,7 +52,7 @@ function JobSearch(props) {
     return (
         <div className="jobSearch">
             <div className="jobSearch__fixedArea">
-                <h1 className="is-size-2 is-size-3-mobile has-text-grey-dark">仕事検索</h1>
+                <h1 className="is-size-2 is-size-3-mobile has-text-grey-dark">求人検索</h1>
                 <div className="jobSearch__areaFilter level">
                     <div className="level-item">
                         <h4 className="is-hidden-mobile u-margin-small">エリア</h4>
