@@ -15,6 +15,8 @@ module.exports = {
     "sendgridKey": process.env.SENDGRID_KEY,
     "mailUser": process.env.MAIL_USER,
     "mailPass": process.env.MAIL_PASS,
+    "sesAccessKey": process.env.SES_ACCESS_KEY,
+    "sesSecretKey": process.env.SES_SECRET_KEY,
     "twitterConsumerKey": process.env.TWITTER_CONSUMER_KEY,
     "twitterConsumerSecret": process.env.TWITTER_CONSUMER_SECRET,
     "twitterAccessTokenKey": process.env.TWITTER_TOKEN_KEY,
