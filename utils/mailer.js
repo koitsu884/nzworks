@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer');
 const sgTransport = require('nodemailer-sendgrid');
 const Email = require('email-templates');
 const path = require('path');
-// const sgMail = require('@sendgrid/mail');
+const sgMail = require('@sendgrid/mail');
 const config = require("config");
-// sgMail.setApiKey(config.get("sendgridKey"));
-// const options = {
-//   apiKey: config.get("sendgridKey")
-// }
+sgMail.setApiKey(config.get("sendgridKey"));
+const options = {
+  apiKey: config.get("sendgridKey")
+}
 let AWS = require('aws-sdk');
 
 AWS.config.update({
@@ -16,15 +16,15 @@ AWS.config.update({
   region: 'us-east-1',
 });
 
-// const client = nodemailer.createTransport(sgTransport(options));
-const client = nodemailer.createTransport({
-  host: 'mail.privateemail.com',
-  port: 465,
-  auth: {
-    user: config.get('mailUser'),
-    pass: config.get('mailPass'),
-  }
-});
+const client = nodemailer.createTransport(sgTransport(options));
+// const client = nodemailer.createTransport({
+//   host: 'mail.privateemail.com',
+//   port: 465,
+//   auth: {
+//     user: config.get('mailUser'),
+//     pass: config.get('mailPass'),
+//   }
+// });
 // const client = nodemailer.createTransport({
 //   SES: new AWS.SES({
 //     apiVersion: '2010-12-01'
