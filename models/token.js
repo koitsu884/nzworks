@@ -12,7 +12,7 @@ TokenSchema = new Schema({
         required: true,
     },
     type: { type: String, required: true},
-    createdAt: { type: Date, required: true, default: Date.now, expires: 3600 }
+    createdAt: { type: Date, required: true, default: Date.now, expires: 3600 * 24 }
 });
 TokenSchema.index({"_userId": 1, "type": 1}, {unique: true});
 

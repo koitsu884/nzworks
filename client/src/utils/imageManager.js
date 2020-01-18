@@ -75,3 +75,7 @@ export const getResizedImageUrl = (url, transParams) => {
     let urlParts = url.split('image/upload');
     return urlParts[0] + 'image/upload/' + transParams + urlParts[1];
 }
+
+export const validateImage = (file) => {
+    return file && file['type'].split('/')[0] === 'image';
+}

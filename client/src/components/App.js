@@ -32,6 +32,9 @@ import Privacy from './static/Privacy';
 import ContactForm from './contact/ContactForm';
 import BusinessProfileList from './profile/BusinessProfileList';
 import Dashboard from './admin/Dashboard';
+import ThreadHome from './thread/ThreadHome';
+import ThreadEditForm from './thread/ThreadEditForm';
+import ThreadDetail from './thread/ThreadDetail';
 
 
 function App(props) {
@@ -58,6 +61,10 @@ function App(props) {
             <PrivateRoute path="/jobs/edit/:id" userType="Business" exact component={JobEdit} />
             <Route path="/jobs/:id" exact component={JobDetail} />
             <PrivateRoute path="/jobs/:id/apply" userType="Personal" exact component={ApplyJob} />
+            <Route path="/thread/edit" exact component={ThreadEditForm} />
+            <Route path="/thread/edit/:id" exact component={ThreadEditForm} />
+            <Route path="/thread/:id" exact component={ThreadDetail} />
+            <Route path="/thread" exact component={ThreadHome} />
             <Route path="/signup" exact component={Signup} />
             <Route path="/signin" exact component={Signin} />
             <PrivateRoute path="/mypage" exact component={MyPage} />

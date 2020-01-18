@@ -1,0 +1,17 @@
+.icon {
+    &--selectable{
+        cursor: pointer;
+        &:hover {
+            opacity: .8;
+        }
+    }
+
+    &--edit {
+        color: $primary;
+    }
+
+
+    &--delete {
+        color: $danger;
+    }
+}

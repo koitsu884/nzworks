@@ -33,6 +33,7 @@ function AuthHeader(props) {
                         ? <Link to='/admin' className="button is-warning is-small" >Admin</Link>
                         : null
                     }
+                    <Link className="button is-success is-small" to="/mypage">マイページ</Link>
                     <button type="button" className="button is-info is-small" onClick={handleLogout}>ログアウト</button>
                 </Fragment>
             )

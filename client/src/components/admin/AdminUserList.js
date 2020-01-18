@@ -18,18 +18,15 @@ const AdminUserList = (props) => {
     const itemCount = useSelector(state => state.admin.userCount);
 
     useEffect(() => {
-        if (!loading) {
-            setLoading(true);
-            dispatch(getUserList(currentPage, DEFAULT_PAGE_SIZE, filter))
-        }
+        setLoading(true);
+        dispatch(getUserList(currentPage, DEFAULT_PAGE_SIZE, filter))
     }, [currentPage, filter, setLoading, dispatch])
 
     useEffect(() => {
         setLoading(false);
-    }, [userList])
+    }, [userList, setLoading])
 
     const handlePageClick = selectedPage => {
-        console.log(selectedPage);
         setPage(selectedPage);
     }
 

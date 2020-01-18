@@ -1,0 +1,56 @@
+.threadList {
+    display: flex;
+    flex-wrap: wrap;
+    
+    &__item{
+        position: relative;
+        height: 14rem;
+        margin: 1rem;
+        display: flex;
+        align-items: center;
+        
+        &__content{
+            display: flex;
+            height: 100%;
+            padding: 5px;
+            align-items: center;
+            &:hover {
+                background-color: $info-light;
+            }
+        }
+
+        &__tool{
+            display: flex;
+            align-items: center;
+            margin: 1rem;
+            .icon {
+                margin: 1rem;
+            }
+        }
+     
+        &__image{
+            border-radius: 5px;
+            overflow: hidden;
+            height: 10rem;
+            max-width: 30rem;
+            margin-right: 1rem;
+            img{
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        &__userInfo {
+            display: flex;
+            align-items: center;
+        }
+
+        &__status{
+            position: absolute;
+            left: -.4rem;
+            top: -.4rem;
+        }
+
+        transition: background-color .2s;
+    }
+}

@@ -108,7 +108,7 @@ userSchema.methods.sendPasswordResetEmail = async function () {
 
     try {
         await sendPasswordResetLink(this.email, this.name, link)
-        console.log("Email sent");
+        console.log("Email sent to " + this.email);
     }
     catch (errors) {
         console.log(JSON.stringify(errors));
@@ -129,7 +129,7 @@ userSchema.methods.sendVerifyEmail = async function () {
 
     try {
         await sendEmailVerification(this.email, this.name, link)
-        console.log("Email sent");
+        console.log("Email sent to " + this.email);
     }
     catch (errors) {
         console.log(JSON.stringify(errors));

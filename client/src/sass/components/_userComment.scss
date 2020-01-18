@@ -1,0 +1,63 @@
+.userComment {
+    display: flex;
+    position: relative;
+    width: 100%;
+    align-items: center;
+    justify-content: left;
+    &__image{
+        width: 10rem;
+        // min-width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 1rem;
+        flex-shrink: 0;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+
+    &__status {
+        position: absolute;
+        top: calc(100% / 2 - 7rem);
+        left: 0;
+    }
+
+    &__comment {
+        margin: 1rem;
+        display: inline-block;
+        position: relative; 
+        padding: 17px 13px;
+        border-radius: 12px;
+        background: $primary-light;
+        flex-grow: 1;
+
+
+        // &:after {
+        //     content: "";
+        //     display: inline-block;
+        //     position: absolute;
+        //     top: calc(100% - (50% + 12px));
+        //     left: -24px;
+        //     border: 12px solid transparent;
+        //     border-right: 12px solid $primary-light;
+        // }
+    }
+
+    .mine &__comment {
+        background-color: $warning-light;
+        // &:after{
+        //     border-right: 12px solid $warning-light;
+        // }
+    }
+
+    @include respond(phone){
+        &__image{
+            width: 4rem;
+            height: 4rem;
+        }
+    }
+}

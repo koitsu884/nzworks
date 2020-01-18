@@ -6357,6 +6357,17 @@ h5 {
   right: 3rem;
   z-index: 2000; }
 
+.icon--selectable {
+  cursor: pointer; }
+  .icon--selectable:hover {
+    opacity: .8; }
+
+.icon--edit {
+  color: #52bbf8; }
+
+.icon--delete {
+  color: #f14668; }
+
 .imageSelector {
   display: flex;
   overflow-x: auto; }
@@ -6646,6 +6657,42 @@ h5 {
   .tooltip__content.active {
     visibility: visible;
     opacity: 1; }
+
+.userComment {
+  display: flex;
+  position: relative;
+  width: 100%;
+  align-items: center;
+  justify-content: left; }
+  .userComment__image {
+    width: 10rem;
+    height: 10rem;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 1rem;
+    flex-shrink: 0; }
+    .userComment__image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+  .userComment__status {
+    position: absolute;
+    top: calc(100% / 2 - 7rem);
+    left: 0; }
+  .userComment__comment {
+    margin: 1rem;
+    display: inline-block;
+    position: relative;
+    padding: 17px 13px;
+    border-radius: 12px;
+    background: #ebf7fe;
+    flex-grow: 1; }
+  .mine .userComment__comment {
+    background-color: #fffbeb; }
+  @media only screen and (max-width: 37.5em) {
+    .userComment__image {
+      width: 4rem;
+      height: 4rem; } }
 
 .userForm {
   position: relative;
@@ -7135,3 +7182,57 @@ h5 {
   @media only screen and (max-width: 37.5em) {
     .mypage .editSection {
       margin: 2rem 1rem; } }
+
+.threadList {
+  display: flex;
+  flex-wrap: wrap; }
+  .threadList__item {
+    position: relative;
+    height: 14rem;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+    transition: background-color .2s; }
+    .threadList__item__content {
+      display: flex;
+      height: 100%;
+      padding: 5px;
+      align-items: center; }
+      .threadList__item__content:hover {
+        background-color: #eef6fc; }
+    .threadList__item__tool {
+      display: flex;
+      align-items: center;
+      margin: 1rem; }
+      .threadList__item__tool .icon {
+        margin: 1rem; }
+    .threadList__item__image {
+      border-radius: 5px;
+      overflow: hidden;
+      height: 10rem;
+      max-width: 30rem;
+      margin-right: 1rem; }
+      .threadList__item__image img {
+        height: 100%;
+        object-fit: cover; }
+    .threadList__item__userInfo {
+      display: flex;
+      align-items: center; }
+    .threadList__item__status {
+      position: absolute;
+      left: -.4rem;
+      top: -.4rem; }
+
+.threadDetail__image {
+  max-width: 60rem;
+  border-radius: 10px;
+  overflow: hidden; }
+  .threadDetail__image img {
+    width: 100%; }
+
+.threadDetail__userInfo {
+  max-width: 35rem; }
+
+@media only screen and (max-width: 37.5em) {
+  .threadDetail__userINfo {
+    max-width: 95%; } }

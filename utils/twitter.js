@@ -2,15 +2,23 @@ var Twitter = require('twitter');
 const config = require('config');
 const request = require('request');
 
-var client = new Twitter({
+var client = process.env.NODE_ENV === 'production' 
+? new Twitter({
     consumer_key:  config.get('twitterConsumerKey'),
     consumer_secret:  config.get('twitterConsumerSecret'),
     access_token_key:  config.get('twitterAccessTokenKey'),
-    access_token_secret:  config.get('twitterAccessTokenSecret'),
+    access_token_secret:  config.get('twitterAccessTokenSecret')
 })
+:new Twitter({
+    consumer_key:  config.get('twitterConsumerKey'),
+    consumer_secret:  config.get('twitterConsumerSecret'),
+    access_token_key:  config.get('twitterAccessTokenKey'),
+    access_token_secret:  config.get('twitterAccessTokenSecret')
+})
+    // rest_base: 'https://ads-api-sandbox.twitter.com', //Doesn't work...
 
 module.exports.postTweet = async function(status, mediaIds=null){
-    if (process.env.NODE_ENV !== 'production') return null;
+    // if (process.env.NODE_ENV !== 'production') return null;
 
     try{
         const res = await client.post('statuses/update', {status: status, media_ids: mediaIds});

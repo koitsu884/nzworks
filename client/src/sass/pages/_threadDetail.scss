@@ -1,0 +1,20 @@
+.threadDetail{
+    &__image{
+        max-width: 60rem;
+        border-radius: 10px;
+        overflow: hidden;
+        img {
+            width: 100%;
+        }
+    }
+
+    &__userInfo {
+        max-width: 35rem;
+    }
+
+    @include respond(phone){
+        &__userINfo {
+            max-width: 95%;
+        }
+    }
+}

@@ -31,4 +31,3 @@ module.exports.deleteFolder = function (path) {
     return cloudinary.api.delete_resources_by_prefix(cloudinaryRoot + path);
 }
 
-
