@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../../actions/authActions';
@@ -9,9 +9,24 @@ import Alert from '../../utils/alert';
 import MenuIcon from '../common/Icons/MenuIcon';
 
 function AuthHeader(props) {
+    const ref = useRef();
     const dispatch = useDispatch();
     const [menuActive, setMenuActive] = useState(false);
     const currentUser = useSelector(state => state.user.currentUser);
+
+    const handleClick = e => {
+        if (ref.current && !ref.current.contains(e.target)){
+            setMenuActive(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("click", handleClick);
+
+        return () => {
+            document.removeEventListener("click", handleClick);
+        }
+    })
 
     const handleLogout = () => {
         dispatch(signOut());
@@ -75,7 +90,7 @@ function AuthHeader(props) {
     }
 
     return (
-        <div className="authHeader">
+        <div className="authHeader" ref={ref}>
             {renderLinks(currentUser)}
         </div>
     )
