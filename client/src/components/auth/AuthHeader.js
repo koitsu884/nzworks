@@ -5,6 +5,7 @@ import { signOut } from '../../actions/authActions';
 import Image from '../common/Image';
 import Icon from '../common/Icon';
 import history from '../../history';
+import Alert from '../../utils/alert';
 import MenuIcon from '../common/Icons/MenuIcon';
 
 function AuthHeader(props) {
@@ -16,6 +17,7 @@ function AuthHeader(props) {
         dispatch(signOut());
         setMenuActive(false);
         history.push('/');
+        Alert.success("ログアウトしました");
     }
 
     const renderMenu = user => {

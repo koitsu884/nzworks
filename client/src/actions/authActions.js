@@ -55,7 +55,6 @@ export const signOut = () => dispatch => {
             dispatch({
                 type: SIGN_OUT
             })
-            Alert.success("ログアウトしました")
         })
         .catch(errors => {
             console.log(errors)
