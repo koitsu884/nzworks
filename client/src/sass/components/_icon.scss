@@ -7,11 +7,15 @@
     }
 
     &--edit {
-        color: $primary;
+        color: $primary-dark;
     }
 
 
     &--delete {
         color: $danger;
+    }
+
+    &--menu {
+        color: $primary-dark;
     }
 }

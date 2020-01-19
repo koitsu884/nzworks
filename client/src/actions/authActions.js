@@ -30,6 +30,7 @@ export const signIn = (email, password) => dispatch => {
             payload: res.data
         })
         dispatch(getSavedJobList());
+        Alert.success("ログインしました")
     })
     .catch(errors => {
         Alert.error(errorToStr(errors));
@@ -54,6 +55,7 @@ export const signOut = () => dispatch => {
             dispatch({
                 type: SIGN_OUT
             })
+            Alert.success("ログアウトしました")
         })
         .catch(errors => {
             console.log(errors)

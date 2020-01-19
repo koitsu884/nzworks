@@ -6010,6 +6010,7 @@ h5 {
   padding: 1rem 5rem;
   height: 8rem;
   display: flex;
+  position: relative;
   align-items: center;
   justify-content: space-between; }
   .header__logo {
@@ -6031,14 +6032,45 @@ h5 {
 .authHeader {
   display: flex;
   align-items: center; }
-  .authHeader > * {
-    margin-left: 1rem; }
   @media only screen and (max-width: 37.5em) {
     .authHeader__name {
       display: none; } }
+  .authHeader__menu {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 30rem;
+    border: 2px solid #066298;
+    background-color: white;
+    transform: translateX(100%);
+    transition: transform .2s; }
+    .authHeader__menu__header {
+      background-color: #066298;
+      color: white;
+      padding: 1rem;
+      font-size: 2.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+    .authHeader__menu.active {
+      transform: translateX(0); }
+    .authHeader__menu ul {
+      list-style: none; }
+      .authHeader__menu ul li {
+        cursor: pointer;
+        padding: 1rem;
+        border-bottom: solid 1px #ebf7fe; }
+        .authHeader__menu ul li:hover {
+          background-color: #fffceb; }
+  .authHeader__logout {
+    position: absolute;
+    bottom: 0;
+    right: 1rem;
+    color: #3273dc; }
   .authHeader .image {
-    width: 3.6rem;
-    height: 3.6rem; }
+    width: 4rem;
+    height: 4rem;
+    margin-right: 1rem; }
     .authHeader .image img {
       border-radius: 50%;
       border: solid 1px #52bbf8;
@@ -6363,10 +6395,13 @@ h5 {
     opacity: .8; }
 
 .icon--edit {
-  color: #52bbf8; }
+  color: #066298; }
 
 .icon--delete {
   color: #f14668; }
+
+.icon--menu {
+  color: #066298; }
 
 .imageSelector {
   display: flex;
@@ -6448,6 +6483,12 @@ h5 {
             height: 2rem;
             right: 4px;
             top: 4px; } }
+
+.infoBox {
+  background-color: #ebf7fe;
+  border: 1px solid #066298;
+  border-radius: 10px;
+  padding: 2rem; }
 
 .button-google {
   background-color: red;

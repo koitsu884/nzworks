@@ -1,18 +1,41 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../../actions/authActions';
 import Image from '../common/Image';
+import Icon from '../common/Icon';
 import history from '../../history';
+import MenuIcon from '../common/Icons/MenuIcon';
 
 function AuthHeader(props) {
     const dispatch = useDispatch();
+    const [menuActive, setMenuActive] = useState(false);
     const currentUser = useSelector(state => state.user.currentUser);
 
     const handleLogout = () => {
         dispatch(signOut());
+        setMenuActive(false);
         history.push('/');
     }
+
+    const renderMenu = user => {
+        return (
+            <ul>
+                {
+                    user.is_admin
+                        ? <Link to='/admin' ><li>Admin</li></Link>
+                        : null
+                }
+
+                <Link to="/mypage"><li>マイページ</li></Link>
+                <li onClick={handleLogout}>ログアウト</li>
+            </ul>
+        )
+    }
+
+    // const renderBusinessMenu = user => {
+    //     return renderMenu(user);
+    // }
 
     const renderLinks = (user) => {
         if (user) {
@@ -28,13 +51,14 @@ function AuthHeader(props) {
                             : null
                     }
                     <span className="authHeader__name">{user.name}</span>
-                    {
-                        user.is_admin
-                        ? <Link to='/admin' className="button is-warning is-small" >Admin</Link>
-                        : null
-                    }
-                    <Link className="button is-success is-small" to="/mypage">マイページ</Link>
-                    <button type="button" className="button is-info is-small" onClick={handleLogout}>ログアウト</button>
+                    <div className="u-margin-medium has-text-centered">
+                        <MenuIcon className="is-medium fa-2x" onClick={() => setMenuActive(true)} />
+                        <p className="has-text-info" style={{ fontSize: '1rem' }}><b>メニュー</b></p>
+                    </div>
+                    <div className={`authHeader__menu ${menuActive ? 'active' : ''}`}>
+                        <div className="authHeader__menu__header"><div>メニュー</div><Icon iconClassName="fa-times icon--selectable" className="is-medium fa-lg" onClick={() => setMenuActive(false)} /></div>
+                        {renderMenu(currentUser)}
+                    </div>
                 </Fragment>
             )
         }

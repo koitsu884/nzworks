@@ -18,7 +18,7 @@ var client = process.env.NODE_ENV === 'production'
     // rest_base: 'https://ads-api-sandbox.twitter.com', //Doesn't work...
 
 module.exports.postTweet = async function(status, mediaIds=null){
-    // if (process.env.NODE_ENV !== 'production') return null;
+    if (process.env.NODE_ENV !== 'production') return null;
 
     try{
         const res = await client.post('statuses/update', {status: status, media_ids: mediaIds});
