@@ -35,7 +35,7 @@ function Home(props) {
                 <div className="home__content__main">
                     <section>
                         <div className="infoBox u-margin-small">
-                            <h4>更新情報 (1/19/2020)</h4>
+                            <h4>更新情報 (19/1/2020)</h4>
                             <p>短期情報を投稿できる機能を試験的に実装しました！</p>
                             <p>ナビメニューの『短期情報板』から投稿・編集ページへ移動できます。</p>
                             <br />

@@ -22,8 +22,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     let thread = await Thread.findById(req.params.id)
-        .populate('user', ['_id', 'name', 'profile.avatar'])
-        .populate('comments.user', ['_id', 'name', 'profile.avatar', 'profile.images']);
+        .populate('user', ['_id', 'name', 'profile.avatar', 'profile.images'])
+        .populate('comments.user', ['_id', 'name', 'profile.avatar']);
 
     if (!thread) {
         return res.status(404).send("Thread not found");
