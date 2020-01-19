@@ -74,8 +74,12 @@ router.post('/:id/tweet',  passport.authenticate('jwt', { session: false }), fin
     let thread = req.obj;
     let content = thread.details;
     let link = config.get('clientUrl') + "thread/" + thread._id;
-    if (content.length > 100) content = content.substring(0, 100) + '...';
-    let status = `【新規情報投稿】\n『${thread.title}』\n\n${content}\n\n${link}`;
+    let status = `【新規情報投稿】\n『${thread.title}』`;
+    let contentLength = 100 - status.length;
+    
+    if (content.length > contentLength) content = content.substring(0, contentLength) + '...';
+    // let status = `【新規情報投稿】\n『${thread.title}』\n\n${content}\n\n${link}`;
+    status += `\n\n${content}\n\n${link}`;
 
     if (thread.mainImage) {
         let mediaId = await postImageFromUrl(thread.mainImage.image_url);
